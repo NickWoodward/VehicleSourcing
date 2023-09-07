@@ -1,0 +1,51 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+// is your "component frontmatter". It never runs in the browser.
+console.log('This runs in your terminal, not the browser!');
+
+import MainLayout from "../layouts/main-layout.astro";
+import {Section} from '../components/Section';
+import {HeroText} from '../components/HeroText';
+import { WhyUs } from "../components/WhyUs";
+import heroImage from '/fordHero.jpeg';
+import "../styles/global.css";
+import { Form } from "../components/Form";
+import { SectionIntro } from "../components/SectionIntro";
+import { Reviews } from "../components/Reviews";
+
+---
+
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover">
+  <Section height="full" headerOffset={true}>
+    <HeroText className="justify-center"/>
+    <div class="flex flex-col grow justify-center">
+      <img src={heroImage} class="" alt="Three BMW cars" />
+    </div>
+  </Section>
+  <Section variant="dark">
+    <SectionIntro 
+      title="Abdul Come Closer"
+      subtitle="WAKEY WINES"
+      variant="dark"
+    />  
+    <WhyUs className="h-full" client:only />
+  </Section>
+  <Section height="full">
+    <SectionIntro 
+      title="Mange Tout Rodders"
+      subtitle="ORIGINAL FAKE"
+    />    
+    <Reviews client:only/>
+  </Section>
+  <Section height="full" variant="dark" client:only>
+    <SectionIntro 
+      title="Contact Us"
+      subtitle="THE MONEY PHONE"
+      variant="dark"
+    />   
+    <Form />
+  </Section>
+  <Section height="sm" variant="darker">
+   
+  </Section>
+</MainLayout>

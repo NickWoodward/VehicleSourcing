@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-height: 4rem;
+  --footer-height: 8rem;
+  --dvhMinusHeader: calc(100dvh - var(--header-height));
+
+  --primary: hsl(189, 94%, 43%);
+  /* --dark: hsl(); */
+}
+
+
+.embla {  
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.embla__container {  
+  display: flex;
+  position: relative;
+}
+.embla__slide { 
+  flex: 0 0 100%; 
+  min-width: 0;
+}
