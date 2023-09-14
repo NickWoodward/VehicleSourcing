@@ -33,7 +33,10 @@ export const Reviews = () => {
       author: "Reggie",
       rating: 4
     },
-  ]
+  ];
+
+  const autoplayOptions = {  delay:0,  rootNode: (emblaRoot: HTMLElement) => emblaRoot.parentElement}
+  const carouselOptions = { loop: true, duration: 4000, watchDrag: false }
 
   const renderedReviews = reviews.map(({reviewId, title, body, author, rating}: Props) => {
     return (
@@ -48,9 +51,8 @@ export const Reviews = () => {
   })
   return (
     <div>
-      {/* <Carousel slides={renderedReviews} /> */}
+      <Carousel slides={renderedReviews} axis="y" autoplayOptions={autoplayOptions} options={carouselOptions} />
       {/* {renderedReviews} */}
     </div>
   );
 };
-

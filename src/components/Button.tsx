@@ -14,13 +14,12 @@ export const buttonVariants = cva("flex items-center text-sm font-semibold outli
     variant: {
       default: "border-primary bg-primary text-white",
       outline: `shadow-sm bg-transparent`,
-      dark: "bg-gray-700 text-white hover:bg-gray-500 active:bg-gray-800 active:text-white/80",
-      monochrome: "bg-white text-text border border-gray-400",
     },
     intent: {
       primary: "border-primary bg-primary text-white",
       secondary: "bg-neutralDark text-white",
-
+      dark: "bg-gray-700 text-white hover:bg-gray-500 active:bg-gray-800 active:text-white/80",
+      monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
       sm: "py-2 px-3",

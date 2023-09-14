@@ -13,7 +13,7 @@ export interface ReviewProps extends ComponentProps<"div"> {
 
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("rounded w-full bg-white p-6 shadow shadow-dark/20",
+  const classes = cn("rounded w-full bg-white p-6 bg-gray-50",
     className
   );
 

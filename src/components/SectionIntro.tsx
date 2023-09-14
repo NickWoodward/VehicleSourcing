@@ -59,7 +59,7 @@ export const SectionIntro = ({title, subtitle, tagline, variant}: IntroProps) =>
   return (
     <div className={cn(sectionVariants({variant}))}>
       <h3 className={cn(subtitleVariants({variant}))}>{subtitle}</h3>
-      <h2 className="text-3xl font-medium tracking-tight">
+      <h2 className="text-2xl font-medium tracking-tight">
         {title}
       </h2>
       {tagline && <TagLine content={tagline} className={cn(taglineVariants({variant}))}/>}

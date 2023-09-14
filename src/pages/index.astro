@@ -12,20 +12,26 @@ import "../styles/global.css";
 import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
 import { Reviews } from "../components/Reviews";
+import { BrandCloud } from "../components/BrandCloud";
+import { Test } from "../components/Test";
 
 ---
 
 <MainLayout title="Vehicle Sourcing/Purchasing/Cover">
   <Section height="full" headerOffset={true}>
+    <!-- <Circle className=""/> -->
     <HeroText className="justify-center"/>
     <div class="flex flex-col grow justify-center">
       <img src={heroImage} class="" alt="Three BMW cars" />
     </div>
   </Section>
+  <Test />
+
   <Section variant="dark">
     <SectionIntro 
       title="Abdul Come Closer"
       subtitle="WAKEY WINES"
+      tagline="Buying a car should be something you enjoy"
       variant="dark"
     />  
     <WhyUs className="h-full" client:only />
@@ -36,6 +42,7 @@ import { Reviews } from "../components/Reviews";
       subtitle="ORIGINAL FAKE"
     />    
     <Reviews client:only/>
+    <BrandCloud />
   </Section>
   <Section height="full" variant="dark" client:only>
     <SectionIntro 
@@ -43,7 +50,7 @@ import { Reviews } from "../components/Reviews";
       subtitle="THE MONEY PHONE"
       variant="dark"
     />   
-    <Form />
+    <Form client:only/>
   </Section>
   <Section height="sm" variant="darker">
    

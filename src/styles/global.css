@@ -15,13 +15,15 @@
 .embla {  
   overflow: hidden;
   width: 100%;
-  position: relative;
+  /* position: relative; */
+  /* border: 1px solid yellow; */
 }
-.embla__container {  
+/* .embla__container {  
   display: flex;
   position: relative;
-}
+} */
 .embla__slide { 
-  flex: 0 0 100%; 
+  /* border: 1px solid red; */
+  /* flex: 0 0 100%;  */
   min-width: 0;
 }
