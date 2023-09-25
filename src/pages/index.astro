@@ -6,30 +6,85 @@ console.log('This runs in your terminal, not the browser!');
 import MainLayout from "../layouts/main-layout.astro";
 import {Section} from '../components/Section';
 import {HeroText} from '../components/HeroText';
-import { WhyUs } from "../components/WhyUs";
-import heroImage from '/fordHero.jpeg';
+// import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
 import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
-import { Reviews } from "../components/Reviews";
-import { BrandCloud } from "../components/BrandCloud";
-import { Test } from "../components/Test";
+// import { Reviews } from "../components/Reviews";
+import { Circle } from "../components/Circle";
+import { TrustIcon } from "../utils/svgComponents";
+// import { BrandCloud } from "../components/BrandCloud";
 
+
+import heroImage from '/golf.png';
+import bgCar from '/bgCar.jpeg';
 ---
 
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover">
-  <Section height="full" headerOffset={true}>
-    <!-- <Circle className=""/> -->
-    <HeroText className="justify-center"/>
-    <div class="flex flex-col grow justify-center">
-      <img src={heroImage} class="" alt="Three BMW cars" />
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const sections = gsap.utils.toArray<HTMLElement>(".section");
+    console.log(sections);
+  sections.forEach((panel) => {
+    ScrollTrigger.create({
+      scroller: "main",
+      trigger: panel,
+      snap: 1 / (sections.length - 1),
+      start: "top top", 
+      pin: true, 
+      pinSpacing:false,
+      // markers:{startColor:"white", endColor:"white"}
+    });
+  });
+</script>
+
+
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter max-h-[100dvh] mt-headerHeight">
+
+  <Section className="section relative" axis="v" peek={true} justify="evenly" height="full">
+
+    <div class="h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12 ">
+      <Circle className=""/>
+
+      <HeroText className=" row-start-2 xs:row-start-2 lg:row-start-2 col-start-1 md:col-start-2 md:col-span-6 lg:col-span-7 xl:col-span-6 z-30"/>
+
+      <div class=" flex flex-col relative max-w-md lg:max-w-3xl xs:ml-auto
+        md:col-start-5 md:col-span-full 
+        row-start-11 xs:row-start-10 lg:row-start-6">
+        <img src={heroImage} class=" -scale-x-100" alt="Three BMW cars" />
+      </div>
+
+      <TrustIcon className="hidden xs:flex h-16 lg:w-44 p-1 row-start-16 md:row-end-14 lg:row-end-13 md:col-start-2 lg:col-start-1 z-20" />
+
     </div>
   </Section>
-  <Test />
 
-  <Section variant="dark">
+  <Section className="section relative rounded-t-3xl" height="full" variant="dark" client:only>
+    
+    <div class="absolute inset-0 rounded-t-3xl overflow-hidden">
+      <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute w-full h-full -scale-x-100  rounded-t-3xl">
+      <div class="absolute inset-0 bg-dark/90 rounded-t-3xl "></div>
+    </div>
+
+    <div class="wrapper flex flex-col justify-center gap-4 h-full lg:w-1/2 md:ml-auto">
+      <SectionIntro 
+        title="Find the Perfect Car"
+        subtitle="Contact Us Today"
+        variant="dark"
+        className="w-full z-40"
+      />   
+      <Form className="" client:only/>
+    </div>
+
+    <!-- <BrandCloud /> -->
+
+  </Section>
+  <!-- <Section variant="dark" height="full">
     <SectionIntro 
-      title="Abdul Come Closer"
+      title="How It Works"
       subtitle="WAKEY WINES"
       tagline="Buying a car should be something you enjoy"
       variant="dark"
@@ -42,17 +97,8 @@ import { Test } from "../components/Test";
       subtitle="ORIGINAL FAKE"
     />    
     <Reviews client:only/>
-    <BrandCloud />
-  </Section>
-  <Section height="full" variant="dark" client:only>
-    <SectionIntro 
-      title="Contact Us"
-      subtitle="THE MONEY PHONE"
-      variant="dark"
-    />   
-    <Form client:only/>
-  </Section>
-  <Section height="sm" variant="darker">
-   
-  </Section>
+  </Section> -->
+
+  <!-- <Section height="full" variant="darker">
+  </Section> -->
 </MainLayout>

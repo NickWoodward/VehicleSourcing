@@ -3,8 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchemaWithVehicle } from '../models/Models';
 import type { UserWithVehicle } from "../models/Models";
 import { Button } from "./Button";
+import { cn } from "../utils/utils";
+import { Space } from "./Space";
 
-export const Form = () => {
+export const Form = ({className}: {className?: string}) => {
   const {
     register,
     handleSubmit,
@@ -14,26 +16,26 @@ export const Form = () => {
     resolver: zodResolver(UserSchemaWithVehicle),
   });
 
+  const classes = cn('flex flex-col justify-start w-full mt-[6%]', className);
+
   const onSubmit: SubmitHandler<UserWithVehicle> = (data) => {
     console.log(data.fName);
     console.log(data);
   }
 
-  console.log(isValid)
-
   return (
-    <div className="">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 mt-[5%] mx-auto">
-        <div className="form-pages flex text-gray-300">
-          <div className="page-label py-2 px-4">You</div>
-          <div className="page-label py-2 px-4">The Car</div>
-          <div className="page-label py-2 px-4">Any PX?</div>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
+      <div className="form-pages flex text-gray-300 text-sm">
+        <div className="basis-1/2 border-gray-600 rounded-t page-label py-2.5 px-6 translate-y-[2px] border border-b-transparent  bg-dark/50 backdrop-blur-md  z-20">You</div>
+        <div className="basis-1/2 border border-gray-600 rounded-t page-label py-2.5
+          px-6 translate-y-[2px]  bg-dark/50 backdrop-blur-md ">The Car</div>
+      </div>
 
+      <div className="flex flex-col border border-gray-600 bg-dark/50 backdrop-blur-md rounded px-6 py-3 pb-6 gap-3 z-10">
 
-        </div>
         <div className="text-sm font-semibold w-full text-gray-300">
           <label htmlFor="fName">Name</label>
-          <div className="mt-2.5">
+          <div className="mt-1">
             <input id="fName" type="text" {...register("fName", {required: true})}
               className="w-full rounded ring-gray-600 ring-inset ring-1 bg-darker text-sm px-3.5 py-2"
             />
@@ -43,7 +45,7 @@ export const Form = () => {
         </div>
         <div className="text-sm font-semibold w-full text-gray-300">
           <label htmlFor="sName">Surname</label>
-          <div className="mt-2.5">
+          <div className="mt-1">
             <input id="sName" type="text" {...register("sName", {required: true})}
               className="w-full rounded ring-gray-600 ring-inset ring-1 bg-darker text-sm px-3.5 py-2"
             />
@@ -52,7 +54,7 @@ export const Form = () => {
         </div>
         <div className="text-sm font-semibold w-full text-gray-300">
           <label htmlFor="email">Email</label>
-          <div className="mt-2.5">
+          <div className="mt-1">
             <input id="email" type="text" {...register("email", {required: true})}
               className="w-full rounded ring-gray-600 ring-inset ring-1 bg-darker text-sm px-3.5 py-2"
               />
@@ -61,31 +63,26 @@ export const Form = () => {
         </div>
         <div className="text-sm font-semibold w-full text-gray-300">
           <label htmlFor="phone">Phone Number</label>
-          <div className="mt-2.5">
+          <div className="mt-1">
             <input id="phone" type="text" {...register("phone", { required: true })}
               className="w-full rounded ring-gray-600 ring-inset ring-1 bg-darker text-sm px-3.5 py-2"
               />
           </div>
           {errors.phone && <p className="bg-red-100 border border-red-500 text-red-500">{errors.phone?.message}</p>}
         </div>
-
+        <Space className="" />
         <div className="flex">
           <Button   
-            size="sm"
-            rounded
+            rounded="md"
             intent="primary"
-            className=""
+            className="w-full"
           >
             {/* <Tick className="h-6 w-6 flex-none" /> */}
             Submit
           </Button>
         </div>
       
-      </form>
-
-      <Button className="" size="sm" rounded variant="outline"  onClick={() => trigger()}>
-        Display Data Requirements
-      </Button>
-    </div>
+      </div>
+    </form>
   );
 }

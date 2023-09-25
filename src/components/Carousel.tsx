@@ -24,7 +24,7 @@ export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, mar
     variants: {
       axis: {
         x: "flex-row",
-        y: "flex-col justify-start h-96",
+        y: "flex-col justify-start h-[400px]",
       },
     },
     defaultVariants: {
@@ -70,7 +70,18 @@ export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, mar
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <div className="embla mt-6">
+    <div className="embla mt-3">
+      {markers? <div className="embla__dots flex justify-end gap-2 text-sm p-2 ">
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            className={cn("embla__dot w-7 h-1 bg-", {
+              "embla__dot--selected bg-primary": index === selectedIndex,
+            })}
+            onClick={() => scrollTo(index)}
+          ></button>
+        ))}
+      </div> : null}
       <div className="embla__viewport" ref={emblaRef}>
         <div className={cn("flex",carouselVariants({axis}))}>
           <div className={slideClasses}>{slides[0]}</div>
@@ -78,17 +89,7 @@ export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, mar
           <div className={slideClasses}>{slides[2]}</div>
         </div>
       </div>
-      {markers? <div className="embla__dots flex justify-end gap-2 text-sm p-2 ">
-        {scrollSnaps.map((_, index) => (
-          <button
-            key={index}
-            className={cn("embla__dot w-7 h-7 rounded-full border ", {
-              "embla__dot--selected bg-primary": index === selectedIndex,
-            })}
-            onClick={() => scrollTo(index)}
-          >{index}</button>
-        ))}
-      </div> : null}
+      
       {/* <button className="embla__prev" onClick={scrollPrev}>        
         Prev      
       </button>      

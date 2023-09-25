@@ -5,7 +5,10 @@
 :root {
   --header-height: 4rem;
   --footer-height: 8rem;
-  --dvhMinusHeader: calc(100dvh - var(--header-height));
+  --dvh: calc(100dvh - var(--header-height));
+  --peekHeight: 2rem;
+  --dvhMinusPeek: calc(var(--dvh) - var(--peekHeight));
+  --dvhPlusPeek: calc(var(--dvh) + var(--peekHeight));
 
   --primary: hsl(189, 94%, 43%);
   /* --dark: hsl(); */

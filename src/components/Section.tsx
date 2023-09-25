@@ -1,47 +1,80 @@
 import type { ComponentProps } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../utils/utils";
+import { Button } from "./Button";
 
 interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVariants>{
+  axis?: "h" | "v",
+  peek?: boolean,
   children: React.ReactNode
 }
 
-export const sectionVariants = cva("container flex px-5 py-[15%] sm:px-6 lg:px-8", {
-  variants: {
-    variant: {
-      default: "flex-col items-center bg-white text-dark",
-      dark: "bg-dark text-white",
-      darker: "bg-slate-700"
+export const sectionVariants = cva("snap-start flex items-center w-full px-6 xs:px-8 sm:px-14 md:px-12 lg:px-16 xl:px-36", 
+  {
+    variants: {
+      variant: {
+        default: "flex-col bg-white text-dark",
+        dark: "flex-col bg-dark text-white",
+        darker: "bg-slate-700"
+      },
+      headerOffset: {
+        true: "mt-headerHeight"
+      },
+      height: {
+        default: "h-auto",
+        full: "py-[5vh] h-dvh",
+        sm: "min-h-footerHeight"
+      },
+    
+      justify: {
+        center: "justify-center",
+        start: "justify-start",
+        end: "justify-end",
+        between: "justify-between",
+        around: "justify-around",
+        evenly: "justify-evenly"
+      },
+      scroll: {
+        default: "",
+        fullscreen: "h-full"
+      },
+
     },
-    headerOffset: {
-      true: "mt-headerHeight"
-    },
-    height: {
-      full: "min-h-dvhMinusHeader",
-      sm: "min-h-footerHeight"
-    },
-    axis: {
-      vertical: "flex-col",
-      horizontal: "flex-row"
+    defaultVariants: {
+      variant: "default",
+      height: "default",
+      headerOffset: false,
     }
-  },
-  defaultVariants: {
-    variant: "default",
-    height: "full",
-    headerOffset: false,
-    axis: "vertical"
   }
-}
 );
+
 
 // max-height: 100vh;
 // overflow-y: scroll;
 // scroll-snap-type: y mandatory;
 
 
-export function Section({className, variant, height, headerOffset, children}:Props) {
+export function Section({className, variant, axis = 'v', justify = 'start', height, peek, headerOffset, children}:Props) {
 
-  return <div className={cn(
-    sectionVariants({ variant, height, headerOffset, className })
-  )}>{children}</div>
-}
+  const contentClasses = cn("flex md:justify-start h-full w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-8xl", {
+    "flex-col": axis === "v",
+    "flex-row": axis === "h",
+    "justify-center": justify === "center",
+    "justify-start": justify === "start",
+    "justify-end": justify === "end",
+    "justify-between": justify === "between",
+    "justify-around": justify === "around",
+ });
+
+  return (
+    <div className={cn(
+      sectionVariants({ variant, justify, height, headerOffset, className })
+    )}>
+      <div className={contentClasses}>
+        {children}
+      </div>
+      {/* {peek? <SectionPeeker /> : null} */}
+
+    </div>
+  );
+} 

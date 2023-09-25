@@ -3,6 +3,8 @@ const { title } = Astro.props;
 import { Header } from "../components/Header";
 import { MobileNav } from "../components/MobileNav";
 import { Logo } from "../components/Logo";
+
+const { classes } = Astro.props;
 ---
 
 <html lang="en">
@@ -14,15 +16,16 @@ import { Logo } from "../components/Logo";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
-  <title>Document</title>
+  <title>VehicleSearcher</title>
 </head>
 <body>
-  <main class="font-inter">
+  <main class={classes}>
     <Header>
       <Logo />
       <MobileNav className="text-white" client:only/>
     </Header>
-    <slot />
+
+      <slot />
   </main>
 </body>
 </html>

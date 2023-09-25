@@ -5,7 +5,7 @@ import { cn } from "../utils/utils";
 interface IntroProps extends ComponentProps<"div">, VariantProps<typeof sectionVariants> {
   title: string,
   subtitle: string,
-  tagline?: string
+  tagline?: string,
 }
 
 interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglineVariants> {
@@ -55,11 +55,11 @@ const TagLine = ({content, className}: TagLineProps) => {
   );
 }
 
-export const SectionIntro = ({title, subtitle, tagline, variant}: IntroProps) => {
+export const SectionIntro = ({title, subtitle, tagline, variant, className}: IntroProps) => {
   return (
-    <div className={cn(sectionVariants({variant}))}>
+    <div className={cn(className, sectionVariants({variant}))}>
       <h3 className={cn(subtitleVariants({variant}))}>{subtitle}</h3>
-      <h2 className="text-2xl font-medium tracking-tight">
+      <h2 className="text-xl xs:text-2xl font-medium tracking-tight">
         {title}
       </h2>
       {tagline && <TagLine content={tagline} className={cn(taglineVariants({variant}))}/>}
