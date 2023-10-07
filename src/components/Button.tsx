@@ -9,7 +9,7 @@ interface ButtonProps
   disabled?: boolean | undefined;
 }
 
-export const buttonVariants = cva("flex items-center justify-center text-sm lg:text-lg font-base bg-red-500 outline-2 outline-offset-2 border", {
+export const buttonVariants = cva("flex items-center justify-center text-sm lg:text-lg font-base  outline-2 outline-offset-2", {
   variants: {
     variant: {
       default: "bg-primary text-white",
@@ -19,12 +19,12 @@ export const buttonVariants = cva("flex items-center justify-center text-sm lg:t
     intent: {
       primary: "border-primary bg-primary text-white",
       secondary: "bg-neutralDark text-white",
-      dark: "bg-gray-700 text-white hover:bg-gray-500 active:bg-gray-800 active:text-white/80",
+      dark: "bg-gray-700 text-white hover:bg-darker active:bg-gray-800 active:text-white/80",
       monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
-      sm: "w-9 h-9",
-      md: "pl-3 md:pl-4 pr-4 md:pr-7 py-2 md:py-1.5 lg:py-2.5"
+      sm: "py-1.5 px-2",
+      md: "pl-3 md:pl-4 pr-6 md:pr-7 py-3 md:py-1.5 lg:py-2.5"
     },
     rounded: {
       true: "rounded-xl",

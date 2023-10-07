@@ -1,9 +1,12 @@
-import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel, { EmblaCarouselType, EmblaEventType } from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { useState, useCallback, type ComponentProps, useEffect } from 'react';
+import { useState, useCallback, type ComponentProps, useEffect, useRef } from 'react';
 import { cva } from 'class-variance-authority';
+import {gsap} from "gsap";
+
 import { cn } from '../utils/utils';
-// import { cn } from '../utils/utils';
+import { Button } from '../components/Button';
+import { ChevronRight, ChevronLeft } from '../utils/svgComponents';
 
 interface Props extends ComponentProps<"div">{
   slides: React.ReactNode[];
@@ -13,15 +16,19 @@ interface Props extends ComponentProps<"div">{
   markers?: boolean;
 }
 
-export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, markers}:Props) => {
+export const EmblaCarousel = ({slides, className, axis = "x", autoplayOptions, options, markers}:Props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ axis, ...options}, [Autoplay(autoplayOptions)]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const sliderRef = useRef([]);
 
+  const classes = cn("embla relative space-y-2.5", className);  
+  
   const carouselVariants = cva("embla__container flex", {
     variants: {
+
       axis: {
         x: "flex-row",
         y: "flex-col justify-start h-[400px]",
@@ -33,8 +40,8 @@ export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, mar
   });
 
   const slideClasses = cn("embla__slide", {
-    "flex-none basis-full mr-1": axis === "x", 
-    "flex-none basis-1/2 mt-4": axis === "y",
+    "relative flex flex-none justify-center  lg:pr-10 basis-full lg:basis-auto mr-6": axis === "x", 
+    "flex flex-none justify-center lg:justify-end basis-1/2 mt-4": axis === "y",
   })
 
   const scrollPrev = useCallback(() => {    
@@ -54,49 +61,57 @@ export const EmblaCarousel = ({slides, axis = "x", autoplayOptions, options, mar
     setScrollSnaps(emblaApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+  const onSelect = useCallback((emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
+    console.log(`Previous ${emblaApi.previousScrollSnap()}`);
+
     setSelectedIndex(emblaApi.selectedScrollSnap());
     setPrevBtnDisabled(!emblaApi.canScrollPrev());
     setNextBtnDisabled(!emblaApi.canScrollNext());
+    console.log(`Embla just triggered ${eventName}!. Current index is ${emblaApi.selectedScrollSnap()}`);
+
   }, []);
 
   useEffect(() => {
     if(!emblaApi) return;
     onInit(emblaApi);
-    onSelect(emblaApi);
+    onSelect(emblaApi, "select");
     emblaApi.on('reInit', onInit);
     emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <div className="embla mt-3">
-      {markers? <div className="embla__dots flex justify-end gap-2 text-sm p-2 ">
-        {scrollSnaps.map((_, index) => (
-          <button
-            key={index}
-            className={cn("embla__dot w-7 h-1 bg-", {
-              "embla__dot--selected bg-primary": index === selectedIndex,
-            })}
-            onClick={() => scrollTo(index)}
-          ></button>
-        ))}
-      </div> : null}
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className={cn("flex",carouselVariants({axis}))}>
-          <div className={slideClasses}>{slides[0]}</div>
-          <div className={slideClasses}>{slides[1]}</div>
-          <div className={slideClasses}>{slides[2]}</div>
+    <>
+      <div className={classes}>
+
+        <div className="embla__viewport lg:hidden" ref={emblaRef}>
+          <div className={cn("flex",carouselVariants({axis}))}>
+            <div className={cn(slideClasses, `slide-0`)}>{slides[0]}</div>
+            <div className={cn(slideClasses, `slide-1`)}>{slides[1]}</div>
+            <div className={cn(slideClasses, `slide-2`)}>{slides[2]}</div>
+          </div>
+        </div>
+        <div className="relative flex justify-end space-x-2">
+          <Button size="sm" className="embla__prev text-dark bg-transparent rounded" onClick={scrollPrev}>        
+            <ChevronLeft className="w-4" />    
+          </Button>  
+          {markers? <div className="embla__dots  z-50 flex justify-end gap-2 text-sm lg:py-4 lg:px-8">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              className={cn("embla__dot w-7 h-full rounded bg-gray-300", {
+                "embla__dot--selected bg-primary": index === selectedIndex,
+              })}
+              onClick={() => scrollTo(index)}
+            >{index + 1}</button>
+          ))}
+        </div> : null}    
+          <Button size="sm" className="embla__next text-dark bg-transparent rounded" onClick={scrollNext}>        
+            <ChevronRight className="w-4" />     
+          </Button>
         </div>
       </div>
-      
-      {/* <button className="embla__prev" onClick={scrollPrev}>        
-        Prev      
-      </button>      
-      <button className="embla__next" onClick={scrollNext}>        
-        Next      
-      </button> */}
-    </div>
+    </>
   )
 }
 

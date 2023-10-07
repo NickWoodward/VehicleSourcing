@@ -1,9 +1,11 @@
 import { forwardRef, type ComponentProps } from "react";
+// import { Transition } from 'react-transition-group';
 import { cn } from "./utils";
 
 interface Props extends ComponentProps<"div">{};
 interface BurgerProps extends ComponentProps<"div">{
-  onToggle: () => void;
+  animate: boolean;
+  // onToggle: () => void;
 };
 
 export const TrustIcon = (props: Props) => {
@@ -55,20 +57,104 @@ export const TrustIcon = (props: Props) => {
   )
 }
 
+export const SearchIcon = (props: Props) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  )
+}
+
+export const ChevronRight = (props: Props) => {
+  return (
+    <div {...props}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+
+  )
+}
+
+export const ChevronLeft = (props: Props) => {
+  return (
+    <div {...props}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </div>
+
+  )
+}
+
 export const Burger = forwardRef<HTMLDivElement, BurgerProps>(function Burger(
   props: BurgerProps, 
   ref
 ) {
+  // const { animate } = props;
+
   return (
-    <div ref={ref} onClick={props.onToggle} {...props}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <rect width="100%" height="32" y="96" fill="currentColor" className="burger-line"/>
-        <rect width="100%" height="32" y="240" fill="currentColor" className="burger-line"/>
-        <rect width="100%" height="32" y="384" fill="currentColor" className="burger-line"/>
-      </svg>
-    </div>
+    // <Transition
+    //   mountOnEnter
+    //   unmountOnExit
+    //   in={animate}
+    //   addEndListener={(node: HTMLElement, done: () => void) => {
+    //     const ctx = gsap.context(() => {
+    //       const lines = Array.from<HTMLElement>(
+    //         document.querySelectorAll(".burger-line")
+    //       );
+
+    //       if (animate) {
+    //         console.log(lines);
+    //         // gsap.set(menuItems, { xPercent : 110 });
+    //         // gsap
+    //         //   .timeline({ onComplete: done })
+    //         //   .to("#overlay", { autoAlpha: 0.75, duration: 0.1 })
+    //         //   .to("#modal", { autoAlpha: 1, y: 0, duration: 0.25 }, 0)
+    //         //   .to(menuItems, { xPercent: 0, stagger: 0.1}, 0);
+    //       } else {
+    //         // gsap
+    //         //   .timeline({ onComplete: done })
+    //         //   .to(menuItems, { xPercent: 110, stagger: 0.1})
+    //         //   .to("#modal", { autoAlpha: 0, duration: 0.25 }, ">-=0.25")
+    //         //   .to("#overlay", { autoAlpha: 0, duration: 0.1 }, ">-=0.1");
+    //       }
+    //     }, node);
+
+    //     // document.body.classList.toggle("overflow-hidden");
+    //   }}
+    // >
+    // <Transition>
+      <div ref={ref} {...props}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <rect width="100%" height="32" y="96" fill="currentColor" className="burger-line"/>
+          <rect width="100%" height="32" y="240" fill="currentColor" className="burger-line"/>
+          <rect width="100%" height="32" y="384" fill="currentColor" className="burger-line"/>
+        </svg>
+      </div>
+    // </Transition>
   );
 });
+
+export const HomeIcon = (props: Props) => {
+  return (
+    <div {...props}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="">
+        <path d="M19.006 3.705a.75.75 0 00-.512-1.41L6 6.838V3a.75.75 0 00-.75-.75h-1.5A.75.75 0 003 3v4.93l-1.006.365a.75.75 0 00.512 1.41l16.5-6z" />
+        <path fillRule="evenodd" d="M3.019 11.115L18 5.667V9.09l4.006 1.456a.75.75 0 11-.512 1.41l-.494-.18v8.475h.75a.75.75 0 010 1.5H2.25a.75.75 0 010-1.5H3v-9.129l.019-.006zM18 20.25v-9.565l1.5.545v9.02H18zm-9-6a.75.75 0 00-.75.75v4.5c0 .414.336.75.75.75h3a.75.75 0 00.75-.75V15a.75.75 0 00-.75-.75H9z" clipRule="evenodd" />
+      </svg>
+    </div>
+
+  );
+}
+
+export const CarIcon = (props: Props) => {
+  return (
+    <div {...props}>
+      <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M494.26 276.22c-3.6-40.41-9.53-48.28-11.77-51.24-5.15-6.84-13.39-11.31-22.11-16a3.6 3.6 0 01-.91-5.68 15.93 15.93 0 004.53-12.53A16.27 16.27 0 00447.65 176h-15.6a17 17 0 00-2 .13 8.5 8.5 0 00-1.41-.47c-9.24-19.53-21.89-46.27-48.11-59.32C341.64 97 270 96 256 96s-85.64 1-124.48 20.31c-26.22 13.05-38.87 39.79-48.11 59.32l-.08.16a6.52 6.52 0 00-1.35.34 17 17 0 00-2-.13H64.35A16.27 16.27 0 0048 190.77a15.93 15.93 0 004.59 12.47 3.6 3.6 0 01-.91 5.68c-8.72 4.72-17 9.19-22.11 16-2.24 3-8.16 10.83-11.77 51.24-2 22.74-2.3 46.28-.73 61.44 3.29 31.5 9.46 50.54 9.72 51.33a16 16 0 0013.2 10.87v.2a16 16 0 0016 16h56a16 16 0 0016-16c8.61 0 14.6-1.54 20.95-3.18a158.83 158.83 0 0128-4.91C207.45 389 237.79 388 256 388c17.84 0 49.52 1 80.08 3.91a159.16 159.16 0 0128.11 4.93c6.08 1.56 11.85 3 19.84 3.15a16 16 0 0016 16h56a16 16 0 0016-16v-.12A16 16 0 00485.27 389c.26-.79 6.43-19.83 9.72-51.33 1.57-15.17 1.29-38.67-.73-61.45zm-381.93-86.91c8-17 17.15-36.24 33.44-44.35 23.54-11.72 72.33-17 110.23-17s86.69 5.24 110.23 17c16.29 8.11 25.4 27.36 33.44 44.35l1 2.17a8 8 0 01-7.44 11.42C360 202 290 199.12 256 199.12s-104 2.95-137.28 3.85a8 8 0 01-7.44-11.42c.35-.74.72-1.49 1.05-2.24zm11.93 79.63A427.17 427.17 0 0172.42 272c-10.6 0-21.53-3-23.56-12.44-1.39-6.35-1.24-9.92-.49-13.51C49 243 50 240.78 55 240c13-2 20.27.51 41.55 6.78 14.11 4.15 24.29 9.68 30.09 14.06 2.91 2.16 1.36 7.8-2.38 8.1zm221.38 82c-13.16 1.5-39.48.95-89.34.95s-76.17.55-89.33-.95c-13.58-1.51-30.89-14.35-19.07-25.79 7.87-7.54 26.23-13.18 50.68-16.35s34.8-4.8 57.62-4.8 32.12 1 57.62 4.81 44.77 9.52 50.68 16.35c10.78 12.24-5.29 24.19-18.86 25.84zm117.5-91.39c-2 9.48-13 12.44-23.56 12.44a455.91 455.91 0 01-52.84-3.06c-3.06-.29-4.48-5.66-1.38-8.1 5.71-4.49 16-9.91 30.09-14.06 21.28-6.27 33.55-8.78 44.09-6.69 2.57.51 3.93 3.27 4.09 5a40.64 40.64 0 01-.49 14.48z"></path></svg>
+    </div>
+  );
+}
 
 export const Plane = (props: Props) => {
   return (
@@ -284,7 +370,7 @@ export const PhoneIcon = (props: Props) => {
   )
 };
 
-export const SearchIcon = (props: Props) => {
+export const StackIcon = (props: Props) => {
   const classes = cn("", props.className);
 
   return (

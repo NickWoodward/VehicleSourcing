@@ -6,7 +6,7 @@ console.log('This runs in your terminal, not the browser!');
 import MainLayout from "../layouts/main-layout.astro";
 import {Section} from '../components/Section';
 import {HeroText} from '../components/HeroText';
-// import { WhyUs } from "../components/WhyUs";
+import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
 import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
@@ -18,16 +18,38 @@ import { TrustIcon } from "../utils/svgComponents";
 
 import heroImage from '/golf.png';
 import bgCar from '/bgCar.jpeg';
+import { Footer } from "../components/Footer";
+import { BrandCloud } from "../components/BrandCloud";
 ---
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
+  gsap.registerPlugin(ScrollTrigger)
   const sections = gsap.utils.toArray<HTMLElement>(".section");
-    console.log(sections);
+  console.log(sections);
+        // const menuItems = Array.from(document.querySelectorAll('.menu__item'));
+        // const sectionsMap = new Map();
+
+        // sections.forEach((section, index) => sectionsMap.set(section, menuItems[index]));
+
+        // this._sectionTriggers = sections.map((section, i) => {
+        //     const scrollTrigger = ScrollTrigger.create({
+        //         trigger: section,
+        //         start: "top center",
+        //         onEnter: () => this._Header.setActiveItem(sectionsMap.get(sections[i])),
+        //         onLeaveBack: () => this._Header.setActiveItem(sectionsMap.get(sections[i - 1])),
+        //     });
+        //     return scrollTrigger;
+        // });
+
+  // import { gsap } from "gsap";
+  // import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  // gsap.registerPlugin(ScrollTrigger);
+
+  // const sections = gsap.utils.toArray<HTMLElement>(".section");
+    console.log("sections",sections);
   sections.forEach((panel) => {
     ScrollTrigger.create({
       scroller: "main",
@@ -36,50 +58,67 @@ import bgCar from '/bgCar.jpeg';
       start: "top top", 
       pin: true, 
       pinSpacing:false,
-      // markers:{startColor:"white", endColor:"white"}
+      markers: true
     });
   });
 </script>
 
+<!-- snap-y snap-mandatory overflow-y-scroll -->
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter max-h-[100dvh] mt-headerHeight ">
 
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter max-h-[100dvh] mt-headerHeight">
+  <Section className="section relative" justify="evenly" height="full">
 
-  <Section className="section relative" axis="v" peek={true} justify="evenly" height="full">
-
-    <div class="h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12 ">
+    <div class="h-full grid grid-cols-1 md:grid-cols-12 grid-flow-row auto-rows-max ">
       <Circle className=""/>
 
-      <HeroText className=" row-start-2 xs:row-start-2 lg:row-start-2 col-start-1 md:col-start-2 md:col-span-6 lg:col-span-7 xl:col-span-6 z-30"/>
+      <HeroText className="row-start-2 xs-v:row-start-1 lg:row-start-2 col-start-1 md:col-start-1 md:col-span-8 lg:col-span-7 xl:col-span-6 z-30"/>
 
-      <div class=" flex flex-col relative max-w-md lg:max-w-3xl xs:ml-auto
+      <div class="flex flex-col relative max-w-md sm-v:max-w-sm lg:max-w-3xl xs:ml-auto
         md:col-start-5 md:col-span-full 
-        row-start-11 xs:row-start-10 lg:row-start-6">
+        xs-v:row-star sm-v:row-start-11 row-start-12 xs:row-start-9 md:row-start-8 lg:row-start-6">
         <img src={heroImage} class=" -scale-x-100" alt="Three BMW cars" />
       </div>
 
-      <TrustIcon className="hidden xs:flex h-16 lg:w-44 p-1 row-start-16 md:row-end-14 lg:row-end-13 md:col-start-2 lg:col-start-1 z-20" />
+      <TrustIcon className="sm-v:hidden h-16 w-44 p-1 row-start-15 md:row-end-14 lg:row-end-13 md:col-start-2 lg:col-start-1 z-20" />
 
     </div>
   </Section>
 
-  <Section className="section relative rounded-t-3xl" height="full" variant="dark" client:only>
-    
-    <div class="absolute inset-0 rounded-t-3xl overflow-hidden">
-      <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute w-full h-full -scale-x-100  rounded-t-3xl">
-      <div class="absolute inset-0 bg-dark/90 rounded-t-3xl "></div>
-    </div>
-
-    <div class="wrapper flex flex-col justify-center gap-4 h-full lg:w-1/2 md:ml-auto">
+  <Section className="section relative" variant="gray" justify="center" height="full">
+    <div class="h-full grid grid-cols-1 gap-6 grid-flow-row auto-rows-max">
       <SectionIntro 
-        title="Find the Perfect Car"
-        subtitle="Contact Us Today"
-        variant="dark"
-        className="w-full z-40"
-      />   
-      <Form className="" client:only/>
+        title="How It Works"
+        subtitle="3 Easy Steps"
+        tagline="Let us take the hassle out of buying a car"
+        className=" col-span-full"
+        taglineClasses="xxs-v:hidden"
+      />
+      <WhyUs className="  col-span-full" client:only />
     </div>
+  </Section>
 
-    <!-- <BrandCloud /> -->
+  <Section className="section relative " height="full" variant="dark" client:only>
+    <!-- <div class="relative h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12"> -->
+
+      <div class="absolute inset-0 overflow-hidden">
+        <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute inset-0 -scale-x-100  ">
+        <div class="absolute inset-0 bg-dark  "></div>
+      </div>
+
+      <div class="wrapper relative h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12h-full lg:w-1/2 md:ml-auto">
+        <SectionIntro 
+          title="Find the Perfect Car"
+          subtitle="Contact Us Today"
+          variant="dark"
+          className="row-start-1 w-full z-40"
+          tagline="Let our team know what you're looking for and we'll get right on it!"
+          taglineClasses="xxs-v:hidden"
+          />   
+        <Form className="row-start-5 xs-v:row-start-3 mt-4" client:only/>
+        <BrandCloud className="xxs-v:hidden" />
+
+      </div>
+    </div>
 
   </Section>
   <!-- <Section variant="dark" height="full">
@@ -99,6 +138,7 @@ import bgCar from '/bgCar.jpeg';
     <Reviews client:only/>
   </Section> -->
 
-  <!-- <Section height="full" variant="darker">
-  </Section> -->
+  <Section variant="darker">
+    <Footer />
+  </Section>
 </MainLayout>

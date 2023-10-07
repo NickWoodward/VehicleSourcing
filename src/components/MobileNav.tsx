@@ -1,5 +1,4 @@
-import { type ComponentProps, useLayoutEffect, useState, useRef, useEffect } from "react";
-import { gsap } from 'gsap';
+import { type ComponentProps, useLayoutEffect, useState, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { Burger } from "../utils/svgComponents";
 import { Modal } from "./Modal";
@@ -11,10 +10,10 @@ export const MobileNav = ({className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({top:"0", right:"0"});
 
-  const modalRef = useRef<HTMLDivElement>(null);
+  // const modalRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);
-  const scope = useRef<HTMLDivElement>(null);
-  const tl = useRef(gsap.timeline({ paused:true }));
+  // const scope = useRef<HTMLDivElement>(null);
+  // const tl = useRef(gsap.timeline({ paused:true }));
   
   const classes = twMerge(
     "relative md:hidden cursor-pointer",
@@ -36,46 +35,59 @@ export const MobileNav = ({className }: Props) => {
     });
   }, []);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const lines = Array.from<HTMLElement>(
-        document.querySelectorAll(".burger-line")
-      );
+  // useLayoutEffect(() => {
+  //   const ctx = gsap.context(() => {
+  //     const lines = Array.from<HTMLElement>(
+  //       document.querySelectorAll(".burger-line")
+  //     );
+  //     const menuItems = Array.from<HTMLElement>(
+  //       document.querySelectorAll(".menu-item")
+  //     );
 
-      gsap.set(modalRef.current, { yPercent: 0 });
-      tl.current
-        .to(modalRef.current, { yPercent: 0-100 })
-        .to(lines[0] || null, { y: 144, ease: "power3.out" }, "<")
-        .to(lines[2] || null, { y: -144, ease: "power3.out" }, "<")
-        .to(lines[1] || null, { opacity: 0, ease: "power3.out" }, "<.2")
-        .to(
-          lines[0] || null,
-          { rotate: 45, transformOrigin: "center", ease: "power3.inOut" },
-          ">"
-        )
-        .to(
-          lines[2] || null,
-          { rotate: 135, transformOrigin: "center", ease: "power3.inOut" },
-          "<"
-        );    
-      }, scope);
+  //     // gsap.set(modalRef.current, { yPercent: 0 });
+  //     gsap.set(modalRef.current, { opacity: 0 });
 
-      return () => ctx.revert();
-  }, []);
+  //     tl.current
+  //       // .to(modalRef.current, { yPercent: -100 })
+  //       .to(modalRef.current, { opacity: 1 })
+  //       .fromTo(menuItems, {xPercent: 100}, { stagger: .1, xPercent: 0 }, '<')
+
+  //       .to(lines[0] || null, { y: 144, ease: "power3.out" }, "<")
+  //       .to(lines[2] || null, { y: -144, ease: "power3.out" }, "<")
+  //       .to(lines[1] || null, { opacity: 0, ease: "power3.out" }, "<.2")
+  //       .to(
+  //         lines[0] || null,
+  //         { rotate: 45, transformOrigin: "center", ease: "power3.inOut" },
+  //         ">"
+  //       )
+  //       .to(
+  //         lines[2] || null,
+  //         { rotate: 135, transformOrigin: "center", ease: "power3.inOut" },
+  //         "<"
+  //       );    
+  //     }, scope);
+
+  //     return () => ctx.revert();
+  // }, []);
 
   const toggleMenu = () => {
-    setIsOpen((currState) => {
-      if (currState) tl.current.reverse();
-      else tl.current.play(0);
-      return !currState;
-    });
+    setIsOpen(curr => !curr);
   };
 
   return (
-    <div ref={scope} className={classes}>
-      <Burger ref={burgerRef} className="burger flex w-6" onToggle={toggleMenu} />
-      <Modal position={menuPosition} ref={modalRef} closeModal={toggleMenu} modalClasses="fixed flex-col modal w-11/12 mx-auto bg-white z-40">
-        <Navigation onToggle={toggleMenu} />
+    <div className={classes}>
+      <Burger 
+        ref={burgerRef} 
+        animate={isOpen}
+        className="burger flex w-6" 
+        onClick={toggleMenu} />
+      <Modal 
+        position={menuPosition} 
+        show={isOpen} 
+        close={toggleMenu} 
+        modalClasses="fixed flex-col w-full h-full mx-auto z-50"
+      >
+        <Navigation id="modal" onClick={toggleMenu} />
       </Modal>
     </div>
   );

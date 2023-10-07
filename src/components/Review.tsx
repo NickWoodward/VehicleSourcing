@@ -1,4 +1,6 @@
 import type { ComponentProps } from "react";
+import { cva } from "class-variance-authority";
+
 import { cn } from "../utils/utils";
 import { StarIcon } from "../utils/svgComponents";
 

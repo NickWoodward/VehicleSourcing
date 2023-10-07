@@ -1,12 +1,12 @@
 import type { ComponentProps } from "react";
 import { cn } from "../utils/utils";
 import { List } from "./List";
-import { aboutIcon } from "../utils/svgComponents";
+import { CarIcon, PhoneIcon, HomeIcon } from "../utils/svgComponents";
 import { NavigationItem, NavigationItemType } from "./NavigationItem";
 
 interface Props extends ComponentProps<"div">{
   linkClasses?: string;
-  onToggle: () => void;
+  // onToggle: () => void;
 }
 
 const navOptions = [
@@ -14,27 +14,29 @@ const navOptions = [
     id: 1,
     label: "Home",
     to: "/",
-    icon: aboutIcon,
+    icon: HomeIcon,
+    description: "Is where your new car is"
   },
   {
     id: 2,
     label: "How it Works",
     to: "/about",
-    icon: aboutIcon,
-    description: "Make your life easier"
+    icon: CarIcon,
+    description: "3 Steps to your dream car"
   },
   {
     id: 3,
-    label: "Contact",
+    label: "Masserati 3200",
     to: "/contact",
-    icon: aboutIcon,
-    description: "Contact us today"
+    icon: PhoneIcon,
+    description: "Talk to Us"
   },
 ];
 
-export const Navigation = ({className}: Props) => {
+export const Navigation = (props: Props) => {
+  const { className } = props;
 
-  const classes = cn(className, "");
+  const classes = cn(className, "space-y-3");
 
   const renderItem = (item: NavigationItemType) => {
     return (
@@ -43,14 +45,17 @@ export const Navigation = ({className}: Props) => {
   };
 
   return (
-      <div className=" max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 ring-1 ring-gray-900/5 lg:max-w-3xl">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-1 p-4 lg:grid-cols-2">
-          <List
-            className={classes}
-            items={navOptions}
-            renderItem={renderItem}
-          />      
-        </div>
+      <div 
+        className=" w-full ml-auto flex-auto overflow-hidden rounded-3xl text-sm leading-6  lg:max-w-3xl"
+        {...props}>
+          <div className="p-4">
+            <List
+              className={classes}
+              items={navOptions}
+              renderItem={renderItem}
+              itemName="menu-item"
+            />      
+          </div>
       </div>
   );
 }

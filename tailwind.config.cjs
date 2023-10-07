@@ -24,6 +24,11 @@ module.exports = {
       xs: '380px',
       // sm: '640px',
       // md: '768px',
+      // "sm-v": { raw: '(max-height: 900px) and (min-width: 500px)' },
+      "sm-v": {raw: '(max-height: 875px)'}, 
+      "xs-v": {raw: '(max-height: 760px)'}, 
+      "xxs-v": {raw: '(max-height: 680px)'},    
+
       ...defaultTheme.screens,
     },
 		extend: {
@@ -64,6 +69,18 @@ module.exports = {
         '15': '15',
         '16': '16',
       },
+      gridRowSpan: {
+        '7': '7',
+        '8': '8',
+        '9': '9',
+        '10': '10',
+        '11': '11',
+        '12': '12',
+        '13': '13',
+        '14': '14',
+        '15': '15',
+        '16': '16',
+      },
 			fontFamily: {
         'inter': ['Inter', 'sans-serif']
       },
@@ -85,8 +102,9 @@ module.exports = {
       },
 			colors: {
 				primary: "var(--primary)",
-				dark: "#334155",
-        darker: "#394659"
+				dark: "hsl(215, 25%, 27%)",
+        darker: "hsl(215 28% 24%)",
+        inputDark: "hsl(215 25% 28%)"
 			},
       extend: {
         scale: {

@@ -1,7 +1,8 @@
 import type { ComponentProps } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
+
 import { cn } from "../utils/utils";
-import { Button } from "./Button";
+
 
 interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVariants>{
   axis?: "h" | "v",
@@ -9,20 +10,21 @@ interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVarian
   children: React.ReactNode
 }
 
-export const sectionVariants = cva("snap-start flex items-center w-full px-6 xs:px-8 sm:px-14 md:px-12 lg:px-16 xl:px-36", 
+export const sectionVariants = cva("flex items-center w-full px-6 xs:px-8 sm:px-14 md:px-12 lg:px-16 xl:px-36", 
   {
     variants: {
       variant: {
         default: "flex-col bg-white text-dark",
         dark: "flex-col bg-dark text-white",
-        darker: "bg-slate-700"
+        darker: "bg-darker",
+        gray: "bg-slate-100 text-white"
       },
       headerOffset: {
         true: "mt-headerHeight"
       },
       height: {
         default: "h-auto",
-        full: "py-[5vh] h-dvh",
+        full: "py-[7vh] h-dvh",
         sm: "min-h-footerHeight"
       },
     
@@ -44,6 +46,7 @@ export const sectionVariants = cva("snap-start flex items-center w-full px-6 xs:
       variant: "default",
       height: "default",
       headerOffset: false,
+      justify: "center",
     }
   }
 );
@@ -54,8 +57,8 @@ export const sectionVariants = cva("snap-start flex items-center w-full px-6 xs:
 // scroll-snap-type: y mandatory;
 
 
-export function Section({className, variant, axis = 'v', justify = 'start', height, peek, headerOffset, children}:Props) {
-
+export function Section({className, variant, axis = 'v', justify = 'start', height,  headerOffset, children}:Props) {
+  
   const contentClasses = cn("flex md:justify-start h-full w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-8xl", {
     "flex-col": axis === "v",
     "flex-row": axis === "h",
@@ -67,8 +70,9 @@ export function Section({className, variant, axis = 'v', justify = 'start', heig
  });
 
   return (
-    <div className={cn(
-      sectionVariants({ variant, justify, height, headerOffset, className })
+    <div 
+      className={cn(
+        sectionVariants({ variant, justify, height, headerOffset, className })
     )}>
       <div className={contentClasses}>
         {children}
