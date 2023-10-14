@@ -3,9 +3,9 @@ import { Button } from "./Button";
 
 export const HeroCTA = () => {
   return (
-    <div className="mt-6 flex flex-col items-start space-y-1">
+    <div className="mt-6 sm:mt-12 flex flex-col items-start space-y-3">
       <Button   
-        
+        className="cta-button animate-text invisible opacity-0"
         rounded
         intent="dark"   
         variant="outline"
@@ -14,7 +14,7 @@ export const HeroCTA = () => {
         <span className="ml-3.5">Find your Car</span>
       </Button>
       <Button   
-        
+        className="cta-button animate-text invisible opacity-0"
         rounded
         variant="ghost"
         // intent="primary"

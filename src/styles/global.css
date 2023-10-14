@@ -14,6 +14,21 @@
   /* --dark: hsl(); */
 }
 
+body, html {
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+.test-red, .test-red * {
+  border: 1px solid red;
+}
+.test-green, .test-green * {
+  border: 1px solid green;
+}
+.test-blue, .test-blue * {
+  border: 1px solid blue;
+}
 
 .embla {  
   overflow: hidden;

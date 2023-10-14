@@ -4,7 +4,9 @@ import { cn } from "../utils/utils";
 
 interface IntroProps extends ComponentProps<"div">, VariantProps<typeof sectionVariants> {
   title: string,
+  titleClasses,
   subtitle: string,
+  subtitleClasses?: string,
   tagline?: string,
   taglineClasses?: string,
 }
@@ -13,34 +15,31 @@ interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglin
   content: string
 }
 
-const sectionVariants = cva("flex flex-col w-full items-start", {
+const sectionVariants = cva("flex flex-col w-full items-start justify-center", {
   variants: {
     variant: {
       default: "text-gray-700",
       dark: "text-white",
     },
-    align: {
-      default: "items-start",
-      center: "items-center"
-    }
+
   },
   defaultVariants: {
     variant: "default"
   }
 });
 
-const subtitleVariants = cva("mb-1 font-semibold tracking-tight text-primary", {
+const subtitleVariants = cva("animate-text subtitle mb-1 sm:mb3 font-medium text-primary", {
   variants: {
     variant: {
-      default: "text-sm",
-      dark: "text-sm",
+      default: "text-sm xs:text-base sm:text-lg",
+      dark: "text-sm xs:text-base sm:text-lg",
     }
   },
   defaultVariants: {
     variant: "default"
   }
 });
-const taglineVariants = cva("mt-3", {
+const taglineVariants = cva("mt-1", {
   variants: {
     variant: {
       default: "text-gray-600",
@@ -60,14 +59,14 @@ const TagLine = ({content, className}: TagLineProps) => {
   );
 }
 
-export const SectionIntro = ({title, subtitle, tagline, variant, align, className, taglineClasses}: IntroProps) => {
+export const SectionIntro = ({title, subtitle, tagline, variant, className, titleClasses, subtitleClasses, taglineClasses}: IntroProps) => {
   return (
-    <div className={cn(className, sectionVariants({variant, align}))}>
-      <h3 className={cn(subtitleVariants({variant}))}>{subtitle}</h3>
-      <h2 className="text-xl xs:text-2xl font-medium tracking-tight">
+    <div className={cn(sectionVariants({variant}), className)}>
+      <h3 className={cn(subtitleVariants({variant}), subtitleClasses)}>{subtitle}</h3>
+      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl font-medium tracking-tight", titleClasses)}>
         {title}
       </h2>
-      {tagline && <TagLine content={tagline} className={cn("", taglineClasses, taglineVariants({variant}))}/>}
+      {tagline && <TagLine content={tagline} className={cn("tagline", taglineClasses, taglineVariants({variant}))}/>}
     </div>
   );
 }

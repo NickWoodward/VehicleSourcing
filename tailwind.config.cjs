@@ -33,8 +33,17 @@ module.exports = {
     },
 		extend: {
       spacing: {
-        'headerHeight': 'var(--headerHeight)',
+        'headerHeight': 'var(--headerHeight)',        
       },
+      padding: {
+        "header": "1rem",
+        "page-xs":"2rem",
+        "page-sm": "3rem",
+        "page-md": "2.5rem",
+        "page-lg": "4rem",
+        "page-xl": "5rem",
+      },
+
       gridTemplateRows: {
         '12': 'repeat(12, minmax(0, 1fr))',
         '16': 'repeat(16, minmax(0, 1fr))',
@@ -69,7 +78,19 @@ module.exports = {
         '15': '15',
         '16': '16',
       },
-      gridRowSpan: {
+      gridRow: {
+        'span-7': 'span 7 / span 7',
+        'span-8': 'span 8 / span 8',
+        'span-9': 'span 9 / span 9',
+        'span-10': 'span 10 / span 10',
+        'span-11': 'span 11 / span 11',
+        'span-12': 'span 12 / span 12',
+        'span-13': 'span 13 / span 13',
+        'span-14': 'span 14 / span 14',
+        'span-15': 'span 15 / span 15',
+        'span-16': 'span 16 / span 16',
+      },
+      gridColStart: {
         '7': '7',
         '8': '8',
         '9': '9',
@@ -80,6 +101,30 @@ module.exports = {
         '14': '14',
         '15': '15',
         '16': '16',
+      },
+      gridColEnd: {
+        '7': '7',
+        '8': '8',
+        '9': '9',
+        '10': '10',
+        '11': '11',
+        '12': '12',
+        '13': '13',
+        '14': '14',
+        '15': '15',
+        '16': '16',
+      },
+      gridCol: {
+        'span-7': 'span 7 / span 7',
+        'span-8': 'span 8 / span 8',
+        'span-9': 'span 9 / span 9',
+        'span-10': 'span 10 / span 10',
+        'span-11': 'span 11 / span 11',
+        'span-12': 'span 12 / span 12',
+        'span-13': 'span 13 / span 13',
+        'span-14': 'span 14 / span 14',
+        'span-15': 'span 15 / span 15',
+        'span-16': 'span 16 / span 16',
       },
 			fontFamily: {
         'inter': ['Inter', 'sans-serif']
@@ -98,6 +143,8 @@ module.exports = {
       },
       maxWidth: {
         '8xl': '1400px',
+        '9xl': '1600px',
+        '10xl': '1800px',
         'header': '1450px'
       },
 			colors: {

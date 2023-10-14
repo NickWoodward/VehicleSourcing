@@ -24,7 +24,7 @@ export const EmblaCarousel = ({slides, className, axis = "x", autoplayOptions, o
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const sliderRef = useRef([]);
 
-  const classes = cn("embla relative space-y-2.5", className);  
+  const classes = cn("embla px-1 relative space-y-8", className);  
   
   const carouselVariants = cva("embla__container flex", {
     variants: {
@@ -91,22 +91,22 @@ export const EmblaCarousel = ({slides, className, axis = "x", autoplayOptions, o
             <div className={cn(slideClasses, `slide-2`)}>{slides[2]}</div>
           </div>
         </div>
-        <div className="relative flex justify-end space-x-2">
-          <Button size="sm" className="embla__prev text-dark bg-transparent rounded" onClick={scrollPrev}>        
+        <div className=" -translate-x-2  relative flex justify-start items-center space-x-3">
+          <Button size="none" className="embla__prev text-dark bg-transparent rounded" onClick={scrollPrev}>        
             <ChevronLeft className="w-4" />    
           </Button>  
-          {markers? <div className="embla__dots  z-50 flex justify-end gap-2 text-sm lg:py-4 lg:px-8">
+          {markers? <div className="embla__dots  z-50 flex justify-end gap-2.5 text-sm lg:py-4 lg:px-8">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
-              className={cn("embla__dot w-7 h-full rounded bg-gray-300", {
+              className={cn("embla__dot h-8 w-8 rounded bg-gray-300", {
                 "embla__dot--selected bg-primary": index === selectedIndex,
               })}
               onClick={() => scrollTo(index)}
             >{index + 1}</button>
           ))}
         </div> : null}    
-          <Button size="sm" className="embla__next text-dark bg-transparent rounded" onClick={scrollNext}>        
+          <Button size="none" className="embla__next text-dark bg-transparent rounded" onClick={scrollNext}>        
             <ChevronRight className="w-4" />     
           </Button>
         </div>

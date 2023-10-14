@@ -25,9 +25,71 @@ import { BrandCloud } from "../components/BrandCloud";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
+
+  const aboutAnimation = gsap.timeline({defaults: {ease: "power2.inOut"}, paused: true});;
+
   const sections = gsap.utils.toArray<HTMLElement>(".section");
-  console.log(sections);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    gsap.delayedCall(1, heroAnimation);
+
+    // aboutAnimation 
+
+    aboutAnimation.to('.about .animate-text', { autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .8});
+
+    // const aboutAnimation = () => {
+    //   aboutAnimation
+    //     .set('.about .animate-text', { y:-10 })
+    //     .to('.about .animate-text', { autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .6})
+    // }
+
+    ScrollTrigger.create({
+      trigger: ".about .animate-text",
+      start: "top 80%",
+      markers:true,
+      onEnter: () => { aboutAnimation.play(0)},
+    });
+
+    function heroAnimation() {
+      console.log(document.querySelector('.title'));
+      const heroText = document.querySelectorAll('.hero .animate-text');
+      gsap.timeline({})
+        .set(heroText, { y:-8 })
+        .set('.hero .animate-up', { x:40, scale:.95 })
+        .to(heroText, { autoAlpha:1, y:0, ease: "ease: back.out(2)", stagger: .2, duration: .6})
+        .to('.hero .animate-up', { autoAlpha:1, x:0, ease: "ease: back.out(10)", scale:1, duration:.6 }, "<.48");
+    }
+  });
+
+ 
+//   const items = gsap.utils.toArray<HTMLElement>(".animate");
+// console.log("items",items);
+//   const tl = gsap.timeline();
+//     tl.from(items, {
+//         autoAlpha: 0,
+//         x: -20,
+//         // scale: 0.988,
+//         stagger: {
+//           amount: .8,
+//           ease: "slow(0.7, 0.7, false)"    
+//         }
+//       }, '<-.2');
+    
+    // // Separate scrolltrigger objects allow leaveback and onenter trigger points to be different
+    // ScrollTrigger.create({
+    //   trigger: ".animate",
+    //   start: "top 80%",
+    //   markers:true,
+    //   onEnter: () => tl.play()
+    // });
+    // ScrollTrigger.create({
+    //   trigger: ".animate",
+    //   start: "top 110%",
+    //   markers:true,
+    //   onLeaveBack: () => tl.pause(0)
+    // });
+    
         // const menuItems = Array.from(document.querySelectorAll('.menu__item'));
         // const sectionsMap = new Map();
 
@@ -50,95 +112,99 @@ import { BrandCloud } from "../components/BrandCloud";
 
   // const sections = gsap.utils.toArray<HTMLElement>(".section");
     console.log("sections",sections);
-  sections.forEach((panel) => {
-    ScrollTrigger.create({
-      scroller: "main",
-      trigger: panel,
-      snap: 1 / (sections.length - 1),
-      start: "top top", 
-      pin: true, 
-      pinSpacing:false,
-      markers: true
-    });
-  });
+  // sections.forEach((panel) => {
+  //   ScrollTrigger.create({
+  //     scroller: "main",
+  //     trigger: panel,
+  //     snap: 1 / (sections.length - 1),
+  //     start: "top top", 
+  //     pin: true, 
+  //     pinSpacing:false,
+  //     // markers: true
+  //   });
+  // });
 </script>
 
 <!-- snap-y snap-mandatory overflow-y-scroll -->
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter max-h-[100dvh] mt-headerHeight ">
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter mt-headerHeight">
+  <div class="scroller snap-y snap-mandatory">
+      <Section className="hero section relative snap-start snap-always scroll-mt-16 px-page-xs bg-gradient-to-b from-slate-100 to-white" height="full" contentClassName="xl:max-w-8xl">
+    
+        <div class="h-full w-full grid grid-cols-1 md:grid-cols-16 sm:grid-rows-16 gap-4">
+          <!-- <Circle className=""/> -->
+    
+          <HeroText className="hero-text animate-down z-30 flex flex-col justify-center col-start-1 col-end-[-1] sm:row-start-2 sm:row-span-8 md:row-start-3 lg:row-start-3 xl:row-start-4 " />
+    
+          <div class="hero-image animate-up invisible opacity-0 flex justify-center sm:justify-end items-start sm:items-center overflow-hidden sm:pl-0  col-span-1 md:col-span-12 md:col-end-[-1] sm:row-start-10 md:row-start-7 lg:row-start-7 xl:row-start-5 sm:row-span-7  lg:row-span-10">
+            <img src={heroImage} class="object-contain max-h-full -scale-x-100  hover:scale-both-110" alt="Three BMW cars" />
+          </div>
+    
+          <!-- <TrustIcon className="border border-red-500 xs-v:hidden sm:row-start-15 col-start-1 h-16 w-36 p-1 z-20" /> -->
+    
+        </div>
+      </Section>
+    
+      <Section className="about section relative snap-start  snap-always scroll-mt-16 px-page-xs bg-gradient-to-b from-slate-100 to-slate-50" variant="gray"  height="full" breakout={true} >
+        <div class="h-full grid grid-cols-1 sm:grid-rows-16 gap-5 xl:gap-7">
+          <SectionIntro 
+            title="How It Works"
+            titleClasses="animate-text invisible"
+            subtitle="3 Easy Steps"
+            subtitleClasses="animate-text invisible",
+            tagline="Let us take the hassle out of buying a car"
+            className="xl:max-w-8xl xl:mx-auto flex flex-col justify-center col-start-1 col-span-1 xl:col-span-auto  sm:row-start-1 sm:row-span-4 lg:row-start-1 "
+            taglineClasses="animate-text invisible xxs-v:hidden"
+          />
+          <WhyUs className=" sm:row-start-5 sm:row-span-13 col-span-full" client:only />
+        </div>
+      </Section>
+    
+    
+      <Section className="section relative snap-start snap-always scroll-mt-16 px-page-xs " height="full" variant="dark" client:visible>
+          <div class="absolute inset-0 overflow-hidden">
+            <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute inset-0 -scale-x-100  ">
+            <div class="absolute inset-0 bg-dark  "></div>
+          </div>
+    
+          <div class="relative h-full grid grid-cols-1 lg:grid-cols-16  grid-rows-16 gap-6 ">
+            <SectionIntro 
+              title="Find the Perfect Car"
+              subtitle="Contact Us Today"
+              variant="dark"
+              className=" flex flex-col col-start-1 col-span-1 lg:col-start-1 lg:col-span-6  row-start-1 lg:row-start-3  row-span-4"
+              tagline="Let our team know what you're looking for and we'll get right on it!"
+              taglineClasses="xs-v:hidden"
+              />   
+              <BrandCloud className="hidden lg:flex lg:col-span-5 lg:row-start-7 lg:row-span-4" />
 
-  <Section className="section relative" justify="evenly" height="full">
-
-    <div class="h-full grid grid-cols-1 md:grid-cols-12 grid-flow-row auto-rows-max ">
-      <Circle className=""/>
-
-      <HeroText className="row-start-2 xs-v:row-start-1 lg:row-start-2 col-start-1 md:col-start-1 md:col-span-8 lg:col-span-7 xl:col-span-6 z-30"/>
-
-      <div class="flex flex-col relative max-w-md sm-v:max-w-sm lg:max-w-3xl xs:ml-auto
-        md:col-start-5 md:col-span-full 
-        xs-v:row-star sm-v:row-start-11 row-start-12 xs:row-start-9 md:row-start-8 lg:row-start-6">
-        <img src={heroImage} class=" -scale-x-100" alt="Three BMW cars" />
-      </div>
-
-      <TrustIcon className="sm-v:hidden h-16 w-44 p-1 row-start-15 md:row-end-14 lg:row-end-13 md:col-start-2 lg:col-start-1 z-20" />
-
-    </div>
-  </Section>
-
-  <Section className="section relative" variant="gray" justify="center" height="full">
-    <div class="h-full grid grid-cols-1 gap-6 grid-flow-row auto-rows-max">
-      <SectionIntro 
-        title="How It Works"
-        subtitle="3 Easy Steps"
-        tagline="Let us take the hassle out of buying a car"
-        className=" col-span-full"
-        taglineClasses="xxs-v:hidden"
-      />
-      <WhyUs className="  col-span-full" client:only />
-    </div>
-  </Section>
-
-  <Section className="section relative " height="full" variant="dark" client:only>
-    <!-- <div class="relative h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12"> -->
-
-      <div class="absolute inset-0 overflow-hidden">
-        <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute inset-0 -scale-x-100  ">
-        <div class="absolute inset-0 bg-dark  "></div>
-      </div>
-
-      <div class="wrapper relative h-full grid grid-cols-1 grid-rows-16 md:grid-cols-12h-full lg:w-1/2 md:ml-auto">
+            <Form className="xs-v:row-start-4 row-start-5 sm:row-start-5 sm:row-span-12 lg:row-start-2 col-span-full lg:col-start-8 lg:col-span-9" client:only/>
+    
+          </div>
+        </div>
+    
+      </Section>
+    
+      
+      <!-- <Section variant="dark" height="full">
         <SectionIntro 
-          title="Find the Perfect Car"
-          subtitle="Contact Us Today"
+          title="How It Works"
+          subtitle="WAKEY WINES"
+          tagline="Buying a car should be something you enjoy"
           variant="dark"
-          className="row-start-1 w-full z-40"
-          tagline="Let our team know what you're looking for and we'll get right on it!"
-          taglineClasses="xxs-v:hidden"
-          />   
-        <Form className="row-start-5 xs-v:row-start-3 mt-4" client:only/>
-        <BrandCloud className="xxs-v:hidden" />
-
-      </div>
-    </div>
-
-  </Section>
-  <!-- <Section variant="dark" height="full">
-    <SectionIntro 
-      title="How It Works"
-      subtitle="WAKEY WINES"
-      tagline="Buying a car should be something you enjoy"
-      variant="dark"
-    />  
-    <WhyUs className="h-full" client:only />
-  </Section>
-  <Section height="full">
-    <SectionIntro 
-      title="Mange Tout Rodders"
-      subtitle="ORIGINAL FAKE"
-    />    
-    <Reviews client:only/>
-  </Section> -->
-
-  <Section variant="darker">
-    <Footer />
-  </Section>
+        />  
+        <WhyUs className="h-full" client:only />
+      </Section>
+      <Section height="full">
+        <SectionIntro 
+          title="Mange Tout Rodders"
+          subtitle="ORIGINAL FAKE"
+        />    
+        <Reviews client:only/>
+      </Section> -->
+    
+      <Section className="snap-end px-header" variant="darker">
+        <Footer />
+      </Section>
+      
+  </div>
 </MainLayout>

@@ -4,7 +4,7 @@ import { cn } from "./utils";
 
 interface Props extends ComponentProps<"div">{};
 interface BurgerProps extends ComponentProps<"div">{
-  animate: boolean;
+  // animate: boolean;
   // onToggle: () => void;
 };
 

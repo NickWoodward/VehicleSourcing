@@ -7,16 +7,18 @@ import { cn } from "../utils/utils";
 interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVariants>{
   axis?: "h" | "v",
   peek?: boolean,
+  contentClassName?: string,
+  breakout?: boolean,
   children: React.ReactNode
 }
 
-export const sectionVariants = cva("flex items-center w-full px-6 xs:px-8 sm:px-14 md:px-12 lg:px-16 xl:px-36", 
+export const sectionVariants = cva("flex  w-full", 
   {
     variants: {
       variant: {
         default: "flex-col bg-white text-dark",
         dark: "flex-col bg-dark text-white",
-        darker: "bg-darker",
+        darker: "flex-col bg-darker",
         gray: "bg-slate-100 text-white"
       },
       headerOffset: {
@@ -24,10 +26,13 @@ export const sectionVariants = cva("flex items-center w-full px-6 xs:px-8 sm:px-
       },
       height: {
         default: "h-auto",
-        full: "py-[7vh] h-dvh",
+        full: "xs-v:py-[4vh] py-[8vh] h-dvh",
         sm: "min-h-footerHeight"
       },
-    
+      breakout: {
+        true: "xs:px-page-sm sm:px-page-sm lg:px-10 xl:px-20",
+        false: "xs:px-page-sm sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
+      },
       justify: {
         center: "justify-center",
         start: "justify-start",
@@ -47,6 +52,7 @@ export const sectionVariants = cva("flex items-center w-full px-6 xs:px-8 sm:px-
       height: "default",
       headerOffset: false,
       justify: "center",
+      breakout: false
     }
   }
 );
@@ -57,28 +63,21 @@ export const sectionVariants = cva("flex items-center w-full px-6 xs:px-8 sm:px-
 // scroll-snap-type: y mandatory;
 
 
-export function Section({className, variant, axis = 'v', justify = 'start', height,  headerOffset, children}:Props) {
-  
-  const contentClasses = cn("flex md:justify-start h-full w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-8xl", {
+export function Section({className, variant, axis = 'v', justify = 'start', height, contentClassName, headerOffset, breakout, children}:Props) {
+  const contentClasses = cn("flex md:justify-start h-full w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-8xl mx-auto", contentClassName, {
     "flex-col": axis === "v",
     "flex-row": axis === "h",
-    "justify-center": justify === "center",
-    "justify-start": justify === "start",
-    "justify-end": justify === "end",
-    "justify-between": justify === "between",
-    "justify-around": justify === "around",
+    "xl:max-w-9xl": breakout
  });
 
   return (
     <div 
       className={cn(
-        sectionVariants({ variant, justify, height, headerOffset, className })
+        sectionVariants({ variant, justify, height, headerOffset, breakout }), className
     )}>
       <div className={contentClasses}>
         {children}
       </div>
-      {/* {peek? <SectionPeeker /> : null} */}
-
     </div>
   );
 } 

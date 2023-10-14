@@ -16,7 +16,7 @@ export const MobileNav = ({className }: Props) => {
   // const tl = useRef(gsap.timeline({ paused:true }));
   
   const classes = twMerge(
-    "relative md:hidden cursor-pointer",
+    "relative flex md:hidden cursor-pointer",
     className
   );
 
@@ -78,7 +78,7 @@ export const MobileNav = ({className }: Props) => {
     <div className={classes}>
       <Burger 
         ref={burgerRef} 
-        animate={isOpen}
+        // animate={isOpen}
         className="burger flex w-6" 
         onClick={toggleMenu} />
       <Modal 

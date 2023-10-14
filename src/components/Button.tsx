@@ -9,7 +9,7 @@ interface ButtonProps
   disabled?: boolean | undefined;
 }
 
-export const buttonVariants = cva("flex items-center justify-center text-sm lg:text-lg font-base  outline-2 outline-offset-2", {
+export const buttonVariants = cva("flex items-center justify-center  text-base sm:text-lg  outline-2 outline-offset-2", {
   variants: {
     variant: {
       default: "bg-primary text-white",
@@ -23,8 +23,9 @@ export const buttonVariants = cva("flex items-center justify-center text-sm lg:t
       monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
-      sm: "py-1.5 px-2",
-      md: "pl-3 md:pl-4 pr-6 md:pr-7 py-3 md:py-1.5 lg:py-2.5"
+      default:"pl-3 md:pl-4 pr-6 md:pr-7 py-3.5 md:py-3.5 ",
+      square: "p-4",
+      none: "p-0"
     },
     rounded: {
       true: "rounded-xl",
@@ -47,7 +48,7 @@ export const buttonVariants = cva("flex items-center justify-center text-sm lg:t
   ],
   defaultVariants: {
     variant: "default",
-    size: "md",
+    size:"default"
   },
 });
 

@@ -1,10 +1,10 @@
 import type { ComponentProps } from "react";
-import { cva } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "../utils/utils";
 import { StarIcon } from "../utils/svgComponents";
 
-export interface ReviewProps extends ComponentProps<"div"> {
+export interface ReviewProps extends ComponentProps<"div">, VariantProps<typeof reviewVariants> {
   reviewId: number,
   title: string,
   body: string,
@@ -13,9 +13,28 @@ export interface ReviewProps extends ComponentProps<"div"> {
   className?: string,
 }
 
+export const reviewVariants = cva("", {
+  variants: {
+    variant: {
+      default: "bg-gray-50"
+    },
+    size: {
+      sm: "p-6",
+    },
+    rounded: {
+      true: "rounded",
+    },
+    defaults: {
+      variant: "default",
+      size: "sm",
+      rounded: true,
+    }
+  }
+});
+
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("rounded w-full bg-white p-6 bg-gray-50",
+  const classes = cn("",
     className
   );
 
