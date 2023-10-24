@@ -32,11 +32,9 @@ module.exports = {
       ...defaultTheme.screens,
     },
 		extend: {
-      spacing: {
-        'headerHeight': 'var(--headerHeight)',        
-      },
+
       padding: {
-        "header": "1rem",
+        "header": "2rem",
         "page-xs":"2rem",
         "page-sm": "3rem",
         "page-md": "2.5rem",
@@ -60,7 +58,6 @@ module.exports = {
         '10': '10',
         '11': '11',
         '12': '12',
-
         '13': '13',
         '14': '14',
         '15': '15',
@@ -114,7 +111,7 @@ module.exports = {
         '15': '15',
         '16': '16',
       },
-      gridCol: {
+      gridColumn: {
         'span-7': 'span 7 / span 7',
         'span-8': 'span 8 / span 8',
         'span-9': 'span 9 / span 9',
@@ -149,9 +146,10 @@ module.exports = {
       },
 			colors: {
 				primary: "var(--primary)",
-				dark: "hsl(215, 25%, 27%)",
+				dark: "var(--dark)",
         darker: "hsl(215 28% 24%)",
-        inputDark: "hsl(215 25% 28%)"
+        inputDark: "hsl(215 25% 28%)",
+        circle: "var(--c-cirle)",
 			},
       extend: {
         scale: {

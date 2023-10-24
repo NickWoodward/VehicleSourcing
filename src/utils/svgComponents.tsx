@@ -395,6 +395,7 @@ export const StarIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
 export const CircleIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
   return (
     <svg
+    strokeWidth={1}
 
     viewBox="0 0 558 558"
     fill="none"
@@ -411,7 +412,7 @@ export const CircleIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
         y2={237}
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#fff" />
+        <stop stopColor="hsl(100, 32%, 91%)" />
         <stop offset={1} stopColor="#fff" stopOpacity={0} />
       </linearGradient>
     </defs>
@@ -428,3 +429,6 @@ export const CircleIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
   </svg>
   )
 }
+
+
+

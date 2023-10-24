@@ -11,7 +11,7 @@ export const BrandCloud = (props: Props) => {
     <div className={classes}>
       <ul
         role="list"
-        className="flex justify-between w-full  text-slate-600"
+        className="flex justify-between w-full gap-x-12 text-slate-600"
       >
           <li><MercedesLogo className="h-14 aspect-square" /></li>
           <li><BMWLogo className="h-14 aspect-square" /></li>
@@ -23,10 +23,10 @@ export const BrandCloud = (props: Props) => {
       </ul>
       <ul
         role="list"
-        className=" flex justify-around items-center w-full text-slate-600"
+        className=" flex items-center gap-8 w-full text-slate-600"
       >          
-        <li><MiniLogo className="w-24 aspect-auto" /></li>
         <li><AudiLogo className="flex align-center w-24 aspect-auto" /></li>
+        <li><MiniLogo className="w-24 aspect-auto" /></li>
       </ul>
     </div>
   );

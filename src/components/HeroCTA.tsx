@@ -3,24 +3,25 @@ import { Button } from "./Button";
 
 export const HeroCTA = () => {
   return (
-    <div className="mt-6 sm:mt-12 flex flex-col items-start space-y-3">
+    <div className="mt-6 lg:mt-12 flex flex-col items-start space-y-2.5">
       <Button   
-        className="cta-button animate-text invisible opacity-0"
+        className="cta-button invisible opacity-0"
         rounded
         intent="dark"   
-        variant="outline"
-      >
-        <SearchIcon className="h-6 w-6  flex-none" />
-        <span className="ml-3.5">Find your Car</span>
-      </Button>
-      <Button   
-        className="cta-button animate-text invisible opacity-0"
-        rounded
-        variant="ghost"
-        // intent="primary"
+        size="md"
       >
         <Plane className="h-6  w-6 flex-none" />
-        <span className="ml-2.5 ">Read more</span>
+        <span className="ml-3">Get Started</span>
+      </Button>
+      <Button   
+        className="cta-button invisible opacity-0"
+        rounded
+        size="md"
+        variant="outline"
+        intent="secondary"
+      >
+        <SearchIcon className="h-6 w-6  flex-none" />
+        <span className="ml-3 ">Read more</span>
       </Button>
     </div>
   )

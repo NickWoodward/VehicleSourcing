@@ -5,7 +5,7 @@ import { cn } from '../utils/utils';
 interface ListProps<T> extends ComponentProps<"div"> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
-  itemName?: string
+  itemClassName?: string
 }
 
 interface HasId {
@@ -16,14 +16,14 @@ export const List = <T extends HasId>({
   className,
   items,
   renderItem,
-  itemName
+  itemClassName
 }: ListProps<T>): React.ReactNode => {
-  const itemClasses = cn("w-full", itemName);
+  const itemClasses = cn("", itemClassName);
 
   return (
     <ul className={className}>
-      {items.map((item) => (
-        <li className={itemClasses} key={item.id}>
+      {items.map((item, index) => (
+        <li className={cn(`item-${index}`, itemClasses)} key={item.id}>
           {renderItem(item)}
         </li>
       ))}

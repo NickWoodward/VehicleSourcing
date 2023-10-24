@@ -9,14 +9,12 @@ export const UserSchema = z.object({
 });
 
 export const VehicleSchema = z.object({
-  brand: z.string().trim().min(2, {message: "> 2 characters"}),
+  manufacturer: z.string().trim().min(2, {message: "> 2 characters"}),
   model: z.string().trim().min(2, {message: "> 2 characters"}),
   year: z.number().min(1983, {message: "> 1983"}),
 });
 
-export const UserSchemaWithVehicle = UserSchema.extend({
-  vehicle: VehicleSchema
-})
+export const UserSchemaWithVehicle = UserSchema.merge(VehicleSchema);
 
 export type User = z.infer<typeof UserSchema>;
 export type Vehicle = z.infer<typeof VehicleSchema>;

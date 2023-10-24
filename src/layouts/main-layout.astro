@@ -3,6 +3,7 @@ const { title } = Astro.props;
 import { Header } from "../components/Header";
 import { MobileNav } from "../components/MobileNav";
 import { Logo } from "../components/Logo";
+import { Navigation } from "../components/Navigation";
 
 const { classes } = Astro.props;
 ---
@@ -20,12 +21,13 @@ const { classes } = Astro.props;
 </head>
 <body>
   <main class={classes}>
-    <Header>
-      <Logo />
-      <!-- <MobileNav className="text-white" client:only/> -->
+    <Header className="">
+      <Logo className="" />
+      <MobileNav client:only/>
+      <Navigation className="hidden md:flex md:justify-start md:items-center md:space-x-6" />
     </Header>
 
-      <slot />
+    <slot />
   </main>
 </body>
 </html>

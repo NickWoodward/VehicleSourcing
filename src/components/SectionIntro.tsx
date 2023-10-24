@@ -4,7 +4,7 @@ import { cn } from "../utils/utils";
 
 interface IntroProps extends ComponentProps<"div">, VariantProps<typeof sectionVariants> {
   title: string,
-  titleClasses,
+  titleClasses?: string,
   subtitle: string,
   subtitleClasses?: string,
   tagline?: string,
@@ -15,7 +15,7 @@ interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglin
   content: string
 }
 
-const sectionVariants = cva("flex flex-col w-full items-start justify-center", {
+const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center", {
   variants: {
     variant: {
       default: "text-gray-700",
@@ -28,7 +28,7 @@ const sectionVariants = cva("flex flex-col w-full items-start justify-center", {
   }
 });
 
-const subtitleVariants = cva("animate-text subtitle mb-1 sm:mb3 font-medium text-primary", {
+const subtitleVariants = cva("subtitle mb-1 sm:mb3 font-medium text-primary", {
   variants: {
     variant: {
       default: "text-sm xs:text-base sm:text-lg",
@@ -66,7 +66,7 @@ export const SectionIntro = ({title, subtitle, tagline, variant, className, titl
       <h2 className={cn("title text-xl xs:text-xl sm:text-2xl font-medium tracking-tight", titleClasses)}>
         {title}
       </h2>
-      {tagline && <TagLine content={tagline} className={cn("tagline", taglineClasses, taglineVariants({variant}))}/>}
+      {tagline && <TagLine content={tagline} className={cn("tagline text-base xs:text-lg sm:text-xl lg:text-xl xl:text-2xl", taglineClasses, taglineVariants({variant}))}/>}
     </div>
   );
 }

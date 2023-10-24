@@ -6,13 +6,12 @@ import { cn } from "../utils/utils";
 
 interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVariants>{
   axis?: "h" | "v",
-  peek?: boolean,
   contentClassName?: string,
   breakout?: boolean,
   children: React.ReactNode
 }
 
-export const sectionVariants = cva("flex  w-full", 
+export const sectionVariants = cva("flex w-full", 
   {
     variants: {
       variant: {
@@ -25,33 +24,21 @@ export const sectionVariants = cva("flex  w-full",
         true: "mt-headerHeight"
       },
       height: {
-        default: "h-auto",
-        full: "xs-v:py-[4vh] py-[8vh] h-dvh",
+        default: "xs-v:py-12 py-20",
+        full: "xs-v:py-12 py-24 h-dvh",
         sm: "min-h-footerHeight"
       },
       breakout: {
         true: "xs:px-page-sm sm:px-page-sm lg:px-10 xl:px-20",
         false: "xs:px-page-sm sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
       },
-      justify: {
-        center: "justify-center",
-        start: "justify-start",
-        end: "justify-end",
-        between: "justify-between",
-        around: "justify-around",
-        evenly: "justify-evenly"
-      },
-      scroll: {
-        default: "",
-        fullscreen: "h-full"
-      },
+
 
     },
     defaultVariants: {
       variant: "default",
       height: "default",
       headerOffset: false,
-      justify: "center",
       breakout: false
     }
   }
@@ -63,8 +50,8 @@ export const sectionVariants = cva("flex  w-full",
 // scroll-snap-type: y mandatory;
 
 
-export function Section({className, variant, axis = 'v', justify = 'start', height, contentClassName, headerOffset, breakout, children}:Props) {
-  const contentClasses = cn("flex md:justify-start h-full w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-8xl mx-auto", contentClassName, {
+export function Section({className, variant, axis = 'h',  height, contentClassName, headerOffset, breakout, children}:Props) {
+  const contentClasses = cn("flex w-full h-full lg:max-w-8xl mx-auto", contentClassName, {
     "flex-col": axis === "v",
     "flex-row": axis === "h",
     "xl:max-w-9xl": breakout
@@ -73,7 +60,7 @@ export function Section({className, variant, axis = 'v', justify = 'start', heig
   return (
     <div 
       className={cn(
-        sectionVariants({ variant, justify, height, headerOffset, breakout }), className
+        sectionVariants({ variant, height, headerOffset, breakout }), className
     )}>
       <div className={contentClasses}>
         {children}

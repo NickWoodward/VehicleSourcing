@@ -9,23 +9,27 @@ interface ButtonProps
   disabled?: boolean | undefined;
 }
 
-export const buttonVariants = cva("flex items-center justify-center  text-base sm:text-lg  outline-2 outline-offset-2", {
+export const buttonVariants = cva("flex items-center justify-center  text-sm sm:text-lg  outline-2 outline-offset-2", {
   variants: {
     variant: {
       default: "bg-primary text-white",
-      outline: `shadow-sm bg-transparent`,
+      outline: `border border-current bg-transparent`,
       ghost: "bg-transparent shadow-none border-none",
     },
     intent: {
       primary: "border-primary bg-primary text-white",
-      secondary: "bg-neutralDark text-white",
+      secondary: "text-slate-500 ",
       dark: "bg-gray-700 text-white hover:bg-darker active:bg-gray-800 active:text-white/80",
       monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
-      default:"pl-3 md:pl-4 pr-6 md:pr-7 py-3.5 md:py-3.5 ",
-      square: "p-4",
+      sm:"pl-3 py-2.5 pr-5 md:pl-3 md:pr-10 md:py-1.5 ",
+      md:"pl-3 py-3.5 pr-7 md:pl-4 md:pr-7 md:py-3.5 ",
       none: "p-0"
+    },
+    aspect: {
+      square: "p-4",
+      circle: "p-4 rounded-full",
     },
     rounded: {
       true: "rounded-xl",
@@ -48,13 +52,13 @@ export const buttonVariants = cva("flex items-center justify-center  text-base s
   ],
   defaultVariants: {
     variant: "default",
-    size:"default"
+    size:"none",
   },
 });
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function ButtonComponent(
-    { className, variant, intent, size, rounded, ...props },
+    { className, variant, intent, size, aspect, rounded, ...props },
     ref
   ) {
 
@@ -62,7 +66,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          buttonVariants({ variant, intent,  size, rounded, className })
+          buttonVariants({ variant, intent,  size, aspect, rounded, className })
         )}
         {...props}
       />

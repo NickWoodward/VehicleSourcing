@@ -7,7 +7,7 @@ interface Props extends ComponentProps<"div">{
 }
 export const Circle = ({className}:Props) => {
   return (
-    <div className={cn("absolute top-1/2  bg-blue-500", className)}>
+    <div className={cn("", className)}>
       <CircleIcon />
     </div>
   );

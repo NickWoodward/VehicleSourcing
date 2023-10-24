@@ -12,54 +12,199 @@ import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
 // import { Reviews } from "../components/Reviews";
 import { Circle } from "../components/Circle";
-import { TrustIcon } from "../utils/svgComponents";
+import { SearchIcon, TrustIcon } from "../utils/svgComponents";
 // import { BrandCloud } from "../components/BrandCloud";
 
 
-import heroImage from '/golf.png';
-import bgCar from '/bgCar.jpeg';
+import heroImage from '/golf-xl.png';
 import { Footer } from "../components/Footer";
 import { BrandCloud } from "../components/BrandCloud";
+import { Button } from "../components/Button";
 ---
 
 <script>
+  // import config from /* preval */ '../../tailwind.config.cjs';
+  // const { theme: { extend: { colors: { primary } } } } = config;
+
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
 
-  const aboutAnimation = gsap.timeline({defaults: {ease: "power2.inOut"}, paused: true});;
+  const heroScrollAnimation = gsap.timeline({paused: true});
+  const aboutScrollAnimation = gsap.timeline({paused: true});
+  const contactScrollAnimation = gsap.timeline({paused: true});
 
-  const sections = gsap.utils.toArray<HTMLElement>(".section");
+  // client:only react elements responsible for their own animation 
+  window.addEventListener('load', () => {
+    // gsap.delayedCall(1, heroAnimation);
 
-  window.addEventListener('DOMContentLoaded', () => {
-    gsap.delayedCall(1, heroAnimation);
+    const heroScope = gsap.utils.selector('.hero');
+    const aboutScope = gsap.utils.selector('.about');
+    const contactScope = gsap.utils.selector('.contact');
+    const cardsScope = gsap.utils.selector('.cards');
 
-    // aboutAnimation 
+    const sections = gsap.utils.toArray<HTMLElement>(".section")
+      
+    sections.forEach(function(section, index){
+      console.log(document.querySelector(`.item-${index}`))
+      ScrollTrigger.create({
+        trigger:section,
+        start:"top center",
+        end:"bottom center",
+        markers:true,
+        animation:gsap
+          .to(`.item-${index}`, {
+            opacity:1, 
+            duration:.2,
+            color: "var(--primary)",
+          }),
+        //if ScrollTrigger isActive = true then play the animation forward via reversed(false)
+        onToggle: (self)=> {
+          if(self.animation)
+            self.animation.reversed(!self.isActive)
+        }		
+      })
+    })
 
-    aboutAnimation.to('.about .animate-text', { autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .8});
+    
+    heroScrollAnimation
+      .to([
+        heroScope('.subtitle'), 
+        heroScope('.title'),
+        heroScope('.tagline')
+      ], { 
+        autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .8 
+      })
+      .to('.cta-button', { autoAlpha:1, x:0, ease: "ease: back.out(10)",  duration:.6 }, "<.35")
+      .set('.hero-image', { autoAlpha:0, xPercent:5, scale:0.98}, '<')
+      .to('.hero-image', {
+        autoAlpha: 1,
+        ease:'power4.inOut',
+        xPercent: 0,
+        scale: 1,
+        duration: .7
+      }, "<.3");
 
-    // const aboutAnimation = () => {
-    //   aboutAnimation
-    //     .set('.about .animate-text', { y:-10 })
-    //     .to('.about .animate-text', { autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .6})
-    // }
+    aboutScrollAnimation
+      .to([
+        aboutScope('.subtitle'), 
+        aboutScope('.title'), 
+        aboutScope('.tagline')
+      ], { 
+        autoAlpha:1, ease: "ease: back.out(2)", stagger: .12, delay: .3,
+      })
+   
+    
+    cardsScope('.card').forEach((card, index) => {
+      const distance = index % 2 === 0 ? 10:-10;
+      const tl = gsap.timeline({paused:true}).from(card, {
+        autoAlpha: 0,
+        xPercent: gsap.utils.wrap([-distance, distance, -distance]),
+        ease:'power4.inOut',
+        duration: .7
+      });
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 50%",
+        // markers:true,
+        onEnter: () => tl.play()
+      });
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 110%",
+        // markers:true,
+        onLeaveBack: () => tl.pause(0)
+      });
+    });
+ console.log(contactScope('.tagline'))
+    contactScrollAnimation
+    .to([
+        contactScope('.subtitle'), 
+        contactScope('.title'),
+        contactScope('.tagline')
+      ], { 
+        autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
+      })
 
     ScrollTrigger.create({
-      trigger: ".about .animate-text",
-      start: "top 80%",
-      markers:true,
-      onEnter: () => { aboutAnimation.play(0)},
+      trigger: ".hero",
+      start: "10% top",
+      end: "90% bottom",
+      // markers:true,
+      // onEnterBack: () => heroScrollAnimation.play(0)
     });
 
-    function heroAnimation() {
-      console.log(document.querySelector('.title'));
-      const heroText = document.querySelectorAll('.hero .animate-text');
-      gsap.timeline({})
-        .set(heroText, { y:-8 })
-        .set('.hero .animate-up', { x:40, scale:.95 })
-        .to(heroText, { autoAlpha:1, y:0, ease: "ease: back.out(2)", stagger: .2, duration: .6})
-        .to('.hero .animate-up', { autoAlpha:1, x:0, ease: "ease: back.out(10)", scale:1, duration:.6 }, "<.48");
-    }
+    ScrollTrigger.create({
+      trigger: ".hero",
+      start: "top 20%",
+      end: "90% 20%",
+      // markers:true,
+      onEnter: () => {
+        // if(!text) return;
+        // text.innerText = 'onEnter';
+        heroScrollAnimation.play(0);
+      },
+      onLeave: () => {
+        // if(!text) return;
+        // text.innerText = 'onLeave';
+        // heroScrollAnimation.pause(0);
+      },
+      onLeaveBack: () => {
+        // if(!text) return;
+        // text.innerText = 'onLeaveBack';
+      },
+    });
+
+    ScrollTrigger.create({
+      trigger: ".about",
+      start: "top 80%",
+      end: "90% top",
+      // markers:true,
+      onEnter: () => { 
+        // if(!text) return;
+        // text.innerText = 'onEnter';
+        aboutScrollAnimation.play(0);
+      },
+      onEnterBack: () => {
+        // aboutScrollAnimation.play(0)
+      }
+    });
+
+    // ScrollTrigger.create({
+    //   trigger: ".about",
+    //   start: "top 90%",
+    //   end: "90% top",
+    //   markers:true,
+    //   onLeave: () => {
+    //     // if(!text) return;
+    //     // text.innerText = 'onLeave';
+    //     aboutScrollAnimation.pause(0);
+    //   }
+    // });
+
+    ScrollTrigger.create({
+      trigger: ".contact",
+      start: "top 80%",
+      end: "90% top",
+      // markers:true,
+      onEnter: () => { 
+        contactScrollAnimation.play(0);
+      },
+      onEnterBack: () => {
+        // aboutScrollAnimation.play(0)
+      }
+    });
+    
+
+    // function heroAnimation() {
+    //   const heroText = document.querySelectorAll('.hero .animate-text');
+    //   gsap.timeline({})
+    //     .set(heroText, { y:-8 })
+    //     .set('.hero .animate-up', { x:40, scale:.95 })
+    //     .to(heroText, { autoAlpha:1, y:0, ease: "ease: back.out(2)", stagger: .2, duration: .6})
+    //     .to('.hero .animate-up', { autoAlpha:1, x:0, ease: "ease: back.out(10)", scale:1, duration:.6 }, "<.48");
+    // }
   });
 
  
@@ -111,7 +256,6 @@ import { BrandCloud } from "../components/BrandCloud";
   // gsap.registerPlugin(ScrollTrigger);
 
   // const sections = gsap.utils.toArray<HTMLElement>(".section");
-    console.log("sections",sections);
   // sections.forEach((panel) => {
   //   ScrollTrigger.create({
   //     scroller: "main",
@@ -124,64 +268,78 @@ import { BrandCloud } from "../components/BrandCloud";
   //   });
   // });
 </script>
+              <!-- <Circle className=""/> -->
 
-<!-- snap-y snap-mandatory overflow-y-scroll -->
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="font-inter mt-headerHeight">
-  <div class="scroller snap-y snap-mandatory">
-      <Section className="hero section relative snap-start snap-always scroll-mt-16 px-page-xs bg-gradient-to-b from-slate-100 to-white" height="full" contentClassName="xl:max-w-8xl">
+          <!-- <TrustIcon className="s-v:hidden sm:row-start-15 col-start-1 h-16 w-36 p-1 z-20" /> -->
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="relative font-inter mt-headerHeight overflow-hidden">
+      <!-- <div class="scroll-text fixed top-50 left-10 text-red-600 z-10"></div> -->
+
+      <Section className="hero section relative justify-center px-page-xs bg-gradient-to-tl from-slate-300 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
+
+
+        <div class="  w-full grid grid-rows-16 grid-cols-16 ">
+          <HeroText className=" hero-text animate-down col-start-1 col-span-16 row-start-1 md:row-start-2 lg:row-start-3 row-span-9 justify-center md:justify-start z-30 flex flex-col" />
     
-        <div class="h-full w-full grid grid-cols-1 md:grid-cols-16 sm:grid-rows-16 gap-4">
-          <!-- <Circle className=""/> -->
-    
-          <HeroText className="hero-text animate-down z-30 flex flex-col justify-center col-start-1 col-end-[-1] sm:row-start-2 sm:row-span-8 md:row-start-3 lg:row-start-3 xl:row-start-4 " />
-    
-          <div class="hero-image animate-up invisible opacity-0 flex justify-center sm:justify-end items-start sm:items-center overflow-hidden sm:pl-0  col-span-1 md:col-span-12 md:col-end-[-1] sm:row-start-10 md:row-start-7 lg:row-start-7 xl:row-start-5 sm:row-span-7  lg:row-span-10">
-            <img src={heroImage} class="object-contain max-h-full -scale-x-100  hover:scale-both-110" alt="Three BMW cars" />
+          <div class=" hero-image animate-up invisible opacity-0 col-start-1 col-span-16 row-start-10 sm:row-start-9 md:row-start-9 lg:row-start-8 xl:row-start-7 row-span-7 md:row-span-9 xl:row-span-10 justify-self-end flex sm:justify-end items-center">
+            <img src={heroImage} class="object-contain max-h-full -scale-x-100  hover:scale-both-110 z-20" alt="Three BMW cars" />
+            <Circle className="absolute bottom-0 right-0 w-[190%] translate-x-1/2 translate-y-1/2 rotate-12 xl:rotate-45 z-10"/>
+            <Circle className="absolute bottom-0 right-0 w-[190%] translate-x-1/2 translate-y-1/2 rotate-12 xl:rotate-45 scale-[.90] z-10"/>
           </div>
-    
-          <!-- <TrustIcon className="border border-red-500 xs-v:hidden sm:row-start-15 col-start-1 h-16 w-36 p-1 z-20" /> -->
-    
         </div>
+
       </Section>
-    
-      <Section className="about section relative snap-start  snap-always scroll-mt-16 px-page-xs bg-gradient-to-b from-slate-100 to-slate-50" variant="gray"  height="full" breakout={true} >
-        <div class="h-full grid grid-cols-1 sm:grid-rows-16 gap-5 xl:gap-7">
+
+      <Section className=" about section relative items-center  px-page-xs bg-gradient-to-bl from-slate-300 to-slate-50"   breakout={true} contentClassName="">
+        <div class=" w-full grid grid-cols-16 lg:grid-rows-16 gap-y-10 sm:gap-y-20 lg:gap-0">
           <SectionIntro 
             title="How It Works"
-            titleClasses="animate-text invisible"
+            titleClasses="invisible opacity-0"
             subtitle="3 Easy Steps"
-            subtitleClasses="animate-text invisible",
-            tagline="Let us take the hassle out of buying a car"
-            className="xl:max-w-8xl xl:mx-auto flex flex-col justify-center col-start-1 col-span-1 xl:col-span-auto  sm:row-start-1 sm:row-span-4 lg:row-start-1 "
-            taglineClasses="animate-text invisible xxs-v:hidden"
+            subtitleClasses="subtitle invisible opacity-0",
+            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
+            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16 lg:row-start-1 lg:row-span-2"
+            taglineClasses="invisible opacity-0"
           />
-          <WhyUs className=" sm:row-start-5 sm:row-span-13 col-span-full" client:only />
+          <div class="  lg:row-start-4 lg:row-span-11 col-span-full z-30">
+            <WhyUs className="" />
+          </div>
+
+          <div class=" w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
+            <Button   
+              className="cta-button invisible opacity-0"
+              rounded
+              intent="dark"   
+              variant="outline"
+            >
+              <SearchIcon className="h-6 w-6 lg:row-start-17 flex-none" />
+              <span class="ml-3.5">Contact Us</span>
+            </Button>
+          </div>
         </div>
       </Section>
     
     
-      <Section className="section relative snap-start snap-always scroll-mt-16 px-page-xs " height="full" variant="dark" client:visible>
-          <div class="absolute inset-0 overflow-hidden">
-            <img src={bgCar} alt="Front-facing view of a car in the darkness" class="hidden md:flex xs:backdrop-brightness-10 absolute inset-0 -scale-x-100  ">
-            <div class="absolute inset-0 bg-dark  "></div>
-          </div>
-    
-          <div class="relative h-full grid grid-cols-1 lg:grid-cols-16  grid-rows-16 gap-6 ">
-            <SectionIntro 
-              title="Find the Perfect Car"
-              subtitle="Contact Us Today"
-              variant="dark"
-              className=" flex flex-col col-start-1 col-span-1 lg:col-start-1 lg:col-span-6  row-start-1 lg:row-start-3  row-span-4"
-              tagline="Let our team know what you're looking for and we'll get right on it!"
-              taglineClasses="xs-v:hidden"
-              />   
-              <BrandCloud className="hidden lg:flex lg:col-span-5 lg:row-start-7 lg:row-span-4" />
+      <Section className="contact section relative flex flex-col justify-center bg-gradient-to-tl from-slate-300 to-slate-50  px-page-xs " client:visible>
 
-            <Form className="xs-v:row-start-4 row-start-5 sm:row-start-5 sm:row-span-12 lg:row-start-2 col-span-full lg:col-start-8 lg:col-span-9" client:only/>
-    
+        <div class=" w-full grid grid-cols-16 lg:grid-rows-16 gap-y-10 lg:gap-0">
+          <SectionIntro 
+            title="Find the Perfect Car"
+            titleClasses="invisible opacity-0"
+            subtitle="Contact Us Today"
+            subtitleClasses="subtitle invisible opacity-0"
+            className="xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16 lg:row-start-1 lg:row-span-2 "
+            tagline="Let our team know what you're looking for and we'll get right on it!"
+            taglineClasses="invisible opacity-0 xs-v:hidden"
+          />   
+
+          <BrandCloud className="invisible opacity-0 hidden lg:flex lg:col-start-1 lg:col-span-5 lg:row-start-7 lg:row-span-4 xl:row-start-auto xl:place-self-start" />
+
+          <div class="col-start-1 col-span-16">
+            <!-- client:only react elements responsible for their own animation -->
+            <Form className=" " client:only/>
           </div>
+
         </div>
-    
       </Section>
     
       
@@ -202,9 +360,8 @@ import { BrandCloud } from "../components/BrandCloud";
         <Reviews client:only/>
       </Section> -->
     
-      <Section className="snap-end px-header" variant="darker">
+      <Section className=" px-header" variant="darker">
         <Footer />
       </Section>
       
-  </div>
 </MainLayout>

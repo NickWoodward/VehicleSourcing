@@ -61,7 +61,7 @@ export const Modal = forwardRef<HTMLDivElement, Props>(function Modal(
         <div
           id="overlay"
           className="h-full w-full absolute inset-0 bg-dark opacity-0 cursor-pointer"
-          onClick={() => {console.log("hello")}}
+          onClick={() => { close() }}
         />
         {children}
       </div>

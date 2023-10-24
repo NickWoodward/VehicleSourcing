@@ -36,7 +36,7 @@ export const Footer = () => {
             </a>
           </div>
 
-          <div className="col-span-full sm:col-span-8 sm:col-start-9 row-start-2 flex flex-col space-y-6 text-gray-400">
+          <div className="col-span-full sm:col-span-8 sm:col-start-9 row-start-3 flex flex-col space-y-6 text-gray-400">
 
             <div className="flex flex-col sm:mt-0 text-left sm:text-right  md:space-x-6">
               <div className="text-base hover:text-gray-200 cursor-pointer">How It Works</div>
