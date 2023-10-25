@@ -16,7 +16,7 @@ export const Form = ({className}: {className?: string}) => {
     resolver: zodResolver(UserSchemaWithVehicle),
   });
 
-  const classes = cn('rounded-md pt-6 space-y-6', className);
+  const classes = cn('rounded-2xl space-y-6', className);
 
   const onSubmit: SubmitHandler<UserWithVehicle> = (data) => {
     console.log(data.fName);
@@ -25,13 +25,13 @@ export const Form = ({className}: {className?: string}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      {/* <div className="form-pages flex text-slate-700 text-sm xs-v:text-xs">
+      {/* <div className="form-pages flex text-gray-500 text-sm xs-v:text-xs">
         <div className="basis-1/2 rounded-t page-label py-2.5 px-6 translate-y-[2px]    z-20">You</div>
         <div className="basis-1/2 rounded-t page-label py-2.5
           px-6 translate-y-[2px]   ">The Car</div>
       </div> */}
 
-      <div className="flex flex-col px-6 xs-v:pb-3 pb-8 pt-6 gap-3 bg-slate-100 shadow-md rounded z-10">
+      <div className="flex flex-col px-7  pb-10 pt-6 gap-3 bg-slate-100 shadow-md rounded-2xl z-10">
 
         <div className="subheader flex items-center gap-x-5 mb-3">
           {/* <Button   
@@ -43,12 +43,12 @@ export const Form = ({className}: {className?: string}) => {
             <Tick className="h-6 w-6 flex-none" />
             
           </Button>   */}
-          <h2 className="grow border-b border-primary py-1 text-base font-semibold leading-7 text-slate-700">About You</h2>
+          <h2 className="grow border-b-[3px] border-primary py-1.5 text-base font-semibold leading-7 text-slate-600">About You</h2>
         </div>
 
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="fName ">Name</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="fName" type="text" {...register("fName", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
@@ -56,27 +56,27 @@ export const Form = ({className}: {className?: string}) => {
           </div>
           {errors.fName && <p className="bg-red-100 border border-red-500 text-red-500">{errors.fName?.message}</p>}
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="sName">Surname</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="sName" type="text" {...register("sName", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
           {errors.sName && <p className="bg-red-100 border border-red-500 text-red-500">{errors.sName?.message}</p>}
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="email">Email</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="email" type="text" {...register("email", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
           </div>
           {errors.email && <p className="bg-red-100 border border-red-500 text-red-500">{errors.email?.message}</p>}
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="phone">Phone Number</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="phone" type="text" {...register("phone", { required: true })}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
@@ -94,11 +94,11 @@ export const Form = ({className}: {className?: string}) => {
             <Tick className="h-6 w-6 flex-none" />
             
           </Button>   */}
-          <h2 className="grow border-b border-primary py-1 px-2 text-base font-semibold leading-7 text-slate-700">About Your Car</h2>
+          <h2 className="grow border-b-[3px] border-primary py-1.5 px-2 text-base font-semibold leading-7 text-slate-600">About Your Car</h2>
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-gray-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="manufacturer ">Manufacturer</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="manufacturer" type="text" {...register("manufacturer", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
@@ -106,18 +106,18 @@ export const Form = ({className}: {className?: string}) => {
           </div>
           {errors.manufacturer && <p className="bg-red-100 border border-red-500 text-red-500">{errors.manufacturer?.message}</p>}
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="model">Model</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="model" type="text" {...register("model", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
           {errors.model && <p className="bg-red-100 border border-red-500 text-red-500">{errors.model?.message}</p>}
         </div>
-        <div className="text-sm xs-v:text-xs font-medium w-full text-slate-700">
+        <div className="text-base font-medium w-full text-gray-500">
           <label htmlFor="year">Year</label>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <input id="year" type="text" {...register("year", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />

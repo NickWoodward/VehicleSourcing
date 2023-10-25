@@ -63,7 +63,7 @@ export const SectionIntro = ({title, subtitle, tagline, variant, className, titl
   return (
     <div className={cn(sectionVariants({variant}), className)}>
       <h3 className={cn(subtitleVariants({variant}), subtitleClasses)}>{subtitle}</h3>
-      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl font-bold text-gray-700 tracking-tight", titleClasses)}>
+      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl font-semibold text-gray-700 tracking-tight", titleClasses)}>
         {title}
       </h2>
       {tagline && <TagLine content={tagline} className={cn("tagline text-base xs:text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-500", taglineClasses, taglineVariants({variant}))}/>}
