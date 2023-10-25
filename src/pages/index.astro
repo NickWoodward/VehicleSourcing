@@ -42,6 +42,7 @@ import { Button } from "../components/Button";
     const aboutScope = gsap.utils.selector('.about');
     const contactScope = gsap.utils.selector('.contact');
     const cardsScope = gsap.utils.selector('.cards');
+    const brandLogos = gsap.utils.selector('.brand-logo');
 
     const sections = gsap.utils.toArray<HTMLElement>(".section")
       
@@ -102,7 +103,7 @@ import { Button } from "../components/Button";
         xPercent: gsap.utils.wrap([-distance, distance, -distance]),
         ease:'power4.inOut',
         duration: .7
-      });
+      }).from(brandLogos, { opacity: 0, stagger: .2 });
 
       ScrollTrigger.create({
         trigger: card,
@@ -122,7 +123,7 @@ import { Button } from "../components/Button";
     .to([
         contactScope('.subtitle'), 
         contactScope('.title'),
-        contactScope('.tagline')
+        contactScope('.tagline'),
       ], { 
         autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
       })
@@ -289,7 +290,7 @@ import { Button } from "../components/Button";
 
       </Section>
 
-      <Section className=" about section relative items-center  px-page-xs bg-gradient-to-bl from-slate-300 to-slate-50"   breakout={true} contentClassName="">
+      <Section className="py-3 about section relative items-center  px-page-xs bg-gradient-to-bl from-slate-300 to-slate-50"   breakout={true} contentClassName="">
         <div class=" w-full grid grid-cols-16 lg:grid-rows-16 gap-y-10 sm:gap-y-20 lg:gap-0">
           <SectionIntro 
             title="How It Works"
@@ -333,7 +334,7 @@ import { Button } from "../components/Button";
             taglineClasses="invisible opacity-0"
           />   
 
-          <BrandCloud className="invisible opacity-0 col-start-1 col-span-16" />
+          <BrandCloud className="col-start-1 col-span-16" />
 
           <div class="col-start-1 col-span-16">
             <!-- client:only react elements responsible for their own animation -->

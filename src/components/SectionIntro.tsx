@@ -15,7 +15,7 @@ interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglin
   content: string
 }
 
-const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center", {
+const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center max-w-sm", {
   variants: {
     variant: {
       default: "text-gray-700",

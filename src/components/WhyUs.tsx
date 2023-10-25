@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { EmblaCarousel as Carousel } from "./Carousel";
 
 import { cn } from "../utils/utils";
-import { BMWLogo, VWLogo, MercedesLogo, PhoneIcon, StackIcon, PinPointIcon, ContactIcon, ArrowTopRight } from "../utils/svgComponents"
+import { BMWLogo, VWLogo, MercedesLogo, PhoneIcon, EngineIcon, PinPointIcon, ContactIcon, ArrowTopRight } from "../utils/svgComponents"
 import networks from "../assests/networks.jpeg";
 import phone from "../assests/phone.jpeg";
 import enjoy from "../assests/enjoy.jpeg";
@@ -21,7 +21,7 @@ const slides = [
     linkText: "Contact Us"
   },
   {
-    icon: <PinPointIcon className="w-7 sm:w-9 p-1.5 bg-primary rounded-lg text-white" />, 
+    icon: <PinPointIcon className="w-7 sm:w-9 p-1.5 rounded-lg text-white" />, 
     title: "Leave it to Us", 
     content:"We'll use our extensive networks to vet and narrow 1000s of vehicles down to that special one",
     image: networks,
@@ -30,7 +30,7 @@ const slides = [
     linkText: "Find Out More"
   },
   {
-    icon: <PhoneIcon className="w-7 sm:w-9 p-1.5 bg-primary rounded-lg text-white" />, 
+    icon: <EngineIcon className="w-7 sm:w-9 p-1.5 rounded-lg text-white" />, 
     title: "Drive away in your new vehicle", 
     content:"Safe in the knowledge that your new car has made it past our thorough team of mechanics",
     image: enjoy,
