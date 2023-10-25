@@ -51,7 +51,7 @@ import { Button } from "../components/Button";
         trigger:section,
         start:"top center",
         end:"bottom center",
-        markers:true,
+        // markers:true,
         animation:gsap
           .to(`.item-${index}`, {
             opacity:1, 
@@ -89,7 +89,7 @@ import { Button } from "../components/Button";
       .to([
         aboutScope('.subtitle'), 
         aboutScope('.title'), 
-        aboutScope('.tagline')
+        aboutScope('.tagline'),
       ], { 
         autoAlpha:1, ease: "ease: back.out(2)", stagger: .12, delay: .3,
       })
@@ -117,7 +117,7 @@ import { Button } from "../components/Button";
         onLeaveBack: () => tl.pause(0)
       });
     });
- console.log(contactScope('.tagline'))
+
     contactScrollAnimation
     .to([
         contactScope('.subtitle'), 
@@ -310,6 +310,7 @@ import { Button } from "../components/Button";
               rounded
               intent="dark"   
               variant="outline"
+              size="md"
             >
               <SearchIcon className="h-6 w-6 lg:row-start-17 flex-none" />
               <span class="ml-3.5">Contact Us</span>

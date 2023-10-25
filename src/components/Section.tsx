@@ -11,7 +11,7 @@ interface Props extends ComponentProps<"div">, VariantProps<typeof sectionVarian
   children: React.ReactNode
 }
 
-export const sectionVariants = cva("flex w-full", 
+export const sectionVariants = cva(" flex w-full", 
   {
     variants: {
       variant: {
@@ -24,7 +24,7 @@ export const sectionVariants = cva("flex w-full",
         true: "mt-headerHeight"
       },
       height: {
-        default: "xs-v:py-12 py-20",
+        default: "xs-v:py-12 py-16",
         full: "xs-v:py-12 py-24 h-dvh",
         sm: "min-h-footerHeight"
       },

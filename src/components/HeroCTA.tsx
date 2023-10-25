@@ -16,9 +16,8 @@ export const HeroCTA = () => {
       <Button   
         className="cta-button invisible opacity-0"
         rounded
+        variant="ghost"
         size="md"
-        variant="outline"
-        intent="secondary"
       >
         <SearchIcon className="h-6 w-6  flex-none" />
         <span className="ml-3 ">Read more</span>

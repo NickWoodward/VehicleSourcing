@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Dropdown } from '../components/Dropdown';
 
 export function DropdownPage() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedPosition, setSelectedPosition] = useState(null);
 
-  const updateOption = (currentSelected, option) => {
+  const updateOption = (currentSelected: any, option: ChangeEvent<HTMLInputElement>) => {
     if (currentSelected !== option) return option;
     return currentSelected;
   };
 
-  const handleColorOptionClick = (option) => {
+  const handleColorOptionClick = (option: ChangeEvent<HTMLInputElement>) => {
+    console.log(option);
     setSelectedColor((currentSelected) =>
       updateOption(currentSelected, option)
     );
   };
 
-  const handlePositionOptionClick = (option) => {
+  const handlePositionOptionClick = (option: ChangeEvent<HTMLInputElement>) => {
     setSelectedPosition((currentSelected) =>
       updateOption(currentSelected, option)
     );
@@ -39,7 +40,7 @@ export function DropdownPage() {
       <Dropdown
         options={colorOptions}
         value={selectedColor}
-        onChange={handleColorOptionClick}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleColorOptionClick(e)}
       />
       <Dropdown
         options={positionOptions}

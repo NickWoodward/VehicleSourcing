@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { GoChevronDown, GoChevronUp } from 'react-icons/go';
-import { Panel } from './Panel';
+// import { GoChevronDown, GoChevronUp } from 'react-icons/go';
+// import { Panel } from './Panel';
 
 export function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,10 +35,7 @@ export function Dropdown({ options, value, onChange }) {
     setIsOpen(toggleOpen);
   };
 
-  window.timeTwo = performance.now();
   const handleOptionClick = (option) => {
-    window.timeOne = performance.now();
-
     // Doesn't rely on previous state, simple update
     setIsOpen(false);
 

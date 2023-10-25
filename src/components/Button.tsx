@@ -24,7 +24,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm sm:
     },
     size: {
       sm:"pl-3 py-2.5 pr-5 md:pl-3 md:pr-10 md:py-1.5 ",
-      md:"pl-3 py-3.5 pr-7 md:pl-4 md:pr-7 md:py-3.5 ",
+      md:"pl-3 py-3 pr-7 md:pl-4 md:pr-7 md:py-3.5 ",
       none: "p-0"
     },
     aspect: {
