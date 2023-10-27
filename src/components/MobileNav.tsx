@@ -87,7 +87,7 @@ export const MobileNav = ({className }: Props) => {
         close={toggleMenu} 
         modalClasses="fixed flex-col w-full h-full mx-auto z-50"
       >
-        <Navigation id="modal" type="mobile" className="space-y-3" onClick={toggleMenu} />
+        <Navigation id="modal" type="mobile" className="flex flex-col items-end space-y-3" onClick={toggleMenu} />
       </Modal>
     </div>
   );

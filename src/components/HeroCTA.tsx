@@ -5,7 +5,7 @@ export const HeroCTA = () => {
   return (
     <div className="mt-6 lg:mt-12 flex flex-col items-start space-y-2.5">
       <Button   
-        className="cta-button invisible opacity-0"
+        className="cta-btn--hero invisible opacity-0"
         rounded
         intent="dark"   
         size="md"
@@ -14,7 +14,7 @@ export const HeroCTA = () => {
         <span className="ml-3">Get Started</span>
       </Button>
       <Button   
-        className="cta-button invisible opacity-0"
+        className="cta-btn--hero invisible opacity-0"
         rounded
         variant="ghost"
         size="md"

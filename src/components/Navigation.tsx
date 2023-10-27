@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import { cn } from "../utils/utils";
 import { List } from "./List";
-import { EngineIcon, PhoneIcon, HomeIcon2,  } from "../utils/svgComponents";
+import { EngineIcon, PhoneIcon2, HomeIcon2,  } from "../utils/svgComponents";
 import { NavigationItem, NavigationItemType } from "./NavigationItem";
 
 interface Props extends ComponentProps<"div">{
@@ -32,7 +32,7 @@ const navOptions = [
     label: "Masserati 3200",
     altLabel: "Contact Us",
     to: "/contact",
-    icon: PhoneIcon,
+    icon: PhoneIcon2,
     description: "Talk to Us"
   },
 ];

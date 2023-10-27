@@ -31,9 +31,9 @@ export const Form = ({className}: {className?: string}) => {
           px-6 translate-y-[2px]   ">The Car</div>
       </div> */}
 
-      <div className="flex flex-col px-7  pb-10 pt-6 gap-3 bg-slate-100 shadow-md rounded-2xl z-10">
+      <div className="grid px-7 pb-10 pt-6 gap-3 bg-slate-100 shadow-md rounded-2xl z-10">
 
-        <div className="subheader flex items-center gap-x-5 mb-3">
+        <div className="subheader sm:col-span-2 sm:col-start-1  flex items-center gap-x-5 mb-3">
           {/* <Button   
             rounded="md"
             variant="ghost"
@@ -46,7 +46,7 @@ export const Form = ({className}: {className?: string}) => {
           <h2 className="grow border-b-[3px] border-primary py-1.5 text-base font-semibold leading-7 text-slate-600">About You</h2>
         </div>
 
-        <div className="text-base font-medium w-full text-gray-500">
+        <div className="sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
           <label htmlFor="fName ">Name</label>
           <div className="mt-1.5">
             <input id="fName" type="text" {...register("fName", {required: true})}
@@ -56,7 +56,7 @@ export const Form = ({className}: {className?: string}) => {
           </div>
           {errors.fName && <p className="bg-red-100 border border-red-500 text-red-500">{errors.fName?.message}</p>}
         </div>
-        <div className="text-base font-medium w-full text-gray-500">
+        <div className="sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
           <label htmlFor="sName">Surname</label>
           <div className="mt-1.5">
             <input id="sName" type="text" {...register("sName", {required: true})}
@@ -65,7 +65,7 @@ export const Form = ({className}: {className?: string}) => {
           </div>
           {errors.sName && <p className="bg-red-100 border border-red-500 text-red-500">{errors.sName?.message}</p>}
         </div>
-        <div className="text-base font-medium w-full text-gray-500">
+        <div className="sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
           <label htmlFor="email">Email</label>
           <div className="mt-1.5">
             <input id="email" type="text" {...register("email", {required: true})}
@@ -74,7 +74,7 @@ export const Form = ({className}: {className?: string}) => {
           </div>
           {errors.email && <p className="bg-red-100 border border-red-500 text-red-500">{errors.email?.message}</p>}
         </div>
-        <div className="text-base font-medium w-full text-gray-500">
+        <div className="sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
           <label htmlFor="phone">Phone Number</label>
           <div className="mt-1.5">
             <input id="phone" type="text" {...register("phone", { required: true })}
@@ -84,7 +84,21 @@ export const Form = ({className}: {className?: string}) => {
           {errors.phone && <p className="bg-red-100 border border-red-500 text-red-500">{errors.phone?.message}</p>}
         </div>
 
-        <div className="subheader flex items-center gap-x-5 my-3">
+        <div className="sm:col-span-1 sm:col-start-1 flex items-center mt-2 shadow-md">
+          <Button   
+            rounded="md"
+            intent="primary"
+            className="w-full"
+            size="md"
+          >
+            {/* <Tick className="h-6 w-6 flex-none" /> */}
+            Next
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr] px-7 pb-10 pt-3 gap-3 sm:gap-x-6 bg-slate-100 shadow-md rounded-2xl z-10"> 
+        <div className="subheader sm:col-start-1 sm:col-span-2 flex items-center gap-x-5 my-3">
           {/* <Button   
             rounded="md"
             variant="ghost"
@@ -94,9 +108,9 @@ export const Form = ({className}: {className?: string}) => {
             <Tick className="h-6 w-6 flex-none" />
             
           </Button>   */}
-          <h2 className="grow border-b-[3px] border-primary py-1.5 px-2 text-base font-semibold leading-7 text-slate-600">About Your Car</h2>
+          <h2 className="grow sm:col-span-2 sm:col-start-1 border-b-[3px] border-primary py-1.5 px-2 text-base font-semibold leading-7 text-slate-600">About Your Car</h2>
         </div>
-        <div className="text-base font-medium w-full text-gray-500">
+        <div className="sm:col-span-1 sm:col-start-1  text-base font-medium w-full text-gray-500">
           <label htmlFor="manufacturer ">Manufacturer</label>
           <div className="mt-1.5">
             <input id="manufacturer" type="text" {...register("manufacturer", {required: true})}
@@ -125,20 +139,20 @@ export const Form = ({className}: {className?: string}) => {
           {errors.year && <p className="bg-red-100 border border-red-500 text-red-500">{errors.year?.message}</p>}
         </div>
     
-
+        <div className="sm:col-span-1 sm:col-start-1 flex items-center sm:col-span-2 sm:col-start-1 sm:row-start-4 flex mt-2 shadow-md">
+          <Button   
+            rounded="md"
+            intent="primary"
+            className="w-full"
+            size="md"
+          >
+            {/* <Tick className="h-6 w-6 flex-none" /> */}
+            Submit
+          </Button>
+        </div>
 
       </div>
-      <div className="flex mt-2 shadow-md">
-        <Button   
-          rounded="md"
-          intent="primary"
-          className="w-full"
-          size="md"
-        >
-          {/* <Tick className="h-6 w-6 flex-none" /> */}
-          Submit
-        </Button>
-      </div>
+
     </form>
   );
 }
