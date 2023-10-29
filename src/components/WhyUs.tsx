@@ -49,9 +49,9 @@ export const WhyUs = ({className}: Props) => {
   const createCard = ({icon, title, content, image, id, linkText}: {icon: React.ReactNode, title: string, content: string, image: string, id: number, linkText: string}) => {
     return (
       <article key={id} className="card md:w-[45%] relative space-y-3 flex flex-col items-start sm:justify-end sm:items-center lg:justify-start   md:rounded-b-md  text-sm sm:text-lg  text-white ">
-        <img src={image} alt="" className="rounded-2xl shadow-md md:hidden" />
+        <img src={image} alt="" className="card__image rounded-2xl shadow-md md:hidden" />
 
-        <div className="w-full space-y-3 sm:space-y-1 xs:px-2 pt-6 sm:pt-4 pb-8 sm:pb-6 sm:absolute lg:relative flex flex-col items-start lg:w-full  bg-slate-50/95 rounded-2xl shadow-md sm:shadow-none sm:rounded-t-none z-30">
+        <div className="card__content w-full space-y-3 sm:space-y-1 xs:px-2 pt-6 sm:pt-4 pb-8 sm:pb-6 sm:absolute lg:relative flex flex-col items-start lg:w-full  bg-slate-50/95 rounded-2xl shadow-md sm:shadow-none sm:rounded-t-none z-30">
           <div className=" flex w-full items-center  pl-4 pr-6 lg:pl-2 sm:py-1 gap-x-4 text-slate-600 text-lg font-semibold  ">
             <div className="flex items-center justify-center rounded-full border-3 border-slate-300">{icon}</div>
             <div className="">

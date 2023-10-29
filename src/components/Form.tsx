@@ -5,6 +5,7 @@ import type { UserWithVehicle } from "../models/Models";
 import { Button } from "./Button";
 import { cn } from "../utils/utils";
 import { Tick } from "../utils/svgComponents";
+import { useState } from "react";
 
 export const Form = ({className}: {className?: string}) => {
   const {
@@ -16,6 +17,8 @@ export const Form = ({className}: {className?: string}) => {
     resolver: zodResolver(UserSchemaWithVehicle),
   });
 
+  const [pageIndex, setPageIndex] = useState(1);
+
   const classes = cn('rounded-2xl space-y-6', className);
 
   const onSubmit: SubmitHandler<UserWithVehicle> = (data) => {
@@ -25,25 +28,13 @@ export const Form = ({className}: {className?: string}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      {/* <div className="form-pages flex text-gray-500 text-sm xs-v:text-xs">
-        <div className="basis-1/2 rounded-t page-label py-2.5 px-6 translate-y-[2px]    z-20">You</div>
-        <div className="basis-1/2 rounded-t page-label py-2.5
-          px-6 translate-y-[2px]   ">The Car</div>
-      </div> */}
-
+      {pageIndex === 1 ? 
       <div className="grid px-7 pb-10 pt-6 gap-3 bg-slate-100 shadow-md rounded-2xl z-10">
+        <div className="subheader relative sm:col-span-2 sm:col-start-1  flex items-center gap-x-5 mb-3">
 
-        <div className="subheader sm:col-span-2 sm:col-start-1  flex items-center gap-x-5 mb-3">
-          {/* <Button   
-            rounded="md"
-            variant="ghost"
-            aspect="circle"
-            className="p-1 bg-slate-600 text-white"
-          >
-            <Tick className="h-6 w-6 flex-none" />
-            
-          </Button>   */}
-          <h2 className="grow border-b-[3px] border-primary py-1.5 text-base font-semibold leading-7 text-slate-600">About You</h2>
+          <h2 className="grow w-1/2 border-b-[3px] border-primary py-1.5 text-base font-semibold leading-7 text-slate-600">You</h2>
+          <h2 className="grow w-1/2 sm:col-span-2 sm:col-start-1 border-b-[3px] border-primary py-1.5 px-2 text-base font-semibold leading-7 text-slate-600">The Car</h2>
+
         </div>
 
         <div className="sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
@@ -96,7 +87,7 @@ export const Form = ({className}: {className?: string}) => {
           </Button>
         </div>
       </div>
-
+      :
       <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr] px-7 pb-10 pt-3 gap-3 sm:gap-x-6 bg-slate-100 shadow-md rounded-2xl z-10"> 
         <div className="subheader sm:col-start-1 sm:col-span-2 flex items-center gap-x-5 my-3">
           {/* <Button   
@@ -108,7 +99,6 @@ export const Form = ({className}: {className?: string}) => {
             <Tick className="h-6 w-6 flex-none" />
             
           </Button>   */}
-          <h2 className="grow sm:col-span-2 sm:col-start-1 border-b-[3px] border-primary py-1.5 px-2 text-base font-semibold leading-7 text-slate-600">About Your Car</h2>
         </div>
         <div className="sm:col-span-1 sm:col-start-1  text-base font-medium w-full text-gray-500">
           <label htmlFor="manufacturer ">Manufacturer</label>
@@ -152,7 +142,7 @@ export const Form = ({className}: {className?: string}) => {
         </div>
 
       </div>
-
+}
     </form>
   );
 }
