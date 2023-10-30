@@ -1,11 +1,5 @@
-import { atom } from 'nanostores';
+import { atom, map } from 'nanostores';
+import { User } from '../models/Models';
 
-type SectionName = 'home' | 'about' | 'contact';
 
-//  const $isOpen = atom(true);
 
-export const $section = atom<SectionName>('home');
-
-export const changeSection = (name: SectionName) => {
-  $section.set(name);
-};

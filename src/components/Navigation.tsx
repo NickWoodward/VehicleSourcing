@@ -39,8 +39,8 @@ const navOptions = [
 
 export const Navigation = (props: Props) => {
   const { className, type = "desktop" } = props;
-  const listClasses = cn("flex flex-col items-end py-3", className);
-  const itemClasses = cn("menu-item w-full justify-end border-b border-transparent px-3 text-base font-light text-white  hover:text-primary hover:delay-0 cursor-pointer");
+  const listClasses = cn("flex items-end py-3", className);
+  const itemClasses = cn("menu-item w-full justify-end border-b border-transparent px-3 md:px-0 text-base font-light text-white  hover:text-primary hover:delay-0 cursor-pointer");
 
   const renderItem = (item: NavigationItemType) => {
     return (

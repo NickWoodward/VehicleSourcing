@@ -18,7 +18,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm sm:
     },
     intent: {
       primary: "border-primary bg-primary text-white",
-      secondary: "text-slate-500 ",
+      secondary: "bg-dark text-white",
       dark: "bg-gray-700 text-white hover:bg-darker active:bg-gray-800 active:text-white/80",
       monochrome: "bg-white text-text border border-gray-400",
     },
@@ -65,10 +65,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(
-          buttonVariants({ variant, intent,  size, aspect, rounded, className })
-        )}
         {...props}
+        className={cn(
+          buttonVariants({ variant, intent,  size, aspect, rounded }),
+          className          
+        )}
       />
     );
   }

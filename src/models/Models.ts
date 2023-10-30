@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 export const UserSchema = z.object({
-  id: z.number(),
   fName: z.string().trim().min(2, {message: "> 2 characters"}),
   sName: z.string().trim().min(2, {message: "> 2 characters"}),
   email: z.string().email().trim().toLowerCase(),
@@ -11,7 +10,7 @@ export const UserSchema = z.object({
 export const VehicleSchema = z.object({
   manufacturer: z.string().trim().min(2, {message: "> 2 characters"}),
   model: z.string().trim().min(2, {message: "> 2 characters"}),
-  year: z.number().min(1983, {message: "> 1983"}),
+  year: z.coerce.number().min(1983, {message: `< ${new Date().getFullYear() - 1983 } years`}),
 });
 
 export const UserSchemaWithVehicle = UserSchema.merge(VehicleSchema);
