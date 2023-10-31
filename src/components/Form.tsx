@@ -5,7 +5,9 @@ import type { UserWithVehicle } from "../models/Models";
 import { Button } from "./Button";
 import { cn } from "../utils/utils";
 import { ChevronLeft } from "../utils/svgComponents";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const Form = ({className}: {className?: string}) => {
   const NUM_FORM_STEPS = 2;
@@ -22,6 +24,25 @@ export const Form = ({className}: {className?: string}) => {
   });
 
   const [stepIndex, setStepIndex] = useState(0);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const onSubmit: SubmitHandler<UserWithVehicle> = async (data) => {
+    await sleep(2000)
+    // e.preventDefault();
+    // const formData = new FormData(e.target as HTMLFormElement);
+   
+   console.log(data);
+   
+    // const response = await fetch("/api/enquiry", {
+    //   method: "POST",
+    //   body: data,
+    // });
+    // console.log(response)
+    // const result = await response.json();
+    // if (result.message) {
+    //   setResponseMessage(result.message);
+    // }
+  }
 
   const nextFormStep = () => {
     console.log("next:", "current index:", stepIndex);
@@ -36,10 +57,10 @@ export const Form = ({className}: {className?: string}) => {
 
   const classes = cn('bg-slate-100 space-y-10 px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded-xl', className);
 
-  const onSubmit: SubmitHandler<UserWithVehicle> = (data) => {
-    console.log(data.fName);
-    console.log(data);
-  }
+  // const onSubmit: SubmitHandler<UserWithVehicle> = (data) => {
+  //   console.log(data.fName);
+  //   console.log(data);
+  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
@@ -65,7 +86,7 @@ export const Form = ({className}: {className?: string}) => {
       {stepIndex === 0 ? 
       <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-3 sm:gap-x-6 bg-slate-100">
         <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor=" fName ">Name</label>
+          <label htmlFor="fName">Name</label>
           <div className="mt-1.5">
             <input id="fName" type="text" {...register("fName", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
@@ -88,7 +109,7 @@ export const Form = ({className}: {className?: string}) => {
           </div>
         </div>
         <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor=" email">
+          <label htmlFor="email">
             Email
 
           </label>
@@ -101,7 +122,7 @@ export const Form = ({className}: {className?: string}) => {
           {errors.email && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.email?.message}</p>}
         </div>
         <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
-          <label htmlFor=" phone">
+          <label htmlFor="phone">
             Phone
 
           </label>
@@ -120,8 +141,7 @@ export const Form = ({className}: {className?: string}) => {
       <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-3 sm:gap-x-6 bg-slate-100"> 
         
         <div className="relative text-base font-medium w-full text-gray-500">
-          <label htmlFor=" manufac
-          turer ">Manufacturer</label>
+          <label htmlFor="manufacturer ">Manufacturer</label>
 
           <div className="mt-1.5">
             <input id="manufacturer" type="text" {...register("manufacturer", {required: true})}
@@ -144,7 +164,7 @@ export const Form = ({className}: {className?: string}) => {
           {errors.model && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.model?.message}</p>}
         </div>
         <div className="relative text-base font-medium w-full text-gray-500">
-          <label htmlFor=" year">Year</label>
+          <label htmlFor="year">Year</label>
           <div className="mt-1.5">
             <input id="year" type="text" {...register("year", {required: true})}
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
@@ -174,7 +194,7 @@ export const Form = ({className}: {className?: string}) => {
         stepIndex !== NUM_FORM_STEPS -1 ? 
           <Button   
             type="button"
-            disabled={!isValid}
+            // disabled={!isValid}
             onClick={nextFormStep}
             rounded="md"
             intent="secondary"
@@ -188,7 +208,6 @@ export const Form = ({className}: {className?: string}) => {
           <Button 
             type="submit"
             disabled={!isValid}
-            onClick={() => { console.log('Form submitted') }}  
             rounded="md"
             intent="primary"
             className="w-1/2 sm:w-1/3 px-8 py-3 text-base"
@@ -199,6 +218,7 @@ export const Form = ({className}: {className?: string}) => {
         }
 
       </div>
+      {responseMessage && <p>{responseMessage}</p>}
       <pre>{JSON.stringify(watch(), null, 2)} {JSON.stringify(isValid, null, 2)}</pre>
     </form>
   );

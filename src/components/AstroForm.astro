@@ -1,0 +1,11 @@
+---
+interface Props {
+    classes: string;
+}
+
+export const prerender = false;
+
+const { classes = "Unknown" } = Astro.props;
+---
+
+<h2 class={classes}>Hello</h2>
