@@ -1,20 +1,20 @@
 import { z } from 'zod';
 
-export const UserSchema = z.object({
-  fName: z.string().trim().min(2, {message: "> 2 characters"}),
-  sName: z.string().trim().min(2, {message: "> 2 characters"}),
+export const PersonSchema = z.object({
+  fName: z.string().trim().min(2, {message: "At least 2 letters"}),
+  sName: z.string().trim().min(2, {message: "At least 2 letters"}),
   email: z.string().email().trim().toLowerCase(),
-  phone: z.string().regex(new RegExp(/^0([1-6][0-9]{8,10}|7[0-9]{9})$/)),
+  phone: z.string().regex(new RegExp(/^0([1-6][0-9]{8,10}|7[0-9]{9})$/), {message: "Invalid number"}),
 });
 
 export const VehicleSchema = z.object({
-  manufacturer: z.string().trim().min(2, {message: "> 2 characters"}),
-  model: z.string().trim().min(2, {message: "> 2 characters"}),
+  manufacturer: z.string().trim().min(2, {message: "At least 2 letters"}),
+  model: z.string().trim().min(2, {message: "At least 2 letters"}),
   year: z.coerce.number().min(1983, {message: `< ${new Date().getFullYear() - 1983 } years`}),
 });
 
-export const UserSchemaWithVehicle = UserSchema.merge(VehicleSchema);
+export const PersonSchemaWithVehicle = PersonSchema.merge(VehicleSchema);
 
-export type User = z.infer<typeof UserSchema>;
+export type User = z.infer<typeof PersonSchema>;
 export type Vehicle = z.infer<typeof VehicleSchema>;
-export type UserWithVehicle = z.infer<typeof UserSchemaWithVehicle>;
+export type UserWithVehicle = z.infer<typeof PersonSchemaWithVehicle>;

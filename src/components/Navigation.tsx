@@ -40,11 +40,11 @@ const navOptions = [
 export const Navigation = (props: Props) => {
   const { className, type = "desktop" } = props;
   const listClasses = cn("flex items-end py-3", className);
-  const itemClasses = cn("menu-item w-full justify-end border-b border-transparent px-3 md:px-0 text-base font-light text-white  hover:text-primary hover:delay-0 cursor-pointer");
+  const itemClasses = cn("menu-item justify-end px-3 md:px-0 text-base font-light text-white  hover:text-primary hover:delay-0 cursor-pointer");
 
   const renderItem = (item: NavigationItemType) => {
     return (
-      type==="mobile"? <NavigationItem item={item} /> : <div>{item.altLabel}</div>
+      type==="mobile"? <NavigationItem item={item} /> : <div key={item.id} className="data-[active=true]:text-primary">{item.altLabel}</div>
     );
   };
 

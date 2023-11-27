@@ -32,7 +32,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm sm:
       circle: "p-4 rounded-full",
     },
     rounded: {
-      true: "rounded-xl",
+      true: "rounded-lg",
       sm: "rounded-sm",
       md: "rounded-md",
       lg: "rounded-lg",

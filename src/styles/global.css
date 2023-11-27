@@ -10,36 +10,48 @@
   --dvhMinusPeek: calc(var(--dvh) - var(--peekHeight));
   --dvhPlusPeek: calc(var(--dvh) + var(--peekHeight));
 
-  --primary: hsl(189, 94%, 43%);
+  /* --primary: hsl(189, 94%, 43%); */
+  --primary: hsl(198, 83%,	47%);
   --dark: hsl(215, 25%, 27%);
   --c-circle: hsl(180, 32%, 91%); 
 }
 
-html {
-  scroll-snap-type: y mandatory; 
-}
-main {
 
-  /* scroll-snap-type: mandatory;  
-   scroll-snap-points-y: 100vh; */
-    /* scroll-snap-points-y: 100vh; 
-    scroll-snap-type: y mandatory; */
+button {
+  transition: all 0.2s ease;
+}
+button:active {
+  transform: scale(0.96);
 }
 
+.animate-spin-slow {
+  animation: spin 4s linear infinite;
+}
+.animate-spin-slower {
+  animation: spin 6s linear infinite;
+}
+.animate-spin-reverse-slower {
+  animation: spinReverse 6s linear infinite;
+}
+/* translate-x-1/2 translate-y-1/2 rotate-12 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform:  rotate(360deg);
+  }
+}
+@keyframes spinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
 
 
-// THIS IS THE MOBILE ADDRESS BAR FIX FOR SCROLL SNAP
-/* html {overflow: hidden;width: 100%;}body {height: 100%;position: fixed;overflow-y: scroll;-webkit-overflow-scrolling: touch;} */
-
-.test-red{
-  border: 1px solid red;
-}
-.test-green, .test-green * {
-  border: 1px solid green;
-}
-.test-blue, .test-blue * {
-  border: 1px solid blue;
-}
 
 .embla {  
   overflow: hidden;

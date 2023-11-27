@@ -24,12 +24,12 @@ export const sectionVariants = cva(" flex w-full",
         true: "mt-headerHeight"
       },
       height: {
-        default: "xs-v:py-12 py-16",
+        default: "py-16",
         full: "xs-v:py-12 py-24 h-dvh",
-        sm: "min-h-footerHeight"
+        sm: "py-8"
       },
       breakout: {
-        true: "xs:px-page-sm sm:px-page-sm lg:px-10 xl:px-20",
+        true: "xs:px-page-xs  lg:px-10 xl:px-20",
         false: "xs:px-page-sm sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
       },
 

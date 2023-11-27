@@ -27,7 +27,8 @@ export const Modal = forwardRef<HTMLDivElement, Props>(function Modal(
   
 
   const contentClassName = cn("cursor-auto", contentClasses);
-  
+  // @TODO: Either the animation should be lifted out of this component, so that it can involve non-generic
+  // items (menuItems vs overlay/modal in this case), or those items should be passed into the modal
   return createPortal(
     <Transition
       mountOnEnter

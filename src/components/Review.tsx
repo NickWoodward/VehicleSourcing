@@ -34,7 +34,7 @@ export const reviewVariants = cva("", {
 
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("",
+  const classes = cn("px-10 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow",
     className
   );
 

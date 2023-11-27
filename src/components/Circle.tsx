@@ -1,14 +1,14 @@
 import type { ComponentProps } from "react";
 import { cn } from "../utils/utils";
-import { CircleIcon } from "../utils/svgComponents";
+import { CircleBG, CircleReversedBG } from "../utils/svgComponents";
 
 interface Props extends ComponentProps<"div">{
-  className?: string
+  reversed?: boolean
 }
-export const Circle = ({className}:Props) => {
+export const Circle = ({className, reversed}:Props) => {
   return (
     <div className={cn("", className)}>
-      <CircleIcon />
+      {reversed? <CircleReversedBG/>:<CircleBG />}
     </div>
   );
 }

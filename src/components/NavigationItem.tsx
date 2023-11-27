@@ -28,7 +28,7 @@ export const NavigationItem = ({item}: Props) => {
           <p className="text-base text-gray-600">{item.description}</p>
         </div>
         <div className="flex flex-none items-center justify-center rounded-lg  text-white group-hover:bg-white group-hover:bg-primary group-hover:border-primary">
-            <item.icon className="h-10 w-10 text-white group-hover:text-white" aria-hidden="true" />
+            <item.icon className="h-8 w-8 text-white group-hover:text-white" aria-hidden="true" />
         </div>
       </div> 
     </>

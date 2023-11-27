@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSchema, UserSchemaWithVehicle } from '../models/Models';
+import { PersonSchema, PersonSchemaWithVehicle } from '../models/Models';
 import type { UserWithVehicle } from "../models/Models";
 import { Button } from "./Button";
 import { cn } from "../utils/utils";
@@ -19,7 +19,7 @@ export const Form = ({className}: {className?: string}) => {
     watch,
     formState: { errors, isValid },
   } = useForm<UserWithVehicle>({
-    resolver: zodResolver(UserSchema),
+    resolver: zodResolver(PersonSchema),
     mode: 'all'
   });
 
@@ -57,11 +57,13 @@ export const Form = ({className}: {className?: string}) => {
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
 
 
-      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-3 sm:gap-x-6 bg-slate-100">
+      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-x-3 gap-y-1 sm:gap-x-6 bg-slate-100">
         <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor="fName">Name</label>
-          <div className="mt-1.5">
+          <label htmlFor="fName" className="block relative py-1.5">Name</label>
+          <div className="">
             <input id="fName" type="text" {...register("fName", {required: true})}
+              required
+              autoComplete="given-name"
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
             
@@ -69,39 +71,44 @@ export const Form = ({className}: {className?: string}) => {
           {errors.fName && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.fName?.message}</p>}
         </div>
         <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
-          <label htmlFor="sName" className="flex w-full  relative" >
+          <label htmlFor="sName" className="block relative py-1.5" >
             Surname
-            {errors.sName && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.sName?.message}</p>}
-
           </label>
+          {errors.sName && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.sName?.message}</p>}
 
-          <div className="mt-1.5">
+          <div className="">
             <input id="sName" type="text" {...register("sName", {required: true})}
+              required
+              autoComplete="family-name"
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
         </div>
         <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor="email">
+          <label htmlFor="email" className="block relative py-1.5">
             Email
 
           </label>
 
-          <div className="mt-1.5">
+          <div className="">
             <input id="email" type="text" {...register("email", {required: true})}
+              required
+              autoComplete="email"
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
           </div>
           {errors.email && <p className="absolute  bottom-0 right-0 pr-1 h-full text-red-500">{errors.email?.message}</p>}
         </div>
         <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
-          <label htmlFor="phone">
+          <label htmlFor="phone" className="block relative py-1.5">
             Phone
 
           </label>
 
-          <div className="mt-1.5">
+          <div className="">
             <input id="phone" type="text" {...register("phone", { required: true })}
+              required
+              autoComplete="tel"
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
           </div>
@@ -162,7 +169,7 @@ export const Form = ({className}: {className?: string}) => {
 // <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-3 sm:gap-x-6 bg-slate-100">
 //   <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
 //     <label htmlFor="fName">Name</label>
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="fName" type="text" {...register("fName", {required: true})}
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //       />
@@ -177,8 +184,9 @@ export const Form = ({className}: {className?: string}) => {
 
 //     </label>
 
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="sName" type="text" {...register("sName", {required: true})}
+  
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //       />
 //     </div>
@@ -189,8 +197,9 @@ export const Form = ({className}: {className?: string}) => {
 
 //     </label>
 
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="email" type="text" {...register("email", {required: true})}
+  
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //         />
 //     </div>
@@ -202,7 +211,7 @@ export const Form = ({className}: {className?: string}) => {
 
 //     </label>
 
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="phone" type="text" {...register("phone", { required: true })}
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //         />
@@ -218,8 +227,9 @@ export const Form = ({className}: {className?: string}) => {
 //   <div className="relative text-base font-medium w-full text-gray-500">
 //     <label htmlFor="manufacturer ">Manufacturer</label>
 
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="manufacturer" type="text" {...register("manufacturer", {required: true})}
+  
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //       />
       
@@ -231,8 +241,9 @@ export const Form = ({className}: {className?: string}) => {
 //       Model
 //     </label>
 
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="model" type="text" {...register("model", {required: true})}
+  
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //       />
 //     </div>
@@ -240,8 +251,9 @@ export const Form = ({className}: {className?: string}) => {
 //   </div>
 //   <div className="relative text-base font-medium w-full text-gray-500">
 //     <label htmlFor="year">Year</label>
-//     <div className="mt-1.5">
+//     <div className="">
 //       <input id="year" type="text" {...register("year", {required: true})}
+  
 //         className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
 //         />
 //     </div>

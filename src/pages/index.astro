@@ -12,7 +12,7 @@ import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
 // import { Reviews } from "../components/Reviews";
 import { Circle } from "../components/Circle";
-import { SearchIcon, TrustIcon } from "../utils/svgComponents";
+import { CarIcon2, SearchIcon, TrustIcon } from "../utils/svgComponents";
 // import { BrandCloud } from "../components/BrandCloud";
 
 
@@ -21,6 +21,8 @@ import { Footer } from "../components/Footer";
 import { BrandCloud } from "../components/BrandCloud";
 import { Button } from "../components/Button";
 import AstroForm from "../components/AstroForm.astro";
+import { FormContainer } from "../components/FormContainer";
+import { Reviews } from "../components/Reviews";
 ---
 
 <script>
@@ -48,22 +50,22 @@ import AstroForm from "../components/AstroForm.astro";
     const sections = gsap.utils.toArray<HTMLElement>(".section")
       
     sections.forEach(function(section, index){
-      console.log(document.querySelector(`.item-${index}`))
       ScrollTrigger.create({
         trigger:section,
         start:"top center",
         end:"bottom center",
         // markers:true,
-        animation:gsap
-          .to(`.item-${index}`, {
-            opacity:1, 
-            duration:.2,
-            color: "var(--primary)",
-          }),
+        // animation:gsap
+        //   .to(`.item-${index}`, {
+        //     opacity:1, 
+        //     duration:.2,
+        //     color: "var(--primary)",
+        //   }),
         //if ScrollTrigger isActive = true then play the animation forward via reversed(false)
-        onToggle: (self)=> {
-          if(self.animation)
-            self.animation.reversed(!self.isActive)
+        onToggle: ()=> {
+          // if(self.animation)
+          //   self.animation.reversed(!self.isActive)
+          document.querySelector(`.item-${index}`)?.toggleAttribute('data-active');
         }		
       })
     })
@@ -106,17 +108,21 @@ import AstroForm from "../components/AstroForm.astro";
 
       const cardScope = gsap.utils.selector(card);
 
+      
       // select image
       const image = cardScope(".card__image");
       const content = cardScope(".card__content");
 
       const tl = gsap.timeline({paused:true})
+      .from(card, {
+        autoAlpha: 0,
+      })
       .from(image, {
         autoAlpha: 0,
         xPercent: gsap.utils.wrap([-distance, distance, -distance]),
         ease:'power4.inOut',
         duration: .7
-      }).from(content, {
+      }, "<").from(content, {
         autoAlpha: 0,
         xPercent: gsap.utils.wrap([distance, -distance, distance]),
         ease:'power4.inOut',
@@ -205,7 +211,7 @@ import AstroForm from "../components/AstroForm.astro";
 
     ScrollTrigger.create({
       trigger: ".contact",
-      start: "top-=100px bottom-=150px",
+      start: "top-=50% bottom-=150px",
       end: "90% top",
       onEnter: () => { 
         contactScrollAnimation.play(0);
@@ -290,40 +296,40 @@ import AstroForm from "../components/AstroForm.astro";
               <!-- <Circle className=""/> -->
 
           <!-- <TrustIcon className="s-v:hidden sm:row-start-15 col-start-1 h-16 w-36 p-1 z-20" /> -->
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="border border-red-500 relative font-inter mt-headerHeight overflow-hidden">
-      <div class="absolute top-[calc(90vh - var(--h-header))] left-10 text-red-600 z-50">Hello</div>
-
-      <Section className="hero section relative justify-center px-page-xs bg-gradient-to-tl from-gray-300 to-gray-100 z-10" height="full" contentClassName="xl:max-w-8xl">
-
-
-        <div class="  w-full grid grid-rows-16 grid-cols-16 ">
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="relative font-inter mt-headerHeight overflow-hidden">
+      <Section className="hero section relative justify-center px-page-xs bg-gradient-to-tl from-slate-100 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
+        <div class="  w-full grid grid-rows-16 grid-cols-16 z-10">
           <HeroText className=" hero-text animate-down col-start-1 col-span-16 row-start-1 md:row-start-2 lg:row-start-3 row-span-9 justify-center md:justify-start z-30 flex flex-col" />
     
-          <div class=" hero-image animate-up invisible opacity-0 col-start-1 col-span-16 row-start-10 sm:row-start-9 md:row-start-9 lg:row-start-8 xl:row-start-7 row-span-7 md:row-span-9 xl:row-span-10 justify-self-end flex sm:justify-end items-center">
+          <div class="hero-image animate-up invisible opacity-0 col-start-1 col-span-16  row-start-10 xs:row-start-11  md:row-start-9 lg:row-start-8 xl:row-start-7 row-span-7 xs:row-span-5 sm:row-span-6 md:row-span-9 xl:row-span-10 justify-self-end flex sm:justify-end items-center">
             <img src={heroImage} class="object-contain max-h-full -scale-x-100  hover:scale-both-110 z-20" alt="Three BMW cars" />
-            <Circle className="absolute bottom-0 right-0 w-[190%] translate-x-1/2 translate-y-1/2 rotate-12 xl:rotate-45 z-10"/>
-            <Circle className="absolute bottom-0 right-0 w-[190%] translate-x-1/2 translate-y-1/2 rotate-12 xl:rotate-45 scale-[.90] z-10"/>
+            <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%] scale-90">
+              <Circle className="animate-spin-slower"/>
+            </div>
+            <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%]">
+              <Circle reversed className="animate-spin-reverse-slower"/>
+            </div>
           </div>
         </div>
 
       </Section>
 
-      <Section className="py-3 about section relative items-center  px-page-xs bg-gradient-to-bl from-gray-300 to-slate-50"   breakout={true} contentClassName="">
-        <div class=" w-full grid grid-cols-16 lg:grid-rows-16 gap-y-10  lg:gap-0">
+      <Section className="pt-10 pb-16 about section relative items-center  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   breakout={true} contentClassName="">
+        <div class="grid grid-cols-16 gap-y-12 sm:gap-y-28 lg:space-y-34 xl:gap-y-16">
           <SectionIntro 
             title="How It Works"
             titleClasses="invisible opacity-0"
             subtitle="3 Easy Steps"
             subtitleClasses="subtitle invisible opacity-0",
             tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
-            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16 lg:row-start-1 lg:row-span-2"
+            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16  md:row-span-2"
             taglineClasses="invisible opacity-0"
           />
-          <div class="  lg:row-start-4 lg:row-span-11 col-span-full z-30">
+          <div class="  col-span-full z-30">
             <WhyUs className="" />
           </div>
 
-          <div class="contact-btn w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
+          <!-- <div class="contact-btn w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
             <Button   
               className="cta-button"
               rounded
@@ -334,34 +340,36 @@ import AstroForm from "../components/AstroForm.astro";
               <SearchIcon className="h-6 w-6 lg:row-start-17 flex-none" />
               <span class="ml-3.5">Contact Us</span>
             </Button>
-          </div>
+          </div> -->
         </div>
       </Section>
     
     
-      <Section className="contact section relative flex flex-col justify-center bg-gradient-to-tl from-gray-300 to-slate-50  px-page-xs " client:visible>
+      <Section className="contact section relative  flex  bg-gradient-to-tl from-gray-100 to-slate-50  px-page-xs " client:visible>
 
-        <div class=" w-full grid grid-cols-16 lg:grid-rows-16 gap-y-10 lg:gap-0">
+        <div class=" w-full grid grid-cols-1  gap-y-8 lg:grid-cols-2 lg:grid-rows-8 lg:gap-x-20">
           <SectionIntro 
             title="Find the Perfect Car"
             titleClasses="invisible opacity-0"
             subtitle="Contact Us Today"
             subtitleClasses="subtitle invisible opacity-0"
-            className="xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16 lg:row-start-1 lg:row-span-2 "
+            className="xl:max-w-8xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
             tagline="Let our team know what you're looking for and we'll get right on it!"
             taglineClasses="invisible opacity-0"
           />   
 
-          <!-- <BrandCloud className="col-start-1 col-span-16" /> -->
+          <BrandCloud className="col-start-1  lg:col-span-1 lg:row-start-3" />
 
-          <div class="col-start-1 col-span-16">
+          <div class="col-start-1 lg:col-start-2 lg:col-span-1  lg:row-start-1 lg:row-span-6">
             <!-- client:only react elements responsible for their own animation -->
-            <Form className=" " client:only/>
+            <!-- <Form className=" " client:only/> -->
+            <FormContainer client:only/>
           </div>
 
         </div>
+
       </Section>
-      <AstroForm classes="bg-red-500"/>
+      <!-- <AstroForm classes="bg-red-500"/> -->
       
       <!-- <Section variant="dark" height="full">
         <SectionIntro 
@@ -371,16 +379,24 @@ import AstroForm from "../components/AstroForm.astro";
           variant="dark"
         />  
         <WhyUs className="h-full" client:only />
-      </Section>
-      <Section height="full">
-        <SectionIntro 
-          title="Mange Tout Rodders"
-          subtitle="ORIGINAL FAKE"
-        />    
-        <Reviews client:only/>
       </Section> -->
+      <Section className="pt-10 pb-16 reviews section relative items-center  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   contentClassName="">
+        <div class="grid w-full grid-cols-1 gap-y-10 xl:gap-y-16">
+          <SectionIntro 
+            title="What Others Have Said"
+            titleClasses=""
+            subtitle="Still Not Sure?"
+            subtitleClasses="subtitle ",
+            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
+            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start  md:row-span-2"
+            taglineClasses=""
+          />
+          <Reviews className="" client:only />
+
+        </div>
+      </Section>
     
-      <Section className=" px-header" variant="darker">
+      <Section height="sm" className=" px-header" variant="darker">
         <Footer />
       </Section>
       

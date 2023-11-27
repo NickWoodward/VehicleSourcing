@@ -1,11 +1,5 @@
 import { twMerge } from "tailwind-merge";
 
-// export const Test = () => {
-//   const open = useStore($isOpen);
-//   console.log('dickhead',open);
-//   return <div>Hello {open}</div>
-// }
-
 type Props = {
   className?: string;
   children: React.ReactNode;

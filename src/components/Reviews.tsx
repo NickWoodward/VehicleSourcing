@@ -1,5 +1,9 @@
 import { Review } from "./Review";
 import { EmblaCarousel as Carousel } from "./Carousel";
+import type { ComponentProps } from "react";
+import { Button } from "./Button";
+import { CarIcon2 } from "../utils/svgComponents";
+import { cn } from "../utils/utils";
 
 type Props = {
   reviewId: number,
@@ -9,7 +13,8 @@ type Props = {
   rating: 1|2|3|4|5,
 }
 
-export const Reviews = () => {
+export const Reviews = ({className}: ComponentProps<"div">) => {
+  const classes = cn("flex flex-col sm:flex-row sm:flex-wrap sm:justify-between space-y-10 sm:space-y-0  sm:gap-y-8 ", className);
 
   const reviews: Props[] = [
     {
@@ -50,9 +55,22 @@ export const Reviews = () => {
     );
   })
   return (
-    <div>
-      <Carousel slides={renderedReviews} axis="y" autoplayOptions={autoplayOptions} options={carouselOptions} />
-      {/* {renderedReviews} */}
+    <div className={classes}>
+      {/* <Carousel slides={renderedReviews} axis="y" autoplayOptions={autoplayOptions} options={carouselOptions} /> */}
+      {renderedReviews}
+      <div className="flex flex-col md:w-[48%] xl:w-[30%] justify-center space-y-8 items-center  px-10 pt-6 pb-8">
+        <p className="flex">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+        <Button     
+          className="w-full"
+          rounded
+          intent="primary"   
+          size="md"
+        >
+          <CarIcon2 className=" h-7 w-7 flex-none" />
+          <span className="ml-3">Get Started</span>
+        </Button>
+
+      </div>
     </div>
   );
 };
