@@ -36,6 +36,7 @@ import { Reviews } from "../components/Reviews";
   const heroScrollAnimation = gsap.timeline({paused: true});
   const aboutScrollAnimation = gsap.timeline({paused: true});
   const contactScrollAnimation = gsap.timeline({paused: true});
+  const testimonialsScrollAnimation = gsap.timeline({paused: true});
 
   // client:only react elements responsible for their own animation 
   window.addEventListener('load', () => {
@@ -45,7 +46,9 @@ import { Reviews } from "../components/Reviews";
     const aboutScope = gsap.utils.selector('.about');
     const contactScope = gsap.utils.selector('.contact');
     const cardsScope = gsap.utils.selector('.cards');
-    const brandLogos = gsap.utils.selector('.brand-logo');
+    const testimonialsScope = gsap.utils.selector('.testimonials');
+
+    // const brandLogos = gsap.utils.selector('.brand-logo');
 
     const sections = gsap.utils.toArray<HTMLElement>(".section")
       
@@ -153,6 +156,17 @@ import { Reviews } from "../components/Reviews";
         autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
       })
 
+
+    testimonialsScrollAnimation
+    .to([
+      testimonialsScope('.subtitle'), 
+      testimonialsScope('.title'), 
+      testimonialsScope('.tagline'),
+    ], { 
+      autoAlpha:1, ease: "ease: back.out(2)", stagger: .12, delay: .3,
+    })
+
+
     ScrollTrigger.create({
       trigger: ".hero",
       start: "10% top",
@@ -211,10 +225,25 @@ import { Reviews } from "../components/Reviews";
 
     ScrollTrigger.create({
       trigger: ".contact",
-      start: "top-=50% bottom-=150px",
+      start: "top-=10% 90%",
       end: "90% top",
+      // markers:true,
       onEnter: () => { 
         contactScrollAnimation.play(0);
+      },
+      onEnterBack: () => {
+        // aboutScrollAnimation.play(0)
+      }
+    });
+
+    
+    ScrollTrigger.create({
+      trigger: ".testimonials",
+      start: "top-=10% 90%",
+      end: "90% top",
+      // markers:true,
+      onEnter: () => { 
+        testimonialsScrollAnimation.play(0);
       },
       onEnterBack: () => {
         // aboutScrollAnimation.play(0)
@@ -344,10 +373,11 @@ import { Reviews } from "../components/Reviews";
         </div>
       </Section>
     
-    
       <Section className="contact section relative  flex  bg-gradient-to-tl from-gray-100 to-slate-50  px-page-xs " client:visible>
-
+        <BrandCloud className="absolute top-0 left-[2rem] -translate-y-1/2 " />
         <div class=" w-full grid grid-cols-1  gap-y-8 lg:grid-cols-2 lg:grid-rows-8 lg:gap-x-20">
+
+
           <SectionIntro 
             title="Find the Perfect Car"
             titleClasses="invisible opacity-0"
@@ -358,7 +388,6 @@ import { Reviews } from "../components/Reviews";
             taglineClasses="invisible opacity-0"
           />   
 
-          <BrandCloud className="col-start-1  lg:col-span-1 lg:row-start-3" />
 
           <div class="col-start-1 lg:col-start-2 lg:col-span-1  lg:row-start-1 lg:row-span-6">
             <!-- client:only react elements responsible for their own animation -->
@@ -380,23 +409,23 @@ import { Reviews } from "../components/Reviews";
         />  
         <WhyUs className="h-full" client:only />
       </Section> -->
-      <Section className="pt-10 pb-16 reviews section relative items-center  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   contentClassName="">
+      <Section className="testimonials section relative items-center pt-10 pb-16  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   contentClassName="">
         <div class="grid w-full grid-cols-1 gap-y-10 xl:gap-y-16">
           <SectionIntro 
             title="What Others Have Said"
-            titleClasses=""
+            titleClasses="invisible opacity-0"
             subtitle="Still Not Sure?"
-            subtitleClasses="subtitle ",
+            subtitleClasses="invisible opacity-0",
             tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
             className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start  md:row-span-2"
-            taglineClasses=""
+            taglineClasses="invisible opacity-0"
           />
           <Reviews className="" client:only />
 
         </div>
       </Section>
     
-      <Section height="sm" className=" px-header" variant="darker">
+      <Section height="sm" last className=" px-header" variant="darker">
         <Footer />
       </Section>
       

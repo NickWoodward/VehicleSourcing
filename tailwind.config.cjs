@@ -34,6 +34,7 @@ module.exports = {
 		extend: {
 
       padding: {
+        "header-sm": "1rem",
         "header": "2rem",
         "page-xs":"2rem",
         "page-sm": "3rem",
@@ -133,6 +134,7 @@ module.exports = {
         dvhPlusPeek: "var(--dvhPlusPeek)",
 				headerHeight: "var(--header-height)",
         footerHeight: "var(--footer-height)",
+        brandCloudIcon: "40px",
 			},
       minHeight: {
         dvh: "var(--dvh)",

@@ -58,7 +58,7 @@ export const Reviews = ({className}: ComponentProps<"div">) => {
     <div className={classes}>
       {/* <Carousel slides={renderedReviews} axis="y" autoplayOptions={autoplayOptions} options={carouselOptions} /> */}
       {renderedReviews}
-      <div className="flex flex-col md:w-[48%] xl:w-[30%] justify-center space-y-8 items-center  px-10 pt-6 pb-8">
+      <div className="flex flex-col md:w-[48%] xl:w-[30%] justify-center items-start space-y-8 ">
         <p className="flex">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
         <Button     
           className="w-full"
@@ -69,7 +69,6 @@ export const Reviews = ({className}: ComponentProps<"div">) => {
           <CarIcon2 className=" h-7 w-7 flex-none" />
           <span className="ml-3">Get Started</span>
         </Button>
-
       </div>
     </div>
   );

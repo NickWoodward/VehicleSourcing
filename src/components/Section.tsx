@@ -32,7 +32,9 @@ export const sectionVariants = cva(" flex w-full",
         true: "xs:px-page-xs  lg:px-10 xl:px-20",
         false: "xs:px-page-sm sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
       },
-
+      last: {
+        true: "pb-2"
+      }
 
     },
     defaultVariants: {
@@ -50,7 +52,7 @@ export const sectionVariants = cva(" flex w-full",
 // scroll-snap-type: y mandatory;
 
 
-export function Section({className, variant, axis = 'h',  height, contentClassName, headerOffset, breakout, children}:Props) {
+export function Section({className, variant, axis = 'h',  height, contentClassName, headerOffset, breakout, last, children}:Props) {
   const contentClasses = cn("flex w-full h-full lg:max-w-8xl mx-auto", contentClassName, {
     "flex-col": axis === "v",
     "flex-row": axis === "h",
@@ -60,7 +62,7 @@ export function Section({className, variant, axis = 'h',  height, contentClassNa
   return (
     <div 
       className={cn(
-        sectionVariants({ variant, height, headerOffset, breakout }), className
+        sectionVariants({ variant, height, headerOffset, breakout, last }), className
     )}>
       <div className={contentClasses}>
         {children}

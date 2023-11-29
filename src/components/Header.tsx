@@ -7,7 +7,7 @@ type Props = {
 
 export const Header: React.FC<Props> = ({ children, className }) => {
   const classes = twMerge(
-    "fixed inset-0 flex justify-between items-center h-headerHeight px-header py-4 bg-dark text-white shadow z-50",
+    "fixed inset-0 flex justify-between items-center h-headerHeight px-header-sm sm:px-header py-4 bg-dark text-white shadow z-50",
     className
   );
 

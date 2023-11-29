@@ -18,7 +18,7 @@ interface Props extends ComponentProps<"div"> {
 export const NavigationItem = ({item}: Props) => {
   return (
     <>
-      <div key={item.id} className=" group relative w-full flex items-center justify-end  gap-x-6  md:w-5/6  pl-12 shadow-lg shadow-dark rounded-lg p-4 bg-white hover:bg-gray-50">
+      <div key={item.id} className=" group relative w-full flex items-center  gap-x-6  md:w-5/6  pl-12 shadow-lg shadow-dark rounded-lg p-4 bg-white hover:bg-gray-50">
   
         <div className="flex flex-col justify-start text-end">
           <a className="text-base font-medium text-dark">

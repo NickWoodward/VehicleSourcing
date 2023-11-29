@@ -147,9 +147,9 @@ console.log("steps", steps);
         { form.selectedIndex === 1 &&<CarForm onNext={nextFormStep} onPrevious={previousFormStep} /> }
         { form.selectedIndex === NUM_STEPS - 1 && <div>Submit</div> }
       </div>
-      <div class="privacy-link md:text-gray-600">
+      <div className="privacy-link md:text-gray-600">
           We care about the protection of your data. Read our
-          <a href="#" class="font-medium lg:text-gray-900 underline">Privacy Policy</a>.
+          <a href="#" className="font-medium lg:text-gray-900 underline">Privacy Policy</a>.
         </div>
         {/* <div className="panel">
           <pre>{JSON.stringify(form, null, 2)}</pre>

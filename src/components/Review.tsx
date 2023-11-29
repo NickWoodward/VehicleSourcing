@@ -34,7 +34,7 @@ export const reviewVariants = cva("", {
 
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("px-10 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow",
+  const classes = cn("px-8 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow",
     className
   );
 
@@ -45,12 +45,12 @@ export const Review = ({className, reviewId, title, body, author,rating, ...prop
     >
       <blockquote className="text-gray-600">
         <StarRating rating={rating} />
-        <p className="mt-4 text-lg font-semibold leading-6 before:content-['“'] after:content-['”']">
+        <p className="mt-4 text-lg font-semibold leading-5 before:content-['“'] after:content-['”']">
           {title}
         </p>
-        <p className="mt-3 text-base leading-7">{body}</p>
+        <p className="mt-3 text-base text-gray-500  font-medium leading-7">{body}</p>
       </blockquote>
-      <figcaption className="mt-3 text-sm text-gray-600 before:content-['–_']">
+      <figcaption className="mt-3 text-base font-medium text-gray-600 before:content-['–_']">
         {author}
       </figcaption>
     </figure>
