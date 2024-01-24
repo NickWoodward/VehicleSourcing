@@ -18,8 +18,8 @@ interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglin
 const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center max-w-sm lg:max-w-lg", {
   variants: {
     variant: {
-      default: "text-gray-700",
-      dark: "text-white",
+      default: "text-gray-700 font-semibold",
+      dark: "text-offWhite font-medium",
     },
 
   },
@@ -31,7 +31,7 @@ const sectionVariants = cva("section-intro flex flex-col w-full items-start just
 const subtitleVariants = cva("subtitle mb-1 sm:mb3 font-medium text-primary", {
   variants: {
     variant: {
-      default: "text-base xs:text-base sm:text-lg",
+      default: "text-sm  xs:text-base sm:text-lg",
       dark: "text-sm xs:text-base sm:text-lg",
     }
   },
@@ -42,8 +42,8 @@ const subtitleVariants = cva("subtitle mb-1 sm:mb3 font-medium text-primary", {
 const taglineVariants = cva("mt-1", {
   variants: {
     variant: {
-      default: "text-gray-600",
-      dark: "text-gray-400",
+      default: "text-textGray font-normal leading-6 xs:leading-7",
+      dark: "text-base text-gray-300 font-normal leading-6 xs:leading-7",
     }
   },
   defaultVariants: {
@@ -63,10 +63,10 @@ export const SectionIntro = ({title, subtitle, tagline, variant, className, titl
   return (
     <div className={cn(sectionVariants({variant}), className)}>
       <h3 className={cn(subtitleVariants({variant}), subtitleClasses)}>{subtitle}</h3>
-      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl font-semibold text-gray-700 tracking-tight", titleClasses)}>
+      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl tracking-tight", titleClasses)}>
         {title}
       </h2>
-      {tagline && <TagLine content={tagline} className={cn("tagline text-lg xs:text-lg sm:text-xl lg:text-xl xl:text-2xl text-gray-500", taglineClasses, taglineVariants({variant}))}/>}
+      {tagline && <TagLine content={tagline} className={cn("tagline text-base font-light xs:text-lg sm:text-xl lg:text-xl xl:text-2xl", taglineClasses, taglineVariants({variant}))}/>}
     </div>
   );
 }

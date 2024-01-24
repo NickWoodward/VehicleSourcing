@@ -2,20 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .poly-clip {
+    clip-path: polygon(0 0, 100% 28%, 100% 100%, 0% 100%);
+  }
+}
+
+/* @font-face {
+  font-family: 'UKNumberPlate';
+  src: url('/fonts/UKNumberPlate.tff') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} */
+
 :root {
   --header-height: 4rem;
+  --header-height-sm: 2rem;
   --footer-height: 8rem;
   --dvh: calc(100svh - var(--header-height));
   --peekHeight: 2rem;
   --dvhMinusPeek: calc(var(--dvh) - var(--peekHeight));
   --dvhPlusPeek: calc(var(--dvh) + var(--peekHeight));
 
+  --slate-200: #e2e8f0;
+
   /* --primary: hsl(189, 94%, 43%); */
   --primary: hsl(198, 83%,	47%);
-  --dark: hsl(215, 25%, 27%);
+  /* --dark: hsl(215, 25%, 27%); */
   --c-circle: hsl(180, 32%, 91%); 
+  --dark: hsl(217, 19%, 27%);
+  --gradient-dark: hsl(217, 19%, 27%);
+  --gradient-light: hsl(217, 25%, 35%);
 }
 
+.numberplate {
+  font-family: 'UKNumberPlate';
+}
+
+.cta-btn--hero {
+  outline-offset: -3px;
+}
 
 button {
   transition: all 0.2s ease;
@@ -53,18 +80,3 @@ button:active {
 
 
 
-.embla {  
-  overflow: hidden;
-  width: 100%;
-  /* position: relative; */
-  /* border: 1px solid yellow; */
-}
-/* .embla__container {  
-  display: flex;
-  position: relative;
-} */
-.embla__slide { 
-  /* border: 1px solid red; */
-  /* flex: 0 0 100%;  */
-  min-width: 0;
-}

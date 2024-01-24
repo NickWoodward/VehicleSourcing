@@ -2,7 +2,13 @@ import { forwardRef, type ComponentProps } from "react";
 // import { Transition } from 'react-transition-group';
 import { cn } from "./utils";
 
-interface Props extends ComponentProps<"div">{};
+interface Props extends ComponentProps<"div">{
+  flip?: boolean
+};
+interface IconProps extends ComponentProps<"svg">{
+  solid?: boolean,
+  flip?: boolean
+}
 interface BurgerProps extends ComponentProps<"div">{
   // animate: boolean;
   // onToggle: () => void;
@@ -57,9 +63,10 @@ export const TrustIcon = (props: Props) => {
   )
 }
 
-export const SearchIcon = (props: Props) => {
+export const SearchIcon = ({flip, className}: IconProps) => {
+  const classes = cn("data-[flip=true]:-scale-x-100", className);
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <svg xmlns="http://www.w3.org/2000/svg" data-flip={flip} className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
   )
@@ -274,18 +281,19 @@ export const OfficeIcon = (props: Props) => {
 }
 
 export const ChatIcon = (props: Props) => {
+  const classes = cn("", props.className);
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1722.24 1246">
+    <svg className={classes} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1722.24 1246">
       <g>
         <g>
           <g>
-            <path className="fill-[#203a72]" d="m267.44,1056.73c-3,0-6.04-.53-8.96-1.63-10.23-3.85-16.86-13.79-16.48-24.72l7.2-207.51h-8.11C108.15,822.86,0,714.71,0,581.77V241.09C0,108.15,108.15,0,241.09,0h654.37c132.94,0,241.09,108.15,241.09,241.09v340.68c0,132.94-108.15,241.09-241.09,241.09h-424.78l-183.51,224.51c-4.94,6.04-12.23,9.35-19.72,9.35Z"/>
-            <path className="cfill-[#14a0de]" d="m267.44,1056.73c-3,0-6.04-.53-8.96-1.63-10.23-3.85-16.86-13.79-16.48-24.72l7.2-207.51h-8.11C108.15,822.86,0,714.71,0,581.77V241.09C0,108.15,108.15,0,241.09,0h654.37c132.94,0,241.09,108.15,241.09,241.09v340.68c0,132.94-108.15,241.09-241.09,241.09h-424.78l-183.51,224.51c-4.94,6.04-12.23,9.35-19.72,9.35Z"/>
+            <path className="" d="m267.44,1056.73c-3,0-6.04-.53-8.96-1.63-10.23-3.85-16.86-13.79-16.48-24.72l7.2-207.51h-8.11C108.15,822.86,0,714.71,0,581.77V241.09C0,108.15,108.15,0,241.09,0h654.37c132.94,0,241.09,108.15,241.09,241.09v340.68c0,132.94-108.15,241.09-241.09,241.09h-424.78l-183.51,224.51c-4.94,6.04-12.23,9.35-19.72,9.35Z"/>
+            <path className="fill-[#777a95]" d="m267.44,1056.73c-3,0-6.04-.53-8.96-1.63-10.23-3.85-16.86-13.79-16.48-24.72l7.2-207.51h-8.11C108.15,822.86,0,714.71,0,581.77V241.09C0,108.15,108.15,0,241.09,0h654.37c132.94,0,241.09,108.15,241.09,241.09v340.68c0,132.94-108.15,241.09-241.09,241.09h-424.78l-183.51,224.51c-4.94,6.04-12.23,9.35-19.72,9.35Z"/>
           </g>
-          <path className="cls-3" d="m869.19,272.84h620.49c128.44,0,232.57,104.12,232.57,232.57v306.8c0,128.44-104.12,232.57-232.57,232.57h0c-9.59,0-17.26,7.95-16.93,17.53l5.77,166.14c.56,16.21-19.78,23.87-30.04,11.31l-154.29-188.75c-3.22-3.94-8.03-6.22-13.12-6.22h-411.88c-128.44,0-232.57-104.12-232.57-232.57v-306.8c0-128.44,104.12-232.57,232.57-232.57Z"/>
-          <circle className="fill-[#203a72]" cx="908.47" cy="643.29" r="76.88" transform="translate(-188.79 830.8) rotate(-45)"/>
-          <circle className="fill-[#203a72]" cx="1169.16" cy="643.29" r="76.88" transform="translate(-112.43 1015.14) rotate(-45)"/>
-          <circle className="fill-[#203a72]" cx="1432.04" cy="642.71" r="74.39" transform="translate(-35.03 1200.85) rotate(-45)"/>
+          <path className="fill-primary" d="m869.19,272.84h620.49c128.44,0,232.57,104.12,232.57,232.57v306.8c0,128.44-104.12,232.57-232.57,232.57h0c-9.59,0-17.26,7.95-16.93,17.53l5.77,166.14c.56,16.21-19.78,23.87-30.04,11.31l-154.29-188.75c-3.22-3.94-8.03-6.22-13.12-6.22h-411.88c-128.44,0-232.57-104.12-232.57-232.57v-306.8c0-128.44,104.12-232.57,232.57-232.57Z"/>
+          <circle className="fill-offWhite" cx="908.47" cy="643.29" r="76.88" transform="translate(-188.79 830.8) rotate(-45)"/>
+          <circle className="fill-offWhite" cx="1169.16" cy="643.29" r="76.88" transform="translate(-112.43 1015.14) rotate(-45)"/>
+          <circle className="fill-offWhite" cx="1432.04" cy="642.71" r="74.39" transform="translate(-35.03 1200.85) rotate(-45)"/>
         </g>
       </g>
     </svg>
@@ -732,10 +740,10 @@ export const StackIcon = (props: Props) => {
   )
 };
 
-export const StarIcon = (props: React.ComponentPropsWithoutRef<'svg'>) => {
+export const StarIcon = (props: IconProps) => {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true" {...props}>
-      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      <path stroke="transparent" strokeWidth="1.5" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
     </svg>
   )
 }

@@ -24,18 +24,25 @@ module.exports = {
       xs: '380px',
       // sm: '640px',
       // md: '768px',
+      // lg: '1024px',
+      // xl: '1280px',
+      // '2xl': '1536px',
+      '3xl': '1600px',
       // "sm-v": { raw: '(max-height: 900px) and (min-width: 500px)' },
       "sm-v": {raw: '(max-height: 875px)'}, 
       "xs-v": {raw: '(max-height: 760px)'}, 
-      "xxs-v": {raw: '(max-height: 680px)'},    
+      "xxs-v": {raw: '(max-height: 679px)'},    
 
       ...defaultTheme.screens,
     },
 		extend: {
-
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
       padding: {
         "header-sm": "1rem",
         "header": "2rem",
+        "page-xxs": "1.5rem",
         "page-xs":"2rem",
         "page-sm": "3rem",
         "page-md": "2.5rem",
@@ -44,6 +51,7 @@ module.exports = {
       },
 
       gridTemplateRows: {
+        '8': 'repeat(8, minmax(0, 1fr))',
         '12': 'repeat(12, minmax(0, 1fr))',
         '16': 'repeat(16, minmax(0, 1fr))',
 
@@ -75,6 +83,8 @@ module.exports = {
         '14': '14',
         '15': '15',
         '16': '16',
+        '17': '17',
+
       },
       gridRow: {
         'span-7': 'span 7 / span 7',
@@ -125,7 +135,8 @@ module.exports = {
         'span-16': 'span 16 / span 16',
       },
 			fontFamily: {
-        'inter': ['Inter', 'sans-serif']
+        'inter': ['Inter', 'sans-serif'],
+        'numberplate': ['UKNumberplate', 'Inter', 'sans-serif'],
       },
 			height: {
 				dvh: "var(--dvh)",
@@ -150,14 +161,21 @@ module.exports = {
 				primary: "var(--primary)",
 				dark: "var(--dark)",
         darker: "hsl(215 28% 24%)",
-        inputDark: "hsl(215 25% 28%)",
+        offWhite: "hsl(215, 33%, 93%)",
+        grey: "hsl(220 9% 46%)",
+        textDark: "hsl(215 14% 34%)",
+        textGray: "#888e98",
         circle: "var(--c-cirle)",
+        gradientDark: "var(--gradient-dark)",
+        gradientLight: "var(--gradient-light)",
+        yellow: "hsl(52 97% 50%)",
+
+        // "#888e98" also maybe secondary?
 			},
-      extend: {
-        scale: {
-            '-100': '-1',
-        }
+      scale: {
+          '-100': '-1',
       },
+    
       spacing: {
         headerHeight: "var(--header-height)",
       }

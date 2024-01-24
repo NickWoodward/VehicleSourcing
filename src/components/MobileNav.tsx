@@ -3,6 +3,8 @@ import { twMerge } from "tailwind-merge";
 import { Burger } from "../utils/svgComponents";
 import { Modal } from "./Modal";
 import { Navigation } from "./Navigation";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface Props extends ComponentProps<"div">{}
 
@@ -16,7 +18,7 @@ export const MobileNav = ({className }: Props) => {
   // const tl = useRef(gsap.timeline({ paused:true }));
   
   const classes = twMerge(
-    "relative flex md:hidden cursor-pointer",
+    "burger-container relative flex md:hidden cursor-pointer",
     className
   );
 
@@ -27,13 +29,26 @@ export const MobileNav = ({className }: Props) => {
     setMenuPosition((currState) => {
       if(burgerRef.current) {
         const position = burgerRef.current.getBoundingClientRect();
-        console.log(position.right, position.width);
         return {right: `${position.right }px`, top: headerHeight}
       } else {
         return currState
       }
     });
   }, []);
+
+  const container = useRef(null);
+
+  useGSAP(() => {
+    // ✅ safe, created during execution, selector text scoped
+    // gsap.to(".burger", {x: 100}); 
+    gsap.timeline({scrollTrigger: {
+      trigger: ".section-1",
+      start:"top+=10 top",
+      end: "75% 70%",
+      // markers: true,
+      scrub: 0.4,
+    }}).to(".burger-container", {scale: 0.9, transformOrigin:"top right"})
+  })
 
   // useLayoutEffect(() => {
   //   const ctx = gsap.context(() => {
@@ -75,7 +90,7 @@ export const MobileNav = ({className }: Props) => {
   };
 
   return (
-    <div className={classes}>
+    <div ref={container} className={classes}>
       <Burger 
         ref={burgerRef} 
         // animate={isOpen}

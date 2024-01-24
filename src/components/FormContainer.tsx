@@ -2,8 +2,8 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { MultiStepForm } from "./MultiStepForm";
 
 const FORM_STEPS = [
-  { label: 'You' },
   { label: 'The Car' },
+  { label: 'You' },
   { label: '' },
 ];
 

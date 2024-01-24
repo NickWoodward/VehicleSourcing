@@ -3,7 +3,7 @@ import { Logo } from "./Logo";
 
 export const Footer = () => {
   return (
-    <footer className=" w-full" aria-labelledby="footer-heading">
+    <footer className=" w-full pb-4 pt-14" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
       <div className="grid grid-cols-16 grid-row-16 gap-y-4 sm:gap-y-2  sm:max-w-7xl xl:max-w-9xl">
 
@@ -37,14 +37,14 @@ export const Footer = () => {
             </a>
           </div>
 
-          <div className="-translate-y-1 col-span-full sm:row-start-2 sm:col-span-8 sm:col-start-9 row-start-3 flex flex-col space-y-6 text-gray-300">
+          <div className="-translate-y-1 col-span-full sm:row-start-2 sm:col-span-8 sm:col-start-9 row-start-3 flex flex-col text-gray-300">
 
-            <div className="flex flex-col sm:mt-0 text-left sm:text-right  md:space-x-6">
-              <div className="text-base py-0.5  hover:text-gray-200 cursor-pointer">Home</div>
-              <div className="text-base py-0.5  hover:text-gray-200 cursor-pointer">How it Works</div>
-              <div className="text-base py-0.5  hover:text-gray-200 cursor-pointer">Contact</div>
+            <div className="flex flex-col sm:mt-0 text-left sm:text-right py-0.5">
+              <div className="text-base   hover:text-gray-200 cursor-pointer">Home</div>
+              <div className="text-base   hover:text-gray-200 cursor-pointer">How it Works</div>
+              <div className="text-base   hover:text-gray-200 cursor-pointer">Contact</div>
 
-              <div className="privacy-link--footer text-base py-0.5  hover:text-gray-200 cursor-pointer">Privacy Policy</div>
+              <div className="privacy-link--footer text-base   hover:text-gray-200 cursor-pointer">Privacy Policy</div>
             </div>
           </div>
 

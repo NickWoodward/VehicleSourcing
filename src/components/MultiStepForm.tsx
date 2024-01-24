@@ -10,6 +10,7 @@ import { Tab } from './Tab';
 import { PersonForm } from './PersonForm';
 import { CarForm } from './CarForm';
 import { Plane, Tick } from '../utils/svgComponents';
+import React from 'react';
 
 
 interface Props extends ComponentProps<"div"> {
@@ -109,12 +110,12 @@ console.log("steps", steps);
             });
 
           return (
-            <>
+            <React.Fragment key={index}>
               {index!==0 && <div 
                 data-active={selectedIndex === index}
                 data-selectable={canSelectStep}
                 data-last={index===steps.length-1}
-                className="data-[active=false]:data-[selectable=false]:bg-slate-200 grow data-[last=true]:hidden data-[last=true]:sm:flex h-1 bg-primary" 
+                className="data-[active=false]:data-[selectable=false]:bg-slate-300 grow data-[last=true]:hidden data-[last=true]:sm:flex h-1 bg-primary" 
               ></div>}
               <Tab
                 key={index}
@@ -129,27 +130,27 @@ console.log("steps", steps);
                 <div 
                   data-active={selectedIndex === index}
                   data-selectable={canSelectStep}
-                  className="data-[active=true]:outline data-[active=false]:data-[selectable=false]:bg-slate-200 flex justify-center items-center bg-primary outline-offset-2  outline-primary text-white rounded-full w-9 h-9">
+                  className="data-[active=true]:outline data-[active=false]:data-[selectable=false]:bg-slate-300 flex justify-center items-center bg-primary outline-offset-2  outline-primary text-white rounded-full w-7 h-7">
                     {index===steps.length-1? <Tick className='w-9 h-9'/>:index+1}
                 </div>
-                <div className="flex justify-center items-center pl-2 ">
+                <div className="flex justify-center items-center pl-3.5">
                   {step.label}
                 </div>
               </Tab>
 
-            </>
+            </React.Fragment>
           );
         })}
       </Tabs>
 
-      <div className="bg-slate-50  px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded-xl ">
+      <div className="bg-slate-50  px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded ">
         { form.selectedIndex === 0 && <PersonForm onNext={nextFormStep} onPrevious={previousFormStep} /> }
         { form.selectedIndex === 1 &&<CarForm onNext={nextFormStep} onPrevious={previousFormStep} /> }
         { form.selectedIndex === NUM_STEPS - 1 && <div>Submit</div> }
       </div>
-      <div className="privacy-link md:text-gray-600">
+      <div className="privacy-link text-sm md:text-gray-600">
           We care about the protection of your data. Read our
-          <a href="#" className="font-medium lg:text-gray-900 underline">Privacy Policy</a>.
+          <a href="#" className="text-sm font-medium pl-1.5 lg:text-gray-900 underline">Privacy Policy</a>.
         </div>
         {/* <div className="panel">
           <pre>{JSON.stringify(form, null, 2)}</pre>

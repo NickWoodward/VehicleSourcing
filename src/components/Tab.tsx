@@ -7,7 +7,7 @@ interface TabProps extends ComponentProps<'div'> {
 }
 
 export const Tab = ({ onSelect, children, className, "data-last":dataLast }: TabProps) => {
-  const classes = cn("tab flex items-center px-3 ", className)
+  const classes = cn("tab flex items-center px-3", className)
   return (
     <div 
       className={classes} 

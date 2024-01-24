@@ -3,26 +3,28 @@
 // is your "component frontmatter". It never runs in the browser.
 console.log('This runs in your terminal, not the browser!');
 
+import { Image } from 'astro:assets';
+
 import MainLayout from "../layouts/main-layout.astro";
 import {Section} from '../components/Section';
 import {HeroText} from '../components/HeroText';
 import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
-import { Form } from "../components/Form";
 import { SectionIntro } from "../components/SectionIntro";
-// import { Reviews } from "../components/Reviews";
-import { Circle } from "../components/Circle";
-import { CarIcon2, SearchIcon, TrustIcon } from "../utils/svgComponents";
-// import { BrandCloud } from "../components/BrandCloud";
+// import { Circle } from "../components/Circle";
 
 
-import heroImage from '/golf-xl.png';
+import heroImage from '../assests/golf-xl.png';
+import contactImage from '../assests/contact-1920.jpeg';
+import mechanicImage from '../assests/mechanic-1920.jpeg';
+import m3Image from '../assests/m3-1920.jpeg';
+
 import { Footer } from "../components/Footer";
-import { BrandCloud } from "../components/BrandCloud";
-import { Button } from "../components/Button";
-import AstroForm from "../components/AstroForm.astro";
+// import { BrandCloud } from "../components/BrandCloud";
 import { FormContainer } from "../components/FormContainer";
 import { Reviews } from "../components/Reviews";
+import { ChatIcon, ContactIcon, StarIcon } from '../utils/svgComponents';
+import { cn } from '../utils/utils';
 ---
 
 <script>
@@ -33,15 +35,17 @@ import { Reviews } from "../components/Reviews";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
 
+  const headerScrollAnimation = gsap.timeline({paused: true});
   const heroScrollAnimation = gsap.timeline({paused: true});
   const aboutScrollAnimation = gsap.timeline({paused: true});
   const contactScrollAnimation = gsap.timeline({paused: true});
   const testimonialsScrollAnimation = gsap.timeline({paused: true});
 
   // client:only react elements responsible for their own animation 
-  window.addEventListener('load', () => {
+  // window.addEventListener('load', () => {
     // gsap.delayedCall(1, heroAnimation);
 
+    const headerScope = gsap.utils.selector('.header');
     const heroScope = gsap.utils.selector('.hero');
     const aboutScope = gsap.utils.selector('.about');
     const contactScope = gsap.utils.selector('.contact');
@@ -51,7 +55,7 @@ import { Reviews } from "../components/Reviews";
     // const brandLogos = gsap.utils.selector('.brand-logo');
 
     const sections = gsap.utils.toArray<HTMLElement>(".section")
-      
+    
     sections.forEach(function(section, index){
       ScrollTrigger.create({
         trigger:section,
@@ -73,6 +77,62 @@ import { Reviews } from "../components/Reviews";
       })
     })
 
+
+const headerTl = gsap.timeline({scrollTrigger: {
+  trigger: ".section-1",
+  start:"top+=10 top",
+  end: "75% 70%",
+  // markers: true,
+  scrub: 0.4,
+}}).set('.header', {opacity:0})
+    .set('.logo-dark', {opacity:1})
+    .set('.logo-light', {opacity:0})
+    .to('.header', {scaleY:0.9, opacity:1, transformOrigin:"top", ease: "none"})
+    .to('.logo-dark', {scale:0.9,  transformOrigin:"top left", ease: "none"}, "<")
+    .to('.logo-light', {scale:0.9,  transformOrigin:"top left", ease: "none"}, "<")
+    // .to('.burger', {scale:0.8, transformOrigin:"top right", ease: "none"}, "<");
+    // .to('.logo-dark', {scale:0.8, opacity:0, transformOrigin:"top left", ease: "none"}, "<")
+    // .to('.logo-light', {scale:0.8, opacity:1, transformOrigin:"top left", ease: "none"}, "<");
+
+const heroScrollTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".section-1",
+    start:"top top-=1",
+    end: "80% 50%",
+    // markers: true,
+    // pin: true,
+    scrub: 1,
+    // onEnter: () => {
+    //   heroScrollAnimation.reverse(0);
+    // },
+    // onLeaveBack: () => heroScrollAnimation.play(0)
+}})
+// .to(['.hero-image'], {scale:1.05})
+// .add(heroScrollAnimation);
+
+
+    // headerScrollAnimation
+    // .set('.header', {opacity:0})
+    // .set('.logo-dark', {opacity:1})
+    // .set('.logo-light', {opacity:0})
+    // .to('.header', {scaleY:0.8, opacity:1, transformOrigin:"top", ease: "none", duration:0.2})
+    // .to('.logo-dark', {scale:0.8, opacity:0, transformOrigin:"top left", ease: "none", duration:0.2}, "<")
+    // .to('.logo-light', {scale:0.8, opacity:1, transformOrigin:"top left", ease: "none", duration:0.2}, "<");
+
+    // ScrollTrigger.create({
+    //   start: 2,
+    //   end: 3,
+    //   // toggleActions: "play none none reverse"
+    //   onEnter: () => {
+    //     headerScrollAnimation.play(0); 
+    //     console.log('scroll')
+    //   },
+    //   onEnterBack: () => {
+    //     headerScrollAnimation.reverse(0); 
+    //     console.log('scroll back');
+    //   }
+    // });
+
     heroScrollAnimation
       .to([
         heroScope('.subtitle'), 
@@ -92,12 +152,12 @@ import { Reviews } from "../components/Reviews";
       }, "<.3");
 
     aboutScrollAnimation
-      .to([
+    .to([
         aboutScope('.subtitle'), 
-        aboutScope('.title'), 
+        aboutScope('.title'),
         aboutScope('.tagline'),
       ], { 
-        autoAlpha:1, ease: "ease: back.out(2)", stagger: .12, delay: .3,
+        autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
       })
    
     const cards = cardsScope('.card');
@@ -113,24 +173,25 @@ import { Reviews } from "../components/Reviews";
 
       
       // select image
-      const image = cardScope(".card__image");
-      const content = cardScope(".card__content");
+      // const image = cardScope(".card__image");
+      // const content = cardScope(".card__content");
 
       const tl = gsap.timeline({paused:true})
       .from(card, {
         autoAlpha: 0,
       })
-      .from(image, {
-        autoAlpha: 0,
-        xPercent: gsap.utils.wrap([-distance, distance, -distance]),
-        ease:'power4.inOut',
-        duration: .7
-      }, "<").from(content, {
-        autoAlpha: 0,
-        xPercent: gsap.utils.wrap([distance, -distance, distance]),
-        ease:'power4.inOut',
-        duration: .7
-      }, "<");
+      // .from(image, {
+      //   autoAlpha: 0,
+      //   xPercent: gsap.utils.wrap([-distance, distance, -distance]),
+      //   ease:'power4.inOut',
+      //   duration: .7
+      // }, "<")
+      // .from(content, {
+      //   autoAlpha: 0,
+      //   xPercent: gsap.utils.wrap([distance, -distance, distance]),
+      //   ease:'power4.inOut',
+      //   duration: .7
+      // }, "<");
       // .from(brandLogos, { opacity: 0, stagger: .2 });
 
       ScrollTrigger.create({
@@ -147,6 +208,30 @@ import { Reviews } from "../components/Reviews";
       });
     });
 
+    const getStartedBtn = aboutScope('.cta-btn--about');
+
+    const getStartedBtnAnimation = gsap.timeline({paused:true})
+    .to(getStartedBtn, {
+      autoAlpha:1,
+      x:0,
+      ease: "ease: back.out(2)",
+      duration: .6
+    });
+
+    ScrollTrigger.create({
+        trigger: getStartedBtn,
+        start: "top 50%",
+        // markers:true,
+        onEnter: () => getStartedBtnAnimation.play()
+      });
+      ScrollTrigger.create({
+        trigger: getStartedBtn,
+        start: "top 110%",
+        // markers:true,
+        onLeaveBack: () => getStartedBtnAnimation.pause(0)
+      })
+
+
     contactScrollAnimation
     .to([
         contactScope('.subtitle'), 
@@ -159,12 +244,14 @@ import { Reviews } from "../components/Reviews";
 
     testimonialsScrollAnimation
     .to([
-      testimonialsScope('.subtitle'), 
-      testimonialsScope('.title'), 
-      testimonialsScope('.tagline'),
-    ], { 
-      autoAlpha:1, ease: "ease: back.out(2)", stagger: .12, delay: .3,
-    })
+        testimonialsScope('.subtitle'), 
+        testimonialsScope('.title'),
+        testimonialsScope('.tagline'),
+      ], { 
+        autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
+      })
+
+
 
 
     ScrollTrigger.create({
@@ -259,7 +346,9 @@ import { Reviews } from "../components/Reviews";
     //     .to(heroText, { autoAlpha:1, y:0, ease: "ease: back.out(2)", stagger: .2, duration: .6})
     //     .to('.hero .animate-up', { autoAlpha:1, x:0, ease: "ease: back.out(10)", scale:1, duration:.6 }, "<.48");
     // }
-  });
+
+
+  // });
 
  
 //   const items = gsap.utils.toArray<HTMLElement>(".animate");
@@ -322,41 +411,170 @@ import { Reviews } from "../components/Reviews";
   //   });
   // });
 </script>
-              <!-- <Circle className=""/> -->
+        <!-- <div class="absolute top-0 right-0 w-3/4 h-full overflow-hidden"><Image class="h-full object-cover " src={m3Image} alt=""></div> -->
+        <!-- <HeroText className="bg-slate-50  hero-text animate-down justify-self-start px-12 py-4 col-start-1 col-span-8 row-start-1 md:row-start-2 lg:row-start-3 row-span-9 justify-center md:justify-start z-30 flex flex-col rounded" /> -->
+
 
           <!-- <TrustIcon className="s-v:hidden sm:row-start-15 col-start-1 h-16 w-36 p-1 z-20" /> -->
-<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="relative font-inter mt-headerHeight overflow-hidden">
-      <Section className="hero section relative justify-center px-page-xs bg-gradient-to-tl from-slate-100 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
-        <div class="  w-full grid grid-rows-16 grid-cols-16 z-10">
-          <HeroText className=" hero-text animate-down col-start-1 col-span-16 row-start-1 md:row-start-2 lg:row-start-3 row-span-9 justify-center md:justify-start z-30 flex flex-col" />
-    
-          <div class="hero-image animate-up invisible opacity-0 col-start-1 col-span-16  row-start-10 xs:row-start-11  md:row-start-9 lg:row-start-8 xl:row-start-7 row-span-7 xs:row-span-5 sm:row-span-6 md:row-span-9 xl:row-span-10 justify-self-end flex sm:justify-end items-center">
-            <img src={heroImage} class="object-contain max-h-full -scale-x-100  hover:scale-both-110 z-20" alt="Three BMW cars" />
-            <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%] scale-90">
-              <Circle className="animate-spin-slower"/>
-            </div>
-            <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%]">
-              <Circle reversed className="animate-spin-reverse-slower"/>
+<MainLayout title="Vehicle Sourcing/Purchasing/Cover" classes="relative font-inter overflow-hidden">
+      <style is:global>
+        @font-face {
+          font-family: 'UKNumberPlate';
+          src: url('/fonts/dvlavrm-webfont.woff2');
+          font-display: swap;
+        }
+        /* @font-face {
+          font-family: 'UKNumberPlate';
+          src: url('/fonts/UKNumberPlate.ttf');
+        } */
+      </style>
+      <!-- <Section breakout className="hero section relative justify-center flex  bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
+
+
+        <div class="grid  h-full">
+          <div class="hero-background bg-gray-500 h-full col-start-6 col-span-full"></div>
+          <div class="hero-content w-full grid grid-rows-16 lg:grid-cols-1 grid-cols-16 z-10">
+            <HeroText className="hero-text animate-down col-start-1 col-span-16 row-start-1 md:row-start-2 lg:row-start-3 row-span-9 justify-center md:justify-start z-30 flex flex-col" />
+
+  
+            <div class="relative hero-image animate-up invisible opacity-0 col-start-1 col-span-16  row-start-10 xs:row-start-11  md:row-start-9 lg:row-start-8 xl:row-start-7 row-span-7 xs:row-span-5 sm:row-span-6 md:row-span-9 xl:row-span-10 justify-self-end flex sm:justify-end items-center">
+              <img src={heroImage.src} class="object-contain max-h-full -scale-x-100  hover:scale-both-110 z-20" alt="A VW Golf" />
+              
+              
+              <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%] scale-90">
+                <Circle className="animate-spin-slower"/>
+              </div>
+              <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%]">
+                <Circle reversed className="animate-spin-reverse-slower"/>
+              </div>
+  
             </div>
           </div>
         </div>
 
+      </Section> -->
+
+
+
+      <Section breakout className="hero section section-1 relative px-page-xxs pt-headerHeight pb-2 xs:pb-6 flex bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] px-4">
+        
+        <div class="chat-icon fixed bottom-2 right-4 z-50">
+          <ChatIcon className="w-14 h-14 z-50" />
+        </div>
+        
+        <figure class="absolute bottom-20 xs:bottom-10 left-4 flex space-x-3 w-full max-w-[250px] z-50">
+
+          <img
+            class="inline-block h-10 w-10 rounded-full"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt=""
+          />
+
+          <div class="space-y-1">
+
+            <div class="flex">
+              {[...Array(5).keys()].map((index) => (
+                <StarIcon
+                  key={index}
+                  className={cn(
+                    'h-5 w-5',
+                    5 > index ? 'fill-[#fbc227]' : 'fill-transparent',
+                  )}
+                />
+              ))}
+            </div>
+
+            <blockquote class="flex  space-y-1.5 ">
+              <p class="block text-sm text-offWhite leading-5">
+                "Made everything easy!"
+              </p>
+            
+            </blockquote>
+          
+            <figcaption class="pl-1 text-xs text-offWhite  ">
+              Janet, Bristol
+            </figcaption>
+          </div>
+          
+        </figure>
+
+        <div class="relative grid grid-cols-12 grid-rows-16 h-full w-full">
+          
+            <HeroText className=" hero-text mx-auto sm:mx-0 font-medium col-start-1 sm:col-start-2 col-span-12 row-start-2 md:row-start-3 lg:row-start-3 row-span-8 z-30 flex flex-col sm:max-w-xs lg:max-w-md" />
+
+  
+            <div class="relative hero-image flex animate-up invisible opacity-0 xs:mt-4 col-start-1 col-span-12 sm:col-start-2 sm:col-span-10 md:col-start-3 row-start-9 xs:row-end-14 sm:row-start-8  lg:row-start-8 xl:row-start-7  row-span-4 xs:row-span-5 sm:row-span-6 lg:row-span-7 xl:row-span-10 sm:justify-end items-center z-30">
+              <img src={heroImage.src} class="object-contain w-[250px] xs:w-[284px] sm:w-[355px] md:w-[496px] lg:w-[620px] h-[141px] xs:h-[160px] sm:h-[200px] md:h-[280px] lg:h-[350px] max-h-full  sm:-scale-x-100  hover:scale-both-110 z-20" alt="A VW Golf" />
+              
+              
+              <!-- <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%] scale-90">
+                <Circle className="animate-spin-slower"/>
+              </div>
+              <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%]">
+                <Circle reversed className="animate-spin-reverse-slower"/>
+              </div> -->
+  
+            </div>
+       
+              <!-- <figure class="xs:absolute xs:bottom-0 xs:left-0 flex space-x-3 w-full max-w-[250px] col-start-1 col-span-12 row-start-14 xs:row-start-15 row-span-2 z-30">
+
+                <img
+                  class="inline-block h-10 w-10 rounded-full"
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+
+                <div class="space-y-1">
+
+                  <div class="flex">
+                    {[...Array(5).keys()].map((index) => (
+                      <StarIcon
+                        key={index}
+                        className={cn(
+                          'h-5 w-5',
+                          5 > index ? 'fill-[#fbc227]' : 'fill-transparent',
+                        )}
+                      />
+                    ))}
+                  </div>
+
+                  <blockquote class="flex  space-y-1.5 ">
+                    <p class="block text-sm text-offWhite leading-5">
+                      "Made everything easy!"
+                    </p>
+                  
+                  </blockquote>
+                
+                  <figcaption class="pl-1 text-xs text-offWhite  ">
+                    Janet, Bristol
+                  </figcaption>
+                </div>
+                
+              </figure> -->
+              
+              <!-- <div class="hero-background bg-gradient-to-bl from-gradientDark to-gradientLight col-start-1 col-span-full row-end-17 row-span-7 poly-clip"></div> -->
+          
+        </div>
+        <div class="hero-background absolute bottom-0 left-0 sm:-scale-x-100 sm:translate-y-[1px] w-full h-[40%] xs:h-[35%] bg-gradient-to-bl sm:bg-gradient-to-br from-gradientDark to-gradientLight poly-clip"></div>
       </Section>
 
-      <Section className="pt-10 pb-16 about section relative items-center  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   breakout={true} contentClassName="">
-        <div class="grid grid-cols-16 gap-y-12 sm:gap-y-28 lg:space-y-34 xl:gap-y-16">
+      <Section className=" about section  relative items-start pt-2 pb-10 xs:pt-12 sm:pt-24 xs:pb-16 sm:pb-24  px-page-xxs lg:px-0 bg-gradient-to-br from-gradientLight to-gradientDark"   breakout={true} contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] px-4">
+        <div class="w-full grid grid-cols-16 gap-y-12 xs:gap-y-16 sm:gap-y-16 md:gap-y-24 lg:space-y-34 xl:gap-y-16">
           <SectionIntro 
             title="How It Works"
             titleClasses="invisible opacity-0"
             subtitle="3 Easy Steps"
             subtitleClasses="subtitle invisible opacity-0",
             tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
-            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start col-start-1 col-span-16  md:row-span-2"
+            className="pl-1 lg:px-page-xl xl:max-w-2xl flex flex-col justify-start col-start-1 col-span-16  lg:row-span-2"
             taglineClasses="invisible opacity-0"
+            variant="dark"
           />
-          <div class="  col-span-full z-30">
-            <WhyUs className="" />
-          </div>
+          <WhyUs className="col-span-full  xl:px-page-header z-20 col-end">
+            <Image data-flip="false" class="rounded-t-sm" src={contactImage} widths={[ 275, 550 ]} alt="A woman talking on her mobile phone, facing away from the camera" slot="contactImage"/>
+            <Image data-flip="true" class="rounded-t-sm" src={mechanicImage} widths={[275, 550]} alt="A mechanic with a clipboard looking at a BMW" slot="mechanicImage" />
+            <Image data-flip="true" class="rounded-t-sm" src={m3Image} widths={[275, 550]} alt="A light blue BMW M3" slot="m3Image"/>
+          </WhyUs>
 
           <!-- <div class="contact-btn w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
             <Button   
@@ -373,8 +591,24 @@ import { Reviews } from "../components/Reviews";
         </div>
       </Section>
     
-      <Section className="contact section relative  flex  bg-gradient-to-tl from-gray-100 to-slate-50  px-page-xs " client:visible>
-        <BrandCloud className="absolute top-0 left-[2rem] -translate-y-1/2 " />
+      <Section breakout className="testimonials section  relative items-center pt-20 xs:pt-12 sm:pt-24 pb-10 xs:pb-16 sm:pb-24 px-page-xxs bg-gradient-to-bl from-slate-200 to-slate-100 " contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[750px] px-4">
+        <div class="grid w-full grid-cols-1 gap-y-12 xs:gap-y-16 sm:gap-y-16 xl:gap-y-16">
+          <SectionIntro 
+            title="What Others Have Said"
+            titleClasses="invisible opacity-0"
+            subtitle="Still Not Sure?"
+            subtitleClasses="invisible opacity-0"
+            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
+            className="pl-1  xl:max-w-8xl xl:mx-auto flex flex-col justify-start  md:row-span-2"
+            taglineClasses="invisible opacity-0"
+            
+          />
+          <Reviews />
+        </div>
+      </Section>
+    
+      <Section className="contact section  relative  flex bg-gradient-to-bl from-slate-200 to-slate-100  px-page-xxs "  contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[900px] px-4" client:visible>
+        <!-- <BrandCloud className="absolute top-0 left-0 -translate-y-1/2 " /> -->
         <div class=" w-full grid grid-cols-1  gap-y-8 lg:grid-cols-2 lg:grid-rows-8 lg:gap-x-20">
 
 
@@ -383,7 +617,7 @@ import { Reviews } from "../components/Reviews";
             titleClasses="invisible opacity-0"
             subtitle="Contact Us Today"
             subtitleClasses="subtitle invisible opacity-0"
-            className="xl:max-w-8xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
+            className="xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
             tagline="Let our team know what you're looking for and we'll get right on it!"
             taglineClasses="invisible opacity-0"
           />   
@@ -398,33 +632,7 @@ import { Reviews } from "../components/Reviews";
         </div>
 
       </Section>
-      <!-- <AstroForm classes="bg-red-500"/> -->
-      
-      <!-- <Section variant="dark" height="full">
-        <SectionIntro 
-          title="How It Works"
-          subtitle="WAKEY WINES"
-          tagline="Buying a car should be something you enjoy"
-          variant="dark"
-        />  
-        <WhyUs className="h-full" client:only />
-      </Section> -->
-      <Section className="testimonials section relative items-center pt-10 pb-16  px-page-xs bg-gradient-to-bl from-slate-100 to-slate-50"   contentClassName="">
-        <div class="grid w-full grid-cols-1 gap-y-10 xl:gap-y-16">
-          <SectionIntro 
-            title="What Others Have Said"
-            titleClasses="invisible opacity-0"
-            subtitle="Still Not Sure?"
-            subtitleClasses="invisible opacity-0",
-            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
-            className=" xl:max-w-8xl xl:mx-auto flex flex-col justify-start  md:row-span-2"
-            taglineClasses="invisible opacity-0"
-          />
-          <Reviews className="" client:only />
 
-        </div>
-      </Section>
-    
       <Section height="sm" last className=" px-header" variant="darker">
         <Footer />
       </Section>

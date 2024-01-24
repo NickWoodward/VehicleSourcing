@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
+import { type ButtonHTMLAttributes, type ReactNode, forwardRef } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../utils/utils";
 
@@ -23,7 +23,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm sm:
       monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
-      sm:"pl-3 py-2.5 pr-5 md:pl-3 md:pr-10 md:py-1.5 ",
+      sm:"pl-1.5 py-2 pr-3",
       md:"pl-3 py-3 pr-7 md:pl-4 md:pr-7 md:py-3.5 ",
       none: "p-0"
     },

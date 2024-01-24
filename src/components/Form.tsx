@@ -51,7 +51,7 @@ export const Form = ({className}: {className?: string}) => {
     setStepIndex(currIndex => currIndex - 1);
   };
 
-  const classes = cn('bg-slate-100 space-y-10 px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded-xl', className);
+  const classes = cn('bg-slate-100 space-y-10 px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded', className);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>

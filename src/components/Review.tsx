@@ -34,26 +34,26 @@ export const reviewVariants = cva("", {
 
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("px-8 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow",
+  const classes = cn("px-6 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow-md",
     className
   );
-
   return (
-    <figure
-      className={classes}
-      {...props}
-    >
-      <blockquote className="text-gray-600">
-        <StarRating rating={rating} />
-        <p className="mt-4 text-lg font-semibold leading-5 before:content-['“'] after:content-['”']">
-          {title}
-        </p>
-        <p className="mt-3 text-base text-gray-500  font-medium leading-7">{body}</p>
-      </blockquote>
-      <figcaption className="mt-3 text-base font-medium text-gray-600 before:content-['–_']">
-        {author}
-      </figcaption>
-    </figure>
+    <div key={reviewId} className={classes}>
+      <figure
+        {...props}
+      >
+        <blockquote className="text-gray-600">
+          <StarRating rating={rating} />
+          <p className="mt-3 text-lg font-semibold leading-5 before:content-['“'] after:content-['”']">
+            {title}
+          </p>
+          <p className="mt-2 text-base sm:text-lg text-textGray font-light leading-7 line-clamp-4">{body}</p>
+        </blockquote>
+        <figcaption className="mt-2 text-base font-medium text-gray-600 before:content-['–_']">
+          {author}
+        </figcaption>
+      </figure>
+    </div>
   );
 };
 

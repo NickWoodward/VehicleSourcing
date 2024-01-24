@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { cn } from "../utils/utils";
 import { List } from "./List";
 import { EngineIcon, PhoneIcon2, HomeIcon2,  } from "../utils/svgComponents";
-import { NavigationItem, NavigationItemType } from "./NavigationItem";
+import { NavigationItem, type NavigationItemType } from "./NavigationItem";
 
 interface Props extends ComponentProps<"div">{
   linkClasses?: string;
@@ -40,11 +40,11 @@ const navOptions = [
 export const Navigation = (props: Props) => {
   const { className, type = "desktop" } = props;
   const listClasses = cn("flex py-3", className);
-  const itemClasses = cn("menu-item px-3 md:px-0 text-base font-light text-white  hover:text-primary hover:delay-0 cursor-pointer");
+  const itemClasses = cn("menu-item px-3 md:px-0 text-base font-light text-textDark font-medium  hover:text-primary hover:delay-0 cursor-pointer");
 
   const renderItem = (item: NavigationItemType) => {
     return (
-      type==="mobile"? <NavigationItem item={item} /> : <div key={item.id} data-active={true} className="data-[active=true]:text-primary">{item.altLabel}</div>
+      type==="mobile"? <NavigationItem item={item} /> : <div key={item.id} data-active={false} className="data-[active=true]:text-primary">{item.altLabel}</div>
     );
   };
 

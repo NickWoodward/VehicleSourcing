@@ -1,130 +1,116 @@
-import type { ComponentProps } from "react";
-
-import { EmblaCarousel as Carousel } from "./Carousel";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "../utils/utils";
-import { PinPointIcon, ContactIcon, ArrowTopRight, CarIcon2, KeyIcon } from "../utils/svgComponents"
-import mechanic from "../assests/mechanic.jpeg";
-import contact from "../assests/contact.jpeg";
-import m3 from "../assests/m3.jpeg";
+import { Button } from "./Button";
+import { PinPointIcon, ContactIcon, ChevronRight, KeyIcon } from "../utils/svgComponents"
 
+interface Props extends ComponentProps<"div">{
+  contactImage?: ReactNode,
+  m3Image?: ReactNode,
+  mechanicImage?: ReactNode
+}
 
-interface Props extends ComponentProps<"div">{}
-const slides = [
-  {
-    icon: <ContactIcon className="w-12 h-12 bg-slate-300 rounded-full" />, 
-    title: "Get in Touch", 
-    content:"Give one of our friendly experts a no-obligation call, or contact us below to discuss your perfect vehicle",
-    image: contact,
-    id:1,
-    to:"#contact",
-    linkText: "Contact Us"
-  },
-  {
-    icon: <PinPointIcon className="w-12 h-12 bg-slate-300 rounded-full" />, 
-    title: "Leave it to Us", 
-    content:"We'll use our extensive networks to vet and narrow 1000s of vehicles down to that special one",
-    image: mechanic,
-    id:2,
-    to:"#contact",
-    linkText: "Find Out More"
-  },
-  {
-    icon: <KeyIcon className="w-12 h-12 bg-slate-300 rounded-full" />, 
-    title: "Drive away in your new vehicle", 
-    content:"Safe in the knowledge that your new car has made it past our thorough team of mechanics",
-    image: m3,
-    id:3,
-    to:"#contact",
-    linkText: "Get Started"
-  },
-]
+interface CardProps {
+  title: string,
+  content: string,
+  image: ReactNode,
+  id: number,
+  to: string
+}
 
-const NUM_CARDS = slides.length;
+export const WhyUs = ({className, contactImage, m3Image, mechanicImage}: Props) => {
 
-export const WhyUs = ({className}: Props) => {
-  // const classes = cn(
-  //   "border cards flex flex-col space-y-12 md:h-full md:flex-row md:flex-wrap md:justify-between md:items-start lg:space-x-6 xl:space-x-12 lg:max-w-none",
-  //   className
-  // );
+  const slides = [
+    {
+      id:1,
+      icon: <ContactIcon className="w-10 h-10 " />, 
+      title: "Get in Touch", 
+      // content:"Give one of our friendly experts a no-obligation call, or contact us below to discuss your perfect vehicle",
+      content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+      justify:"right",
+      image: contactImage,
+      to:"#contact",
+      linkText: "Contact Us"
+    },
+    {
+      icon: <PinPointIcon className="w-10  h-10 " />, 
+      title: "Leave it to Us", 
+      content:"We'll use our extensive networks to vet and narrow 1000s of vehicles down to that special one",
+      justify:"left",
+      image: mechanicImage,
+      id:2,
+      to:"#contact",
+      linkText: "Find Out More"
+    },
+    {
+      icon: <KeyIcon className="w-10  h-10 " />, 
+      title: "Enjoy your Car", 
+      content:"Safe in the knowledge that it's made it past our thorough team of mechanics",
+      justify:"right",
+      image: m3Image,
+      id:3,
+      to:"#contact",
+      linkText: "Get Started"
+    },
+  ]
+
   const classes = cn(
-    // "cards flex flex-col md:flex-row md:flex-wrap md:justify-between gap-y-10 md:gap-y-10 md:gap-x-4 ",
-    "cards flex flex-col h-full lg:flex-row items-end lg:items-start  gap-y-10  sm:gap-y-28 md:gap-x-4 lg:gap-x-8 lg:gap-y-0",
+    "cards grid w-full lg:grid-cols-9 lg:px-header lg:py-header  md:grid-cols-3 lg:grid-rows-1 sm:mx-auto  gap-y-8 xs:gap-y-14  sm:gap-y-8 md:gap-x-5 lg:gap-x-6 lg:gap-x-6",
     
     className
   );
-  // const createCard = ({icon, title, content, image, id, linkText}: {icon: React.ReactNode, title: string, content: string, image: string, id: number, linkText: string}) => {
-  //   return (
-  //     <article key={id} className="card relative sm:overflow-hidden sm:rounded-xl space-y-3  flex flex-col items-start sm:justify-end sm:items-center lg:justify-start md:w-[48%] md:rounded-b-md md:shadow-md md:bg-white text-sm sm:text-lg  text-white ">
-  //        <img src={image} alt="" className="card__image rounded-xl shadow-md md:hidden" />
-
-  //       <div className="card__content w-full space-y-3 sm:space-y-1 xs:px-2 pt-6 sm:pt-4 pb-8 sm:pb-6 sm:absolute md:relative flex flex-col items-start lg:w-full  bg-slate-50/95 rounded-xl sm:rounded-xl  shadow-md sm:shadow-none sm:rounded-t-none  z-30">
-  //         <div className=" flex w-full items-center  pl-4 pr-6 lg:pl-2 sm:py-1 gap-x-4 text-slate-600 text-lg font-semibold  ">
-  //           <div className="flex items-center justify-center rounded-full border-3 border-slate-300">{icon}</div>
-  //           <div className="">
-  //             {title}
-  //           </div>
-  //         </div>
-  //         <div className="pl-7 lg:pl-3 pr-5 text-base text-gray-500">{content}</div> 
-  //         <a className="flex w-full justify-end space-x-1  pl-7 lg:pl-3 pr-7 font-medium text-primary">
-  //           <div>{linkText}</div>
-  //           <ArrowTopRight className="text-primary w-3 h-3" />
-  //         </a>
-  //       </div>
-  //     </article>
-  //   )
-  // }
 
 
-
-  // const createCard = ({icon, title, content, image, id, linkText}: {icon: React.ReactNode, title: string, content: string, image: string, id: number, linkText: string}) => {
-  //   return (
-  //     <article key={id} data-direction={id===NUM_CARDS ? "horizontal":"vertical"} className="card flex flex-col data-[direction=horizontal]:md:flex-row data-[direction=horizontal]:lg:flex-col data-[direction=vertical]:md:w-[48%] data-[direction=vertical]:lg:w-[31%] data-[direction=horizontal]:lg:w-[31%]  data-[direction=horizontal]:md:w-full data-[direction=horizontal]:md:translate-x-14 data-[direction=horizontal]:md:h-[24rem] data-[direction=horizontal]:md:ml-64 data-[direction=vertical]:md:mx-auto space-y-5">
-  //       <img src={image} alt="" className="card__image rounded shadow" />
-
-  //       <div data-direction={id===NUM_CARDS ? "horizontal":"vertical"} className="card__content data-[direction=horizontal]:md:absolute data-[direction=horizontal]:lg:relative data-[direction=horizontal]:md:max-w-[48%] data-[direction=horizontal]:md:opacity-95 data-[direction=horizontal]:lg:max-w-none data-[direction=horizontal]:md:-translate-x-32 data-[direction=horizontal]:lg:-translate-x-0 flex flex-col pb-8 pt-6 lg:px-4 xl:px-8 space-y-3 shadow rounded bg-slate-50 grow">
-  //         <div className=" flex items-center  pl-4 pr-6 lg:pl-2 sm:py-1 gap-x-4 leading-7 text-gray-600 text-lg font-semibold  ">
-  //           <div className="flex items-center justify-center rounded-full border-3 border-slate-300">{icon}</div>
-  //           <div className="">
-  //             {title}
-  //           </div>
-  //         </div>
-  //         <div className="pl-7 lg:pl-3 pr-5 text-base lg:text-lg text-gray-600">{content}</div> 
-  //         <a className="flex grow justify-end items-end space-x-1  pl-7 lg:pl-3 pr-7 font-medium  text-primary">
-  //           <div className="flex gap-2">
-  //             <div>{linkText}</div>
-  //             <ArrowTopRight className="text-primary w-3 h-3" />
-  //           </div>
-  //         </a>
-  //       </div>
-  //     </article>
-  //   )
-  // }
-
-
-  const createCard = ({icon, title, content, image, id, linkText}: {icon: React.ReactNode, title: string, content: string, image: string, id: number, linkText: string}) => {
-    return (
-      <article key={id}  className="card relative h-full  grid lg:flex lg:flex-col sm:grid-cols-16 lg:grid-cols-1  gap-y-6 sm:gap-y-0 lg:gap-y-6 w-full">
-        <img data-flip={id==1} data-left={id%2===0} src={image} alt="" className="card__image w-full data-[flip=true]:-scale-x-100 data-[left=false]:sm:col-start-3 data-[left=false]:md:col-start-7 data-[left=false]:lg:col-start-1 data-[left=true]:sm:col-start-1  data-[left=true]:md:col-start-1 data-[left=true]:lg:col-start-1 sm:col-span-14 md:col-span-11 lg:col-span-1 sm:row-start-1 sm:row-span-2 lg:row-span-1 data-[left=true]:sm:rounded-l-none data-[left=false]:sm:rounded-r-none rounded shadow  " />
-
-        <div data-left={id%2!==0} className="card__content sm:-translate-y-10 lg:translate-y-0 data-[left=true]:sm:col-start-1 data-[left=true]:md:col-start-2 data-[left=true]:lg:col-start-1 data-[left=true]:sm:rounded-r-none data-[left=false]:sm:rounded-l-none data-[left=false]:sm:col-start-9 data-[left=false]:md:col-start-8 data-[left=false]:lg:col-start-1 sm:col-span-8 md:col-span-8 lg:col-span-1 sm:row-start-1 lg:row-start-2 flex flex-col pb-8 pt-6 lg:px-4 xl:px-8 space-y-3 shadow rounded bg-slate-50 grow">
-          <div className=" flex items-center  pl-4 pr-6 lg:pl-2 sm:py-1 gap-x-4 leading-7 text-gray-600 text-lg  font-semibold  ">
-            <div className="flex items-center justify-center rounded-full ">{icon}</div>
-            <div className="">
-              {title}
-            </div>
-          </div>
-          <div className="pl-7 lg:pl-3 pr-5 text-base md:text-lg md:leading-7 text-gray-600">{content}</div> 
-          <a className="flex grow justify-end items-end space-x-1  pl-7 lg:pl-3 pr-7 font-medium  text-primary">
-            <div className="flex gap-2">
-              <div>{linkText}</div>
-              <ArrowTopRight className="text-primary w-3 h-3" />
-            </div>
-          </a>
+  const createCard = ({title, content, image, id, to}: CardProps) => {
+    
+    return <article key={id} className="card flex flex-col sm:flex-row md:flex-col max-w-[300px] sm:max-w-none  mx-auto sm:gap-x-3 md:gap-y-3 rounded ">
+        <div className="card__image flex object-cover rounded-t sm:rounded sm:rounded-l  overflow-hidden shadow-2xl aspect-[3/2] sm:max-w-[240px] md:max-w-none">
+          {image} 
         </div>
-      </article>
-    )
-  }
+        <div className="grow flex flex-col bg-offWhite shadow-2xl sm:rounded   pt-5 pb-3.5 px-6 ">
+          <div className="title font-semibold text-sm md:text-base text-primary">{title}</div>
+          <div className="content mt-1 ml-0.5 text-sm md:text-base text-textDark leading-5">{content}</div>
+          <ChevronRight className="grow flex items-end ml-auto w-4 h-4 mt-2 text-primary" />
+        </div>
+    </article>
+  };
+
+  // const createCard = ({icon, title, content, justify="left", image, id, to, linkText}: {icon: React.ReactNode, title: string, justify: string, content: string, image: ReactNode, to: string, id: number, linkText: string}) => {
+   
+  //   const contentClasses = cn(" card__content  bg-slate-500 lg:  xs:row-start-6 sm:row-start-5 md:row-start-1 opacity-[97%] xs:row-span-4 md:row-span-3 lg:row-span-1   flex flex-col pb-6 xs:pb-5 pt-5 xs:pt-6 lg:pt-2  lg:px-4 lg:px-6 lg:pb-6 space-y-2.5 sm:space-y-1.5 lg:space-y-1 shadow lg:shadow-none rounded-lg bg-slate-50 lg:bg-transparent grow ", {
+  //     "xs:col-start-1  xs:col-span-7 lg:col-start-1 lg:col-span-12": justify === "left",
+  //     "xs:col-start-2 xs:col-span-7  md:col-span-7 md:col-end-13 lg:col-start-1 lg:col-span-12": justify === "right",
+  //   });
+
+  //   const imageClasses = cn(" card__image flex  md:bg-slate-50  data-[flip=true]:-scale-x-100   object-cover aspect-[3/2]   rounded-lg shadow lg:shadow-none lg:z-50", {
+  //     "xs:col-start-1 xs:col-span-7 md:col-start-1 md:col-span-10 lg:col-start-1 lg:col-span-12 xs:row-start-1 md:row-start-2 lg:row-start-1 xs:row-span-6": justify === "right",
+  //     "xs:col-start-2 xs:col-span-7 md:col-start-3 md:col-span-10 lg:col-start-1 lg:col-span-11 xs:row-start-1 xs:row-span-6  md:row-start-2 lg:row-start-1": justify === "left",
+  //   });
+
+  //   return (
+  //     <article key={id} data-key={id} data-justify={justify} className="card data-[justify='right']:justify-self-end lg:data-[justify='right']:justify-self-auto lg:data-[key='1']:col-start-1 lg:data-[key='2']:col-start-4 lg:data-[key='3']:col-start-7 lg:col-span-3 relative grid lg:flex lg:flex-col xs:grid-cols-8 md:grid-cols-12 xs:auto-rows-auto  gap-y-3 xs:gap-y-0 sm:gap-y-0 lg:gap-y-6  w-full xs:max-w-md sm:max-w-lg md:max-w-3 lg:bg-slate-50 lg:shadow lg:rounded-xl">
+      
+  //       <div className={imageClasses}>
+  //         {image} 
+  //       </div>
+  //       <div className={contentClasses}>
+  //         <div className=" flex items-center pl-8 lg:pl-0 pr-5 gap-x-1 xs:gap-x-2 md:gap-x-3.5 leading-7 text-gray-700 text-lg sm:text-lg  font-semibold  ">
+  //           <div className="flex items-center justify-center -translate-x-0.5">{icon}</div>
+  //           <div className="">
+  //             {title}
+  //           </div>
+  //         </div>
+  //         <div className="grow  pl-8 lg:pl-3 pr-6 text-base font-light  sm:text-lg md:text-lg sm:leading-7 lg:leading-[30px] text-gray-600">{content}</div> 
+  //         <a className="flex justify-end items-end  space-x-1 py-3 pt-1  pl-7 pr-6  font-medium  text-primary">
+  //           <div className="flex gap-x-2 ">
+  //             <div className="sm:flex">{linkText}</div>
+  //             <ArrowTopRight className=" text-primary w-3 h-3" />
+  //           </div>
+  //         </a>
+  //       </div>
+  //     </article>
+  //   )
+  // }
 
   const cards = slides.map((slide) => {
     return createCard(slide);
@@ -133,9 +119,14 @@ export const WhyUs = ({className}: Props) => {
   return (
       <div className={classes}>
         {cards}
-        <div className="hidden  w-[48%] justify-center items-center text-slate-600 shadow text-lg font-semibold">
-          07473 283 499
-        </div>
+        <Button   
+          className="cta-btn--about invisible opacity-0 px-4 py-2.5 max-w-[300px] sm:max-w-none mx-auto w-full sm:w-auto sm:mr-auto sm:ml-0 space-x-3"
+          rounded="md"
+          size="sm"
+        >
+          <span className="text-base">Get Started</span>
+          {/* <SearchIcon flip={true} className="h-5 w-5 flex-none" /> */}
+        </Button>
       </div>
   )
 }

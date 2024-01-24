@@ -1,26 +1,35 @@
-import { SearchIcon, Plane, CarIcon2 } from "../utils/svgComponents";
+import { SearchIcon,  ArrowTopRight, ChevronRight } from "../utils/svgComponents";
 import { Button } from "./Button";
 
 export const HeroCTA = () => {
   return (
-    <div className="xxs-v:mt-4 mt-6 lg:mt-12 flex flex-col items-start space-y-2.5">
+    <div className="xxs-v:mt-4 mt-6  lg:mt-8 flex flex-col items-start space-y-1.5">
+      
       <Button   
-        className="cta-btn--hero invisible opacity-0"
-        rounded
-        intent="dark"   
-        size="md"
+        className="cta-btn--hero invisible opacity-0 shadow-lg space-x-3 px-4 py-2.5 bg-primary text-offWhite"
+        rounded="md"
+        size="sm"
       >
-        <CarIcon2 className=" h-7 w-7 flex-none" />
-        <span className="ml-3">Get Started</span>
+        <span className=" text-offWhite  text-base">Get Started</span>
+        <SearchIcon flip={true} className="h-5 w-5 flex-none" />
       </Button>
+      {/* <Button   
+        className="cta-btn--hero invisible opacity-0 outline outline-1 outline-gray-500 shadow-lg space-x-3 px-9   py-3 bg-yellow text-black"
+        rounded="md"
+        size="sm"
+      >
+        <span className="font-numberplate text-gray-800  text-[1.5rem]">ENTER REG</span>
+      </Button> */}
       <Button   
-        className="cta-btn--hero xxs-v:hidden invisible opacity-0"
+        className="cta-btn--hero xxs-v:hidden invisible opacity-0 space-x-2 cursor"
         rounded
         variant="ghost"
-        size="md"
+        size="sm"
       >
-        <SearchIcon className="h-6 w-6  flex-none" />
-        <span className="ml-3 ">Read more</span>
+        <span className="ml-1 text-sm text-gray-500">Or sell us your car</span>
+        {/* <ArrowTopRight className="h-3 w-3 text-slate-600 -translate-y-1 flex-none" /> */}
+        <ChevronRight className="h-3 w-3 text-gray-500 flex-none" />
+
       </Button>
     </div>
   )

@@ -24,16 +24,16 @@ export const sectionVariants = cva(" flex w-full",
         true: "mt-headerHeight"
       },
       height: {
-        default: "py-16",
-        full: "xs-v:py-12 py-24 h-dvh",
+        default: "py-20 md:py-24",
+        full: "h-[100svh]",
         sm: "py-8"
       },
       breakout: {
-        true: "xs:px-page-xs  lg:px-10 xl:px-20",
-        false: "xs:px-page-sm sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
+        true: "p-0",
+        false: " sm:px-page-sm md:px-page-lg lg:px-16 xl:px-page-xl"
       },
       last: {
-        true: "pb-2"
+        true: "py-0"
       }
 
     },
@@ -53,10 +53,10 @@ export const sectionVariants = cva(" flex w-full",
 
 
 export function Section({className, variant, axis = 'h',  height, contentClassName, headerOffset, breakout, last, children}:Props) {
-  const contentClasses = cn("flex w-full h-full lg:max-w-8xl mx-auto", contentClassName, {
+  const contentClasses = cn("flex w-full h-full mx-auto", contentClassName, {
     "flex-col": axis === "v",
     "flex-row": axis === "h",
-    "xl:max-w-9xl": breakout
+    // "lg:max-w-none": breakout
  });
 
   return (

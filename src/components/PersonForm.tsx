@@ -137,7 +137,7 @@ console.log("formState", errors, isValid);
           disabled={!isValid}
           rounded="md"
           intent="primary"
-          className="ml-auto w-1/2 sm:w-1/3 px-8 py-3 text-base"
+          className="ml-auto w-1/2 sm:w-1/3 px-4 py-2.5 text-base"
         >
           {/* <Tick className="h-6 w-6 flex-none" /> */}
           Next
