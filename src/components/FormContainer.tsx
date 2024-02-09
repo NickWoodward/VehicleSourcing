@@ -9,6 +9,7 @@ const FORM_STEPS = [
 
 const FORM_STATE = {
   selectedIndex: 0,
+  turnstile: '',
   steps: {
     person: {
       valid: false,
@@ -49,15 +50,15 @@ export const FormContainer = () => {
   const [form, setForm] = useState(FORM_STATE);
   
   const onComplete = useCallback((state: typeof FORM_STATE) => {
-    console.log('state',state);
+    console.log('SUBMIT',state);
   }, []);
 
 
   useEffect(() => {
     const lastStepIndex = FORM_STEPS.length;
-
-    if(form.selectedIndex === lastStepIndex) {
-      // onComplete(FORM_STATE);
+console.log('selectedIndex',form.selectedIndex, {lastStepIndex})
+    if(form.selectedIndex === lastStepIndex - 1) {
+      onComplete(form);
     }
   }, [form.selectedIndex]);
 

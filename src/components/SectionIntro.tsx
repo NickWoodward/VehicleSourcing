@@ -15,7 +15,7 @@ interface TagLineProps extends ComponentProps<"div">, VariantProps<typeof taglin
   content: string
 }
 
-const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center max-w-sm lg:max-w-lg", {
+const sectionVariants = cva("section-intro flex flex-col w-full items-start justify-center max-w-sm lg:max-w-lg xl:max-w-md", {
   variants: {
     variant: {
       default: "text-gray-700 font-semibold",
@@ -28,22 +28,22 @@ const sectionVariants = cva("section-intro flex flex-col w-full items-start just
   }
 });
 
-const subtitleVariants = cva("subtitle mb-1 sm:mb3 font-medium text-primary", {
+const subtitleVariants = cva("subtitle mb-1 sm:mb3 font-semibold text-primary", {
   variants: {
     variant: {
-      default: "text-sm  xs:text-base sm:text-lg",
-      dark: "text-sm xs:text-base sm:text-lg",
+      default: "text-sm xs:text-base sm:text-lg xl:text-2xl",
+      dark: "text-sm xs:text-base sm:text-lg xl:text-2xl",
     }
   },
   defaultVariants: {
     variant: "default"
   }
 });
-const taglineVariants = cva("mt-1", {
+const taglineVariants = cva("mt-1 xl:mt-2", {
   variants: {
     variant: {
-      default: "text-textGray font-normal leading-6 xs:leading-7",
-      dark: "text-base text-gray-300 font-normal leading-6 xs:leading-7",
+      default: "text-base xs:text-lg sm:text-xl lg:text-xl xl:text-2xl text-textGray font-normal leading-6 xs:leading-7",
+      dark: "text-base xl:text-2xl text-gray-300 font-normal leading-6 xs:leading-7",
     }
   },
   defaultVariants: {
@@ -63,10 +63,10 @@ export const SectionIntro = ({title, subtitle, tagline, variant, className, titl
   return (
     <div className={cn(sectionVariants({variant}), className)}>
       <h3 className={cn(subtitleVariants({variant}), subtitleClasses)}>{subtitle}</h3>
-      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl tracking-tight", titleClasses)}>
+      <h2 className={cn("title text-xl xs:text-xl sm:text-2xl xl:text-3xl tracking-tight", titleClasses)}>
         {title}
       </h2>
-      {tagline && <TagLine content={tagline} className={cn("tagline text-base font-light xs:text-lg sm:text-xl lg:text-xl xl:text-2xl", taglineClasses, taglineVariants({variant}))}/>}
+      {tagline && <TagLine content={tagline} className={cn("tagline font-light ", taglineClasses, taglineVariants({variant}))}/>}
     </div>
   );
 }

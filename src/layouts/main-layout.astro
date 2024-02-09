@@ -16,6 +16,7 @@ const { classes } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+  <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> -->
   <title>VehicleSearcher</title>
 </head>
 <body>
@@ -24,9 +25,8 @@ const { classes } = Astro.props;
 
       <MobileNav className="fixed top-0 right-0 h-headerHeight pr-6 text-dark z-50" client:only="react"/>
       <!-- <MobileNav className="fixed top-0 right-0 h-headerHeight pr-6 z-50" client:only=""/> -->
-      <Navigation className="hidden fixed top-0 right-0 h-headerHeight md:flex md:justify-start md:items-center md:px-header md:space-x-6 z-50" />
+      <Navigation className="hidden fixed top-0 right-0 h-headerHeight 3xl:h-headerHeight-lg md:flex md:justify-start md:items-center md:px-header md:space-x-6 3xl:px-header-lg text-base 3xl:text-lg z-50" />
     </Header>
-
     <slot />
   </main>
 </body>

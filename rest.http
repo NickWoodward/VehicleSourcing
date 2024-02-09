@@ -1,0 +1,20 @@
+###
+POST http://localhost:1234/api/enquiry
+content-type: application/json
+
+{
+    "name": "an",
+    "surname":"as",
+    "message": "1234567890",
+    "phone":"07632738298",
+    "email": "nick.woodward@hotmail.co.uk",
+    "password": "asdfadsf"
+}
+
+###
+POST http://localhost:8080/auth/testlogin
+content-type: application/json
+
+{
+    "email": "nick@hotmail.com"
+}

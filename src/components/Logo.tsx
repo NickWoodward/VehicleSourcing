@@ -2,17 +2,19 @@
 
 import type { ComponentProps } from "react";
 import { cn } from "../utils/utils";
-import { Logo as CompanyLogo } from "../utils/svgComponents";
+import { Logo as CompanyLogo, WheelIcon, KeyIcon1 } from "../utils/svgComponents";
 
 interface Props extends ComponentProps<"div">{};
 
 export const Logo = ({className}: Props) => {
-  const classes = cn("logo flex items-center text-dark font-medium tracking-tight", className);
+  const classes = cn("logo flex items-center text-dark  tracking-tight", className);
   return (
-    <div className="flex space-x-1.5">
+    <div className={classes}>
       {/* <img src={logo} alt="DCG Logo" width={40} height={40} /> */}
       {/* <CompanyLogo className="w-6 h-6" /> */}
-      <div className={classes}>Car<span className="text-primary">Searcher</span></div>
+      {/* <WheelIcon className="w-6 h-6" /> */}
+      {/* <KeyIcon1 className=" -translate-y-1 w-7 h-7 rotate-[295deg] -scale-x-100" /> */}
+      <a href="#hero" className="font-bold">Car<span className="text-primary font-semibold">Searcher</span></a>
     </div>
     );
 }

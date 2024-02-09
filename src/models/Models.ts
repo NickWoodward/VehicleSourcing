@@ -11,9 +11,14 @@ export const VehicleSchema = z.object({
   manufacturer: z.string().trim().min(2, {message: "At least 2 letters"}),
   model: z.string().trim().min(2, {message: "At least 2 letters"}),
   year: z.coerce.number().min(1983, {message: `< ${new Date().getFullYear() - 1983 } years`}),
+  mileage: z.coerce.number().min(0, {message: "Only numbers"}),
 });
 
 export const PersonSchemaWithVehicle = PersonSchema.merge(VehicleSchema);
+
+export const FormSchema = PersonSchemaWithVehicle.extend({
+  token: z.string(),
+});
 
 export type User = z.infer<typeof PersonSchema>;
 export type Vehicle = z.infer<typeof VehicleSchema>;

@@ -27,7 +27,6 @@ module.exports = {
       // lg: '1024px',
       // xl: '1280px',
       // '2xl': '1536px',
-      '3xl': '1600px',
       // "sm-v": { raw: '(max-height: 900px) and (min-width: 500px)' },
       "sm-v": {raw: '(max-height: 875px)'}, 
       "xs-v": {raw: '(max-height: 760px)'}, 
@@ -36,12 +35,17 @@ module.exports = {
       ...defaultTheme.screens,
     },
 		extend: {
+      screens: {
+        '3xl': '1600px',
+
+      },
       aspectRatio: {
         '4/3': '4 / 3',
       },
       padding: {
         "header-sm": "1rem",
         "header": "2rem",
+        "header-lg": "3rem",
         "page-xxs": "1.5rem",
         "page-xs":"2rem",
         "page-sm": "3rem",
@@ -144,6 +148,7 @@ module.exports = {
         dvhMinusPeek: "var(--dvhMinusPeek)",
         dvhPlusPeek: "var(--dvhPlusPeek)",
 				headerHeight: "var(--header-height)",
+        "headerHeight-lg": "var(--header-height-lg)",
         footerHeight: "var(--footer-height)",
         brandCloudIcon: "40px",
 			},

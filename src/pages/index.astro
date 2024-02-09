@@ -11,7 +11,7 @@ import {HeroText} from '../components/HeroText';
 import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
 import { SectionIntro } from "../components/SectionIntro";
-// import { Circle } from "../components/Circle";
+import { Circle } from "../components/Circle";
 
 
 import heroImage from '../assests/golf-xl.png';
@@ -34,6 +34,28 @@ import { cn } from '../utils/utils';
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
+
+// window.addEventListener('onDomContentLoaded', () => {
+//   const turnstileWidget = document.querySelector('.cf-turnstile') as HTMLElement;
+//   console.log(turnstileWidget);
+//   if (turnstileWidget) {
+//     turnstileWidget.style.width = '100% !important';
+//   }
+// })
+
+  // window.onloadTurnstileCallback = function () {
+  //   turnstile.render('#example-container', {
+  //       sitekey: '<YOUR_SITE_KEY>',
+  //       callback: function(token) {
+  //           console.log(`Challenge Success ${token}`);
+  //       },
+  //   });
+  // };
+  // turnstile.ready(onloadTurnstileCallback);
+
+  const testSections = document.querySelectorAll('.section');
+  console.log(testSections)
+
 
   const headerScrollAnimation = gsap.timeline({paused: true});
   const heroScrollAnimation = gsap.timeline({paused: true});
@@ -62,17 +84,18 @@ import { cn } from '../utils/utils';
         start:"top center",
         end:"bottom center",
         // markers:true,
-        // animation:gsap
-        //   .to(`.item-${index}`, {
-        //     opacity:1, 
-        //     duration:.2,
-        //     color: "var(--primary)",
-        //   }),
+        animation:gsap
+          .to(`.item-${index}`, {
+            opacity:1, 
+            duration:.2,
+            color: "var(--primary)",
+          }),
         //if ScrollTrigger isActive = true then play the animation forward via reversed(false)
-        onToggle: ()=> {
-          // if(self.animation)
-          //   self.animation.reversed(!self.isActive)
-          document.querySelector(`.item-${index}`)?.toggleAttribute('data-active');
+        onToggle: (self)=> {
+          if(self.animation)
+            self.animation.reversed(!self.isActive)
+          // document.querySelector(`.item-${index}`)?.toggleAttribute('data-active');
+
         }		
       })
     })
@@ -88,6 +111,7 @@ const headerTl = gsap.timeline({scrollTrigger: {
     .set('.logo-dark', {opacity:1})
     .set('.logo-light', {opacity:0})
     .to('.header', {scaleY:0.9, opacity:1, transformOrigin:"top", ease: "none"})
+    .to('.nav', {scale:0.9, transformOrigin:"top right", ease: "none"}, "<")
     .to('.logo-dark', {scale:0.9,  transformOrigin:"top left", ease: "none"}, "<")
     .to('.logo-light', {scale:0.9,  transformOrigin:"top left", ease: "none"}, "<")
     // .to('.burger', {scale:0.8, transformOrigin:"top right", ease: "none"}, "<");
@@ -135,7 +159,7 @@ const heroScrollTl = gsap.timeline({
 
     heroScrollAnimation
       .to([
-        heroScope('.subtitle'), 
+        // heroScope('.subtitle'), 
         heroScope('.title'),
         heroScope('.tagline')
       ], { 
@@ -456,16 +480,17 @@ const heroScrollTl = gsap.timeline({
 
 
 
-      <Section breakout className="hero section section-1 relative px-page-xxs pt-headerHeight pb-2 xs:pb-6 flex bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] px-4">
+      <!-- <Section breakout className="hero section section-1 relative px-page-xxs pt-headerHeight pb-2 xs:pb-6 flex bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[850px] lg:max-w-[1100px] px-4 lg:px-0"> -->
+      <Section breakout id='hero' className="hero section section-1 relative px-page-xxs pt-headerHeight flex bg-gradient-to-bl from-blue-100 to-blue-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[850px] lg:max-w-[1100px] 3xl:max-w-[1300px]  px-4 md:px-0 lg:px-0">
         
-        <div class="chat-icon fixed bottom-2 right-4 z-50">
-          <ChatIcon className="w-14 h-14 z-50" />
+       <div class="chat-icon fixed bottom-8 right-8 xl:right-14 z-50">
+          <ChatIcon className="w-14 h-14 xl:w-20 xl:h-20 z-50" />
         </div>
         
-        <figure class="absolute bottom-20 xs:bottom-10 left-4 flex space-x-3 w-full max-w-[250px] z-50">
+        <figure class="absolute bottom-8 xs:bottom-10 xl:bottom-20 left-0 sm:left-[50%] sm:-translate-x-1/2 px-2 sm:px-8  flex space-x-3 xl:space-x-6 w-full max-w-[1300px] 3xl:max-w-[1580px] z-50">
 
           <img
-            class="inline-block h-10 w-10 rounded-full"
+            class="inline-block h-10 w-10 md:h-12 md:w-12 xl:w-20 xl:h-20 rounded-full"
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />
@@ -477,7 +502,7 @@ const heroScrollTl = gsap.timeline({
                 <StarIcon
                   key={index}
                   className={cn(
-                    'h-5 w-5',
+                    'h-5 w-5 md:h-6 md:w-6 xl:h-7 xl:w-7',
                     5 > index ? 'fill-[#fbc227]' : 'fill-transparent',
                   )}
                 />
@@ -485,88 +510,51 @@ const heroScrollTl = gsap.timeline({
             </div>
 
             <blockquote class="flex  space-y-1.5 ">
-              <p class="block text-sm text-offWhite leading-5">
+              <p class="block text-sm md:text-base xl:text-xl text-offWhite leading-5">
                 "Made everything easy!"
               </p>
             
             </blockquote>
           
-            <figcaption class="pl-1 text-xs text-offWhite  ">
+            <figcaption class="pl-1 text-xs xl:text-lg text-offWhite  ">
               Janet, Bristol
             </figcaption>
           </div>
           
         </figure>
 
-        <div class="relative grid grid-cols-12 grid-rows-16 h-full w-full">
-          
-            <HeroText className=" hero-text mx-auto sm:mx-0 font-medium col-start-1 sm:col-start-2 col-span-12 row-start-2 md:row-start-3 lg:row-start-3 row-span-8 z-30 flex flex-col sm:max-w-xs lg:max-w-md" />
+        <div class=" relative grid  grid-cols-16 grid-rows-16 h-full w-full">
+          <!-- <div class="absolute bottom-[30%] right-0 w-[90%] translate-x-[20%] translate-y-[50%] scale-90">
+            <Circle className="animate-spin-slower"/>
+          </div>
+          <div class="absolute bottom-[30%] right-0 w-[90%] translate-x-[20%] translate-y-[50%]">
+            <Circle reversed className="animate-spin-reverse-slower"/>
+          </div>    -->
+            <HeroText client:visible className=" hero-text mx-auto sm:mx-0 font-medium col-start-1 sm:col-start-2 xl:col-start-1 col-span-15 row-start-2 sm:row-start-3 md:row-start-4 xl:row-start-4 row-span-8 sm:row-span-7 z-30 flex flex-col sm:max-w-xs lg:max-w-[400px] xl:max-w-[500px]" />
 
-  
-            <div class="relative hero-image flex animate-up invisible opacity-0 xs:mt-4 col-start-1 col-span-12 sm:col-start-2 sm:col-span-10 md:col-start-3 row-start-9 xs:row-end-14 sm:row-start-8  lg:row-start-8 xl:row-start-7  row-span-4 xs:row-span-5 sm:row-span-6 lg:row-span-7 xl:row-span-10 sm:justify-end items-center z-30">
-              <img src={heroImage.src} class="object-contain w-[250px] xs:w-[284px] sm:w-[355px] md:w-[496px] lg:w-[620px] h-[141px] xs:h-[160px] sm:h-[200px] md:h-[280px] lg:h-[350px] max-h-full  sm:-scale-x-100  hover:scale-both-110 z-20" alt="A VW Golf" />
-              
-              
-              <!-- <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%] scale-90">
-                <Circle className="animate-spin-slower"/>
-              </div>
-              <div class="absolute bottom-[35%] right-0 w-[160%] translate-x-[50%] translate-y-[50%]">
-                <Circle reversed className="animate-spin-reverse-slower"/>
-              </div> -->
+            <!-- Match the row start with the background row start -->
+            <div class="relative hero-image flex animate-up invisible opacity-0 col-start-1 col-span-full sm:col-end-[-1] lg:col-start-5  md:col-start-5 md:col-span-11 xl:col-start-6  row-start-11 xs:row-start-10 sm:row-start-10 md:row-start-11 lg:row-start-10 xl:row-start-9  row-span-4 xs:row-span-5 sm:row-span-6 md:row-span-9 lg:row-span-9 xl:row-span-10 sm:justify-end items-start z-30">
+           
+              <img src={heroImage.src} class="-translate-y-16 xs:-translate-y-10 sm:-translate-y-14 md:-translate-y-36 lg:-translate-y-40 xl:-translate-y-28 object-fit  w-[250px] xs:w-[290px] sm:w-[410px] md:w-[480px] lg:w-[580px] xl:w-[680px] 3xl:w-[760px]  sm:-scale-x-100 " alt="A VW Golf" />
   
             </div>
-       
-              <!-- <figure class="xs:absolute xs:bottom-0 xs:left-0 flex space-x-3 w-full max-w-[250px] col-start-1 col-span-12 row-start-14 xs:row-start-15 row-span-2 z-30">
-
-                <img
-                  class="inline-block h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                />
-
-                <div class="space-y-1">
-
-                  <div class="flex">
-                    {[...Array(5).keys()].map((index) => (
-                      <StarIcon
-                        key={index}
-                        className={cn(
-                          'h-5 w-5',
-                          5 > index ? 'fill-[#fbc227]' : 'fill-transparent',
-                        )}
-                      />
-                    ))}
-                  </div>
-
-                  <blockquote class="flex  space-y-1.5 ">
-                    <p class="block text-sm text-offWhite leading-5">
-                      "Made everything easy!"
-                    </p>
-                  
-                  </blockquote>
-                
-                  <figcaption class="pl-1 text-xs text-offWhite  ">
-                    Janet, Bristol
-                  </figcaption>
-                </div>
-                
-              </figure> -->
-              
-              <!-- <div class="hero-background bg-gradient-to-bl from-gradientDark to-gradientLight col-start-1 col-span-full row-end-17 row-span-7 poly-clip"></div> -->
-          
         </div>
-        <div class="hero-background absolute bottom-0 left-0 sm:-scale-x-100 sm:translate-y-[1px] w-full h-[40%] xs:h-[35%] bg-gradient-to-bl sm:bg-gradient-to-br from-gradientDark to-gradientLight poly-clip"></div>
+
+        <div class="grid grid-cols-1 grid-rows-16 h-dvh absolute top-headerHeight bottom-0 left-0 right-0">
+          <div class="hero-background  h-full sm:-scale-x-100 sm:translate-y-[2px] self-end col-start-1 row-end-[-1] row-start-11 sm:row-start-10 md:row-start-11 lg:row-start-10 3xl:row-start-11 bg-gradient-to-bl sm:bg-gradient-to-br from-gradientDark to-gradientLight poly-clip"></div>
+        </div>
       </Section>
 
-      <Section className=" about section  relative items-start pt-2 pb-10 xs:pt-12 sm:pt-24 xs:pb-16 sm:pb-24  px-page-xxs lg:px-0 bg-gradient-to-br from-gradientLight to-gradientDark"   breakout={true} contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] px-4">
-        <div class="w-full grid grid-cols-16 gap-y-12 xs:gap-y-16 sm:gap-y-16 md:gap-y-24 lg:space-y-34 xl:gap-y-16">
+      <Section id="about" className=" about section  relative items-start px-page-xxs pt-2 pb-14 xs:pt-12 sm:pt-24 lg:pt-28 xs:pb-16 sm:pb-24 lg:pb-32 bg-gradient-to-br from-gradientLight to-gradientDark"   breakout={true} contentClassName=" max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1400px] 3xl:max-w-[1600px] px-4 xl:px-8">
+
+        <div class=" w-full grid grid-cols-16 gap-y-12 xs:gap-y-16 sm:gap-y-16 md:gap-y-16 lg:space-y-34 xl:gap-y-24">
           <SectionIntro 
             title="How It Works"
             titleClasses="invisible opacity-0"
             subtitle="3 Easy Steps"
             subtitleClasses="subtitle invisible opacity-0",
-            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
-            className="pl-1 lg:px-page-xl xl:max-w-2xl flex flex-col justify-start col-start-1 col-span-16  lg:row-span-2"
+            tagline="Take the hassle out of buying your car. Give us a call and sit back and relax"
+            className="pl-1 md:px-page-md lg:px-page-xl xl:max-w-2xl flex flex-col justify-start col-start-1 col-span-16  lg:row-span-2"
             taglineClasses="invisible opacity-0"
             variant="dark"
           />
@@ -591,15 +579,16 @@ const heroScrollTl = gsap.timeline({
         </div>
       </Section>
     
-      <Section breakout className="testimonials section  relative items-center pt-20 xs:pt-12 sm:pt-24 pb-10 xs:pb-16 sm:pb-24 px-page-xxs bg-gradient-to-bl from-slate-200 to-slate-100 " contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[750px] px-4">
-        <div class="grid w-full grid-cols-1 gap-y-12 xs:gap-y-16 sm:gap-y-16 xl:gap-y-16">
+      <Section breakout id="testimonials" className="testimonials section  relative items-center pt-16 xs:pt-18 sm:pt-24 lg:pt-28 pb-14 xs:pb-16 sm:pb-24 lg:pb-32 px-page-xxs bg-gradient-to-bl from-blue-100 to-blue-50 " contentClassName=" max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1400px] px-4 xl:px-8">
+
+        <div class=" grid w-full grid-cols-1 gap-y-12 xs:gap-y-16 sm:gap-y-16 xl:gap-y-24">
           <SectionIntro 
             title="What Others Have Said"
             titleClasses="invisible opacity-0"
             subtitle="Still Not Sure?"
             subtitleClasses="invisible opacity-0"
             tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
-            className="pl-1  xl:max-w-8xl xl:mx-auto flex flex-col justify-start  md:row-span-2"
+            className="pl-1 md:px-page-md lg:px-page-xl xl:max-w-2xl flex flex-col justify-start  md:row-span-2"
             taglineClasses="invisible opacity-0"
             
           />
@@ -607,17 +596,16 @@ const heroScrollTl = gsap.timeline({
         </div>
       </Section>
     
-      <Section className="contact section  relative  flex bg-gradient-to-bl from-slate-200 to-slate-100  px-page-xxs "  contentClassName="max-w-[400px] sm:max-w-[700px] md:max-w-[900px] px-4" client:visible>
+      <Section breakout id="contact" className="contact section relative flex pt-16 pb-14 xs:pt-18 xs:pb-16 sm:pb-24 sm:pt-24 lg:pb-32  bg-gradient-to-bl from-blue-100 to-blue-50  px-page-xxs "  contentClassName=" max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1400px] px-4 xl:px-8" client:visible>
         <!-- <BrandCloud className="absolute top-0 left-0 -translate-y-1/2 " /> -->
-        <div class=" w-full grid grid-cols-1  gap-y-8 lg:grid-cols-2 lg:grid-rows-8 lg:gap-x-20">
-
+        <div class=" w-full grid grid-cols-1  gap-y-12 xs:gap-y-16 sm:gap-y-16 lg:grid-cols-2  lg:gap-x-20">
 
           <SectionIntro 
             title="Find the Perfect Car"
             titleClasses="invisible opacity-0"
             subtitle="Contact Us Today"
             subtitleClasses="subtitle invisible opacity-0"
-            className="xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
+            className="lg:max-w-2xl md:px-page-md lg:px-page-xl xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
             tagline="Let our team know what you're looking for and we'll get right on it!"
             taglineClasses="invisible opacity-0"
           />   
@@ -627,8 +615,11 @@ const heroScrollTl = gsap.timeline({
             <!-- client:only react elements responsible for their own animation -->
             <!-- <Form className=" " client:only/> -->
             <FormContainer client:only/>
+            <!-- <div class="cf-turnstile" data-sitekey="3x00000000000000000000FF" 
+            data-size="normal" 
+            data-theme="light"
+            ></div> -->
           </div>
-
         </div>
 
       </Section>

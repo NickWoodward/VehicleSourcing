@@ -34,7 +34,7 @@ export const reviewVariants = cva("", {
 
 export const Review = ({className, reviewId, title, body, author,rating, ...props}: ReviewProps) => {
 
-  const classes = cn("px-6 pt-6 pb-8 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow-md",
+  const classes = cn("px-6 xl:px-8 pt-6 pb-8 xl:pt-8 xl:pb-12 sm:w-[48%] xl:w-[32%] bg-slate-50 rounded shadow-md",
     className
   );
   return (
@@ -44,12 +44,12 @@ export const Review = ({className, reviewId, title, body, author,rating, ...prop
       >
         <blockquote className="text-gray-600">
           <StarRating rating={rating} />
-          <p className="mt-3 text-lg font-semibold leading-5 before:content-['“'] after:content-['”']">
+          <p className="mt-3 xl:mt-2 text-lg xl:text-xl font-semibold leading-5 before:content-['“'] after:content-['”']">
             {title}
           </p>
-          <p className="mt-2 text-base sm:text-lg text-textGray font-light leading-7 line-clamp-4">{body}</p>
+          <p className="mt-2 xl:mt-3 text-base sm:text-lg xl:text-xl text-textGray font-light leading-7 line-clamp-4">{body}</p>
         </blockquote>
-        <figcaption className="mt-2 text-base font-medium text-gray-600 before:content-['–_']">
+        <figcaption className="mt-2 xl:mt-3 text-base xl:text-lg font-medium text-gray-600 before:content-['–_']">
           {author}
         </figcaption>
       </figure>
@@ -65,8 +65,8 @@ function StarRating({ rating }: { rating: ReviewProps['rating'] }) {
         <StarIcon
           key={index}
           className={cn(
-            'h-5 w-5',
-            rating > index ? 'fill-cyan-500' : 'fill-gray-300',
+            'h-5 w-5 xl:h-7 xl:w-7',
+            rating > index ? 'fill-yellow' : 'fill-gray-300',
           )}
         />
       ))}

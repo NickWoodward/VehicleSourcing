@@ -9,7 +9,7 @@ interface ButtonProps
   disabled?: boolean | undefined;
 }
 
-export const buttonVariants = cva("flex items-center justify-center  text-sm sm:text-lg  outline-2 outline-offset-2", {
+export const buttonVariants = cva("flex items-center justify-center  text-sm  outline-2 outline-offset-2", {
   variants: {
     variant: {
       default: "bg-primary text-white",
@@ -24,7 +24,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm sm:
     },
     size: {
       sm:"pl-1.5 py-2 pr-3",
-      md:"pl-3 py-3 pr-7 md:pl-4 md:pr-7 md:py-3.5 ",
+      md:"pl-3 py-3 pr-7 md:pl-4",
       none: "p-0"
     },
     aspect: {

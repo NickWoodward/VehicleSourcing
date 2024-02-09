@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "../utils/utils";
 import { Button } from "./Button";
 import { PersonSchema } from '../models/Models';
+import { Plane } from "../utils/svgComponents";
 
 interface PersonFormProps extends ComponentProps<"div">{
   onNext: () => void;
@@ -35,7 +36,7 @@ export const PersonForm = ({onNext, onPrevious, className}: PersonFormProps) => 
   const { isDirty } = useFormState({
     control,
   });
-console.log("formState", errors, isValid);
+
   useEffect(() => {
     setForm(
       produce((form) => {
@@ -64,7 +65,7 @@ console.log("formState", errors, isValid);
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-1 sm:grid-rows-[min-content-fit_1fr] gap-x-3 gap-y-1 sm:gap-x-6 ">
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
+        <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="fName" className="block relative py-1.5">Name</label>
           <div className="">
             <input id="fName" type="text" {...register("fName", {required: true})}
@@ -76,7 +77,7 @@ console.log("formState", errors, isValid);
           </div>
           {errors.fName && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.fName?.message}</p>}
         </div>
-        <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base font-medium w-full text-gray-500">
+        <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="sName" className="block relative py-1.5" >
             Surname
           </label>
@@ -90,7 +91,7 @@ console.log("formState", errors, isValid);
             />
           </div>
         </div>
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
+        <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="email" className="block relative py-1.5">
             Email
 
@@ -105,7 +106,7 @@ console.log("formState", errors, isValid);
           </div>
           {errors.email && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.email?.message}</p>}
         </div>
-        <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base font-medium w-full text-gray-500">
+        <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="phone" className="block relative py-1.5">
             Phone
 
@@ -128,7 +129,7 @@ console.log("formState", errors, isValid);
           variant="ghost"
           size="none"
           onClick={onPrevious}
-          className="px-4 text-gray-300 text-base "
+          className="px-4 text-gray-300 text-base lg:text-xl"
         >
           Back
         </Button>
@@ -137,10 +138,12 @@ console.log("formState", errors, isValid);
           disabled={!isValid}
           rounded="md"
           intent="primary"
-          className="ml-auto w-1/2 sm:w-1/3 px-4 py-2.5 text-base"
+          className="ml-auto  px-8 py-2.5 md:py-3 xl:py-4 text-base lg:text-xl"
         >
           {/* <Tick className="h-6 w-6 flex-none" /> */}
           Next
+          <Plane className="ml-3 h-5 w-5 flex-none" />
+
         </Button>
       </div>
 

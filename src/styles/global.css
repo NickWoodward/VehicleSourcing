@@ -4,9 +4,29 @@
 
 @layer utilities {
   .poly-clip {
-    clip-path: polygon(0 0, 100% 28%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 20%, 100% 100%, 0% 100%);
   }
 }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* .multistep-form .cf-turnstile
+{
+  width: 100%;
+} */
+.multistep-form iframe
+{
+  width: 75% !important;
+  background-color: transparent !important;
+}
+.multistep-form #content {
+  background-color: transparent !important;
+
+}
+
 
 /* @font-face {
   font-family: 'UKNumberPlate';
@@ -19,6 +39,7 @@
 :root {
   --header-height: 4rem;
   --header-height-sm: 2rem;
+  --header-height-lg: 6rem;
   --footer-height: 8rem;
   --dvh: calc(100svh - var(--header-height));
   --peekHeight: 2rem;

@@ -5,12 +5,12 @@ export const Footer = () => {
   return (
     <footer className=" w-full pb-4 pt-14" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
-      <div className="grid grid-cols-16 grid-row-16 gap-y-4 sm:gap-y-2  sm:max-w-7xl xl:max-w-9xl">
+      <div className="grid grid-cols-16 grid-row-16 gap-y-4 sm:gap-y-2  mx-auto sm:max-w-7xl xl:max-w-9xl 3xl:max-w-header">
 
         {/* <div className="inline-flex flex-col space-y-3 sm:w-full sm:justify-between"> */}
 
           <div className="col-span-full sm:col-span-8 row-start-1 flex flex-col text-white">
-            <Logo />
+            <Logo className="text-xl text-offWhite" />
             <p className="text-sm text-gray-300">Hassle Free Vehicle Purchasing</p>
           </div>
 
