@@ -35,7 +35,7 @@ export const WhyUs = ({className, contactImage, m3Image, mechanicImage}: Props) 
     {
       icon: <PinPointIcon className="w-10  h-10 " />, 
       title: "Leave it to Us", 
-      content:"We'll use our extensive networks to vet and narrow 1000s of vehicles down to that special one.",
+      content:"We'll use our network to vet and narrow 1000s of vehicles down to that special one.",
       justify:"left",
       image: mechanicImage,
       id:2,
@@ -61,11 +61,18 @@ export const WhyUs = ({className, contactImage, m3Image, mechanicImage}: Props) 
 
   const createCard = ({title, content, image, id, to}: CardProps) => {
     
-    return <article key={id} className="card flex flex-col sm:flex-row lg:flex-col max-w-[300px] sm:max-w-none md:max-w-[800px]  mx-auto sm:gap-x-3 md:gap-y-3 rounded ">
-        <div className="card__image flex object-cover rounded-t sm:rounded sm:rounded-l  overflow-hidden shadow-2xl aspect-[3/2] sm:max-w-[240px] md:max-w-[320px] lg:max-w-none">
+    return <article key={id} className="card flex flex-col sm:flex-row sm:space-x-2 md:h-[210px]">
+         <div className="sm:w-3/5 md:w-2/5">
           {image} 
         </div>
-        <div className=" grow flex flex-col bg-offWhite shadow-2xl rounded-b sm:rounded   pt-5 pb-3.5 sm:pt-8 sm:pb-6 md:pb-8 md:pt-9 xl:pt-10 xl:pb-5 px-6 sm:px-8 md:pl-10 ">
+        {/*<div className="w-1/3 px-8 py-8 bg-offWhite">
+          <div className="title font-semibold text-sm xs:text-base md:text-lg xl:text-xl text-primary">{title}</div>
+          <div className="">{content}</div>
+          <ChevronRight className="grow flex items-end ml-auto w-4 h-4 " />
+        </div> */}
+
+
+        <div className="sm:w-2/5 md:w-3/5 flex flex-col bg-offWhite shadow-2xl rounded-b sm:rounded-r sm:rounded-l-none    pt-5 pb-3.5 sm:pt-8 sm:pb-6 md:pb-8 md:pt-9 xl:pt-10 xl:pb-5 px-6 sm:px-8 md:pl-10 ">
           <div className="title font-semibold text-sm xs:text-base md:text-lg xl:text-xl text-primary">{title}</div>
           <div className="content mt-1 xl:mt-2.5 ml-0.5 text-sm xs:text-base md:text-lg xl:text-xl text-textDark leading-5 md:leading-7">{content}</div>
           <ChevronRight className="grow flex items-end ml-auto w-4 h-4 xl:w-5 xl:h-5 mt-2 text-primary" />

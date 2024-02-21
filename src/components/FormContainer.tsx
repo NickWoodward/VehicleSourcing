@@ -1,15 +1,17 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { MultiStepForm } from "./MultiStepForm";
 
+
 const FORM_STEPS = [
   { label: 'The Car' },
   { label: 'You' },
-  { label: '' },
+  { label: 'Part Exchange' },
 ];
 
-const FORM_STATE = {
+export const FORM_STATE = {
   selectedIndex: 0,
   turnstile: '',
+  px: false,
   steps: {
     person: {
       valid: false,
@@ -31,6 +33,22 @@ const FORM_STATE = {
         mileage: '',
       }
     },
+    partExchange: { 
+      valid: false,
+      dirty: false,
+      value: {
+        registrationNumber: '',
+        yearOfManufacture: '',
+        make: '',
+        model: '',
+        colour: '',
+        engineCapacity: '',
+        fuelType: '',
+        motExpiryDate: '',
+        taxDueDate: '',
+        mileage: '',
+      }
+    },
     finished: {
       valid: true,
       dirty: false,
@@ -48,7 +66,6 @@ export const FormStateContext = createContext({
 
 export const FormContainer = () => {
   const [form, setForm] = useState(FORM_STATE);
-  
   const onComplete = useCallback((state: typeof FORM_STATE) => {
     console.log('SUBMIT',state);
   }, []);
@@ -57,9 +74,7 @@ export const FormContainer = () => {
   useEffect(() => {
     const lastStepIndex = FORM_STEPS.length;
 console.log('selectedIndex',form.selectedIndex, {lastStepIndex})
-    if(form.selectedIndex === lastStepIndex - 1) {
-      onComplete(form);
-    }
+    console.log(form);
   }, [form.selectedIndex]);
 
   return (

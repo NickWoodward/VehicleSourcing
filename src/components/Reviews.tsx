@@ -20,8 +20,8 @@ export const Reviews = () => {
   const reviews: ReviewProps[] = [
     {
       reviewId: 1,
-      title: "Lorem ipsum dolor",
-      body: "I thought it wasn't going to match my hoodie, I was panicking.",
+      title: "Jeff was great",
+      body: "Jeff made finding my new car a pleasure. He really knows his stuff and stopped me making some expensive descisions. Recommended",
       author: "Karen Page",
       rating: 1
     },

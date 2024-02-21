@@ -8,14 +8,15 @@ import { FormSchema } from "../../models/Models";
 const TURNSTILE_VERIFY_ENDPOINT = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 const TURNSTILE_KEY = import.meta.env.TURNSTILE_KEY;
-const API_KEY = import.meta.env.MAILGUN_KEY;
-const MAIL_RECIPIENT = import.meta.env.MAIL_RECIPIENT;
-const DOMAIN = 'YOUR_DOMAIN_NAME';
+const MAILGUN_KEY = import.meta.env.MAILGUN_KEY;
+const MAILGUN_URL = import.meta.env.MAILGUN_URL;
+const MAILGUN_RECIPIENT = import.meta.env.MAILGUN_RECIPIENT;
+const MAILGUN_DOMAIN = import.meta.env.MAILGUN_DOMAIN;
 
 
 
 // const mailgun = new Mailgun(formData);
-// const client = mailgun.client({username: 'api', key: API_KEY, url: 'https://api.eu.mailgun.net'});
+// const client = mailgun.client({username: 'api', key: MAILGUN_KEY, url: 'https://api.eu.mailgun.net'});
 
 // const messageData = {
 //   from: 'Excited User <me@samples.mailgun.org>',
@@ -38,7 +39,8 @@ export const POST: APIRoute = async ({ request }) => {
     const { 
       turnstile: token, 
       personValues,
-      carValues
+      carValues,
+      pxValues
     } = body;
 
     // Validate form
@@ -70,23 +72,24 @@ export const POST: APIRoute = async ({ request }) => {
         })
       }
     
-    // Send email
-    console.log({carValues}, {personValues});
-
     const mailgun = new Mailgun(formData);
-    const client = mailgun.client({username: 'api', key: API_KEY, url: 'https://api.eu.mailgun.net'});
+    const client = mailgun.client({username: 'api', key: MAILGUN_KEY, url: MAILGUN_URL});
 
+    const {fName, sName, email, phone} = personValues;
+    const {manufacturer, model, year, mileage} = carValues;
+    const {registrationNumber, make, yearOfManufacture, colour, engineCapacity, motExpiryDate} = pxValues;
     const messageData = {
       from: personValues.email,
-      to: MAIL_RECIPIENT,
+      to: MAILGUN_RECIPIENT,
       subject: 'Enquiry',
-      text: JSON.stringify({
-        carValues,
-        personValues
-      })
+      text: `${fName} ${sName}.\n ${email}.\n ${phone}.\n The car:\n ${manufacturer} ${model} ${year} ${mileage}.\n PX: ${registrationNumber? registrationNumber:""}.\n ${make? make:""}.\n ${yearOfManufacture? yearOfManufacture:""}.\n ${colour? colour:""}.\n ${engineCapacity? engineCapacity:""}.\n ${motExpiryDate? motExpiryDate:""}.`,
+      // text: JSON.stringify({
+      //   carValues,
+      //   personValues
+      // })
     };
 
-    const messageRes = await client.messages.create(DOMAIN, messageData);
+    const messageRes = await client.messages.create(MAILGUN_DOMAIN, messageData);
 
     console.log(messageRes);
 

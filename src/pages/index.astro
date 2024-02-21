@@ -11,7 +11,6 @@ import {HeroText} from '../components/HeroText';
 import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
 import { SectionIntro } from "../components/SectionIntro";
-import { Circle } from "../components/Circle";
 
 
 import heroImage from '../assests/golf-xl.png';
@@ -23,7 +22,7 @@ import { Footer } from "../components/Footer";
 // import { BrandCloud } from "../components/BrandCloud";
 import { FormContainer } from "../components/FormContainer";
 import { Reviews } from "../components/Reviews";
-import { ChatIcon, ContactIcon, StarIcon } from '../utils/svgComponents';
+import { ChatIcon, StarIcon } from '../utils/svgComponents';
 import { cn } from '../utils/utils';
 ---
 
@@ -35,6 +34,40 @@ import { cn } from '../utils/utils';
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
 
+console.log(document.querySelector('.contact-form'))
+
+    const tl = gsap.timeline({
+        defaults: {
+          duration: .4
+        },
+        paused: true
+      });
+      
+      tl.from('.contact-form', {
+        autoAlpha:0,  y:5, ease: "power4.inOut", duration: .7
+      });
+  
+      ScrollTrigger.create({
+        trigger: '.contact',
+        start: "top 65%",
+        end: "90% top",
+        // markers:true,
+        onEnter: () => { 
+          tl.play(0);
+        },
+        // onLeaveBack: () => tl.reverse()
+      });    
+
+      ScrollTrigger.create({
+        trigger: '.contact',
+        start: "top bottom",
+        end: "90% top",
+        // markers:true,
+        onLeaveBack: () => {
+          tl.reverse();
+        }
+      });
+  
 // window.addEventListener('onDomContentLoaded', () => {
 //   const turnstileWidget = document.querySelector('.cf-turnstile') as HTMLElement;
 //   console.log(turnstileWidget);
@@ -57,7 +90,7 @@ import { cn } from '../utils/utils';
   console.log(testSections)
 
 
-  const headerScrollAnimation = gsap.timeline({paused: true});
+  // const headerScrollAnimation = gsap.timeline({paused: true});
   const heroScrollAnimation = gsap.timeline({paused: true});
   const aboutScrollAnimation = gsap.timeline({paused: true});
   const contactScrollAnimation = gsap.timeline({paused: true});
@@ -559,9 +592,9 @@ const heroScrollTl = gsap.timeline({
             variant="dark"
           />
           <WhyUs className="col-span-full  xl:px-page-header z-20 col-end">
-            <Image data-flip="false" class="rounded-t-sm" src={contactImage} widths={[ 275, 550 ]} alt="A woman talking on her mobile phone, facing away from the camera" slot="contactImage"/>
-            <Image data-flip="true" class="rounded-t-sm" src={mechanicImage} widths={[275, 550]} alt="A mechanic with a clipboard looking at a BMW" slot="mechanicImage" />
-            <Image data-flip="true" class="rounded-t-sm" src={m3Image} widths={[275, 550]} alt="A light blue BMW M3" slot="m3Image"/>
+            <Image data-flip="false" class="h-full rounded-t sm:rounded-l md:rounded-r-none object-cover" src={contactImage} widths={[ 275, 550 ]} alt="A woman talking on her mobile phone, facing away from the camera" slot="contactImage"/>
+            <Image data-flip="true" class="h-full rounded-t sm:rounded-l md:rounded-r-none object-cover" src={mechanicImage} widths={[275, 550]} alt="A mechanic with a clipboard looking at a BMW" slot="mechanicImage" />
+            <Image data-flip="true" class="h-full rounded-t sm:rounded-l md:rounded-r-none object-cover" src={m3Image} widths={[275, 550]} alt="A light blue BMW M3" slot="m3Image"/>
           </WhyUs>
 
           <!-- <div class="contact-btn w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
@@ -587,7 +620,7 @@ const heroScrollTl = gsap.timeline({
             titleClasses="invisible opacity-0"
             subtitle="Still Not Sure?"
             subtitleClasses="invisible opacity-0"
-            tagline="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, consequuntur!"
+            tagline="Read more reviews about us and our services"
             className="pl-1 md:px-page-md lg:px-page-xl xl:max-w-2xl flex flex-col justify-start  md:row-span-2"
             taglineClasses="invisible opacity-0"
             
@@ -598,20 +631,20 @@ const heroScrollTl = gsap.timeline({
     
       <Section breakout id="contact" className="contact section relative flex pt-16 pb-14 xs:pt-18 xs:pb-16 sm:pb-24 sm:pt-24 lg:pb-32  bg-gradient-to-bl from-blue-100 to-blue-50  px-page-xxs "  contentClassName=" max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1400px] px-4 xl:px-8" client:visible>
         <!-- <BrandCloud className="absolute top-0 left-0 -translate-y-1/2 " /> -->
-        <div class=" w-full grid grid-cols-1  gap-y-12 xs:gap-y-16 sm:gap-y-16 lg:grid-cols-2  lg:gap-x-20">
+        <div class=" w-full grid grid-cols-1  gap-y-10 xs:gap-y-16 sm:gap-y-16 lg:grid-cols-2  lg:gap-x-20">
 
           <SectionIntro 
             title="Find the Perfect Car"
             titleClasses="invisible opacity-0"
             subtitle="Contact Us Today"
             subtitleClasses="subtitle invisible opacity-0"
-            className="lg:max-w-2xl md:px-page-md lg:px-page-xl xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
+            className="lg:max-w-2xl md:px-page-md lg:px-0 xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
             tagline="Let our team know what you're looking for and we'll get right on it!"
             taglineClasses="invisible opacity-0"
           />   
 
 
-          <div class="col-start-1 lg:col-start-2 lg:col-span-1  lg:row-start-1 lg:row-span-6">
+          <div class="contact-form col-start-1 lg:col-start-2 lg:col-span-1  lg:row-start-1 lg:row-span-6">
             <!-- client:only react elements responsible for their own animation -->
             <!-- <Form className=" " client:only/> -->
             <FormContainer client:only/>

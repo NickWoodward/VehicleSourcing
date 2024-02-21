@@ -1,5 +1,5 @@
 import { atom, map } from 'nanostores';
-import { User } from '../models/Models';
+import { type RegistrationNumber } from '../models/Models'; 
 
-
+export const $registration = atom<RegistrationNumber>('');
 

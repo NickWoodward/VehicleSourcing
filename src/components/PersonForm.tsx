@@ -12,9 +12,10 @@ import { Plane } from "../utils/svgComponents";
 interface PersonFormProps extends ComponentProps<"div">{
   onNext: () => void;
   onPrevious: () => void;
+  step: number;
 }
 
-export const PersonForm = ({onNext, onPrevious, className}: PersonFormProps) => {
+export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProps) => {
   const { form, setForm } = useContext(FormStateContext);
   const {
     register, 
@@ -65,6 +66,7 @@ export const PersonForm = ({onNext, onPrevious, className}: PersonFormProps) => 
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-1 sm:grid-rows-[min-content-fit_1fr] gap-x-3 gap-y-1 sm:gap-x-6 ">
+
         <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="fName" className="block relative py-1.5">Name</label>
           <div className="">
@@ -123,13 +125,14 @@ export const PersonForm = ({onNext, onPrevious, className}: PersonFormProps) => 
         </div>
       </div>
     
-      <div className="flex justify-between items-center gap-x-2 sm:col-span-2 sm:col-start-1  "> 
-        <Button
+      <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-x-2 sm:col-span-2 sm:col-start-1  space-y-3 sm:space-y-0 space-y-reverse sm:space-x-8">
+      <Button
           type="button"
           variant="ghost"
           size="none"
-          onClick={onPrevious}
-          className="px-4 text-gray-300 text-base lg:text-xl"
+          onClick={() => onPrevious()}
+          disabled={step === 0}
+          className="w-full sm:w-auto ml-auto px-8 py-2.5 sm:px-4  disabled:text-gray-300 text-base lg:text-xl"
         >
           Back
         </Button>
@@ -138,11 +141,11 @@ export const PersonForm = ({onNext, onPrevious, className}: PersonFormProps) => 
           disabled={!isValid}
           rounded="md"
           intent="primary"
-          className="ml-auto  px-8 py-2.5 md:py-3 xl:py-4 text-base lg:text-xl"
+          className="ml-auto sm:ml-0 sm:w-auto w-full disabled:bg-slate-300  px-8 py-2.5 md:py-3 xl:py-4 text-base lg:text-xl"
         >
           {/* <Tick className="h-6 w-6 flex-none" /> */}
           Next
-          <Plane className="ml-3 h-5 w-5 flex-none" />
+          <Plane className="hidden ml-3 h-5 w-5 flex-none" />
 
         </Button>
       </div>

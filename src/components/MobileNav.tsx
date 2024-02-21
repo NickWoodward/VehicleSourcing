@@ -96,14 +96,14 @@ export const MobileNav = ({className }: Props) => {
         // animate={isOpen}
         className="burger flex w-6" 
         onClick={toggleMenu} />
-      <Modal 
-        position={menuPosition} 
-        show={isOpen} 
+      {/* <Modal 
+        // position={menuPosition} 
+        // show={isOpen} 
         close={toggleMenu} 
         modalClasses=" fixed flex justify-end w-full h-full mx-auto z-50"
       >
         <Navigation id="modal" type="mobile" className="flex-col space-y-3" onClick={toggleMenu} />
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

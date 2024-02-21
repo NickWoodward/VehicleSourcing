@@ -13,17 +13,22 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
 }
 
-/* .multistep-form .cf-turnstile
+.email {
+  word-wrap: break-word;
+}
+
+.multistep-form .cf-turnstile
 {
   width: 100%;
-} */
+  background-color: rgb(239 246 255) !important;
+}
 .multistep-form iframe
 {
   width: 75% !important;
   background-color: transparent !important;
 }
 .multistep-form #content {
-  background-color: transparent !important;
+  background-color: rgb(239 246 255) !important;
 
 }
 
