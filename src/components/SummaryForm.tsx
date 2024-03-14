@@ -23,25 +23,8 @@ interface SummaryFormProps extends ComponentProps<"div">{
 }
 
 export const SummaryForm = ({onNext, onPrevious, step, loading}:SummaryFormProps) => {
-  const [numberplate, setNumberplate] = useState<string>('');
-  const [platePlaceholder, setPlatePlaceholder] = useState("ENTER REG");
-  const {form, setForm} = useContext(FormStateContext);
-  const handleRegSubmit = async (e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    setForm(
-      produce((formState) => {
-        formState.steps.partExchange.value.registrationNumber = e.currentTarget.value
-      })
-    );    
-    scrollToContact();
-  }
-
-  const scrollToContact = () => {
-    // querySelector used because no shared react component
-    const contact = document.querySelector('.contact');
-    contact?.scrollIntoView({ behavior: 'smooth' });
-  }
+  const {setForm} = useContext(FormStateContext);
 
   return <form className="space-y-12" onSubmit={(e) => {e.preventDefault(); onNext()}} >
       <Summary />
@@ -75,7 +58,7 @@ export const SummaryForm = ({onNext, onPrevious, step, loading}:SummaryFormProps
 const Summary =  () => {
   const { form } = useContext(FormStateContext);
   const steps: FormSteps = form.steps;
-
+console.log({form})
   if(!steps) return;
 
   // const splitEmail = (value: string): [string, string] => {
@@ -85,38 +68,72 @@ const Summary =  () => {
   //   return [username, "@", domain];
   // }
 
-  const summaryClasses = 'grid   gap-4';
-  const titleClasses = 'underline underline-offset-4 text-gray-600 mb-1.5 text-base lg:text-lg font-semibold';
-  let valueClasses = 'text-sm font-normal text-gray-500';
+  const summaryClasses = 'grid grid-cols-1 sm:grid-cols-16  gap-2 gap-y-3';
+  const titleClasses = "block relative font-medium text-gray-500 py-1.5";
+  const entryClasses = 'flex text-sm font-normal text-gray-500 ';
+  let valueClasses = '';
 
-      return (
-        <div className={summaryClasses}>
-          {Object.keys(steps).map((step, index) => {
+  const formatKeys = (key: string) => {
+    switch(key) {
+      case 'fName':
+      case 'sName':
+      case 'email':
+      case 'phone':
+        return '';
+      case 'registrationNumber': return 'Reg';
+      case 'manufacturer':
+      case 'make': return 'Make';
+      case 'yearOfManufacture': return 'Year';
+      case 'engineCapacity': return 'Engine';
+      case 'motExpiryDate': return 'MOT';
+      case 'taxDueDate': return 'Tax';
+      case 'mileage': return 'Mileage';
+      case 'colour': return 'Colour';
+      case 'model': return 'Model';
+      default: return key;
+    }
+  }
+
+    return (
+      <div className={summaryClasses}>
+        {
+          Object.keys(steps).map((step) => {
             if(!form.px && step === 'partExchange' || step === 'finished') return null;
             const currentStep = steps[step]; 
             
             if (currentStep && typeof currentStep === 'object') {
-              
 
               // Type guard: currentStep is an object
               return (
-                <div className=" sm:data-[col-2=true]:col-start-2 sm:data-[col-2=true]:row-start-1 sm:data-[col-2=true]:row-span-2 col-start-1 md:odd:w-3/5" key={step} data-col-2={step === 'partExchange'}>
+                <div className=" sm:data-[col-2=true]:col-start-10 sm:data-[col-2=true]:col-span-7 sm:data-[col-2=true]:row-start-1 sm:data-[col-2=true]:row-span-2 col-start-1 sm:col-span-9" key={step} data-col-2={step === 'partExchange' || (step === 'car' && !form.px) }>
                   <div className={titleClasses}>
                     {step.charAt(0).toUpperCase() + step.slice(1)}
                   </div>
-                  {Object.entries(currentStep.value).map(([key,value], index) => (
-                    // applies class for regular css file (for wrapping)
-                    valueClasses += key ==="email"?  " email":"",
-                    value = typeof value === 'string'? capitalizeFirstLetter(value) : value,
-                    <p key={index} className={valueClasses}>
-                      {value}     
-                    </p>
-                  ))}
+                  <div className="px-3.5 py-2 bg-slate-100 rounded-md ring-slate-200 ring-inset ring-1">
+                    {          
+                      Object.entries(currentStep.value).map(([key,value], index) => (
+                        
+                        // applies class for regular css file (for wrapping)
+                        valueClasses += key ==="email"?  " email":"",
+                        value = typeof value === 'string'? capitalizeFirstLetter(value) : value,
+                        
+                        <div key={index}  className={entryClasses}>
+                          <div>{formatKeys(key)}</div>
+                          <div className={valueClasses}>
+                            {value}
+                          </div>
+
+                        </div>
+                      )
+                      )
+                    }
+                  </div>
                 </div>
               );
             }
             return null; // Return null if currentStep is not an object
-          })}
-        </div>
-      );
+          })
+        }
+      </div>
+    );
 };

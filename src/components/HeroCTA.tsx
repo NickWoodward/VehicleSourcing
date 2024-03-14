@@ -7,8 +7,13 @@ import { Modal } from "./Modal";
 import { RegistrationSummary } from "./RegistrationSummary";
 
 import {$registration} from '../store/store';
+import { cn } from "../utils/utils";
 
-export const HeroCTA = () => {
+interface Props {
+  className?: string
+}
+
+export const HeroCTA = ({className}: Props) => {
   const [plateOpen, setPlateOpen] = useState<boolean>(false);
   const [numberplate, setNumberplate] = useState<string>('');
   const [platePlaceholder, setPlatePlaceholder] = useState("ENTER REG");
@@ -39,8 +44,10 @@ export const HeroCTA = () => {
     setNumberplate(target.value?.toUpperCase())
   }
 
+  const classes = cn("mt-4  xs:mt-4 lg:mt-8 h-24 flex flex-col   space-y-2.5 xl:space-y-2", className);
+
   return (
-    <div className="xxs-v:mt-4 mt-6 xs:mt-4 lg:mt-8 h-24 flex flex-col   space-y-1.5 xl:space-y-2">
+    <div className={classes}>
       {
         plateOpen? 
         <Button   
@@ -64,6 +71,7 @@ export const HeroCTA = () => {
             onFocus={() => setPlatePlaceholder("")}
             onBlur={() => setPlatePlaceholder("ENTER REG")}
             placeholder={platePlaceholder}
+            autoComplete="off"
           />
         </form>
       }
@@ -78,8 +86,8 @@ export const HeroCTA = () => {
         >
         {
           plateOpen? 
-            <span className="ml-1 xl:ml-0 text-sm xs:text-md xl:text-lg text-gray-500">Or sell us your car</span>:
-            <span className="ml-1 xl:ml-0 text-sm xs:text-md xl:text-lg text-gray-500">Get Started</span>  
+            <span className="ml-1 xl:ml-0 text-base xs:text-md xl:text-lg text-textGray font-medium">Or sell us your car</span>:
+            <span className="ml-1 xl:ml-0 text-base xs:text-md xl:text-lg text-textGray font-medium">Get Started</span>  
         }          
         
           <ChevronRight className="h-3 w-3 xl:h-4 xl:w-4 text-gray-500 flex-none" />

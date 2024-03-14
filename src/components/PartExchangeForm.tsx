@@ -97,28 +97,27 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
 
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
     
-      
-        <div className="relative mb-3 sm:row-start-1 sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-          <label htmlFor="model" className="block relative py-1.5">Registration</label>
-          <input   
-            className="cta-btn--hero placeholder-gray-700 text-center font-numberplate outline outline-1 outline-gray-500 space-x-3 px-6 h-[45px] xl:h-[50px] 3xl:h-[60px] w-[160px] xl:w-[180px] 3xl:w-[200px] py-3 xl:py-4 bg-yellow text-gray-800 rounded text-[1.5rem] 3xl:text-[1.7rem] 3xl:leading-10"
-            name="reg"
-            value={numberplate}
-            onChange={changeHandler}
-            onKeyDown={(e) => e.key === "Enter" && handleRegSubmit(e)}
-            onFocus={() => setPlaceholder("")}
-            onBlur={() => {
-              setPlaceholder(numberplate);
+      <div className="w-full grid sm:grid-cols-2 md:grid-cols-16 lg:grid-cols-1 sm:grid-rows-[min-content-fit_1fr] sm:gap-x-8 md:gap-x-0  gap-y-1  ">
 
-            }}
-            // onClick={ () => {console.log("PLATE SUBMIT"); $registration.set(numberplate)}}
-            placeholder={placeholder}
-          />
+        <div className="relative mb-3 sm:row-start-1 sm:col-span-1 sm:col-start-1 md:col-span-6 text-base lg:text-lg font-medium w-full text-gray-500">
+            <label htmlFor="model" className="block relative py-1.5">Registration</label>
+            <input   
+              className="cta-btn--hero placeholder-gray-700 text-center font-numberplate outline outline-1 outline-gray-500 space-x-3 px-6 h-[45px] xl:h-[50px] 3xl:h-[60px] w-[160px] xl:w-[180px] 3xl:w-[200px] py-3 xl:py-4 bg-yellow text-gray-800 rounded text-[1.5rem] 3xl:text-[1.7rem] 3xl:leading-10"
+              name="reg"
+              value={numberplate}
+              onChange={changeHandler}
+              onKeyDown={(e) => e.key === "Enter" && handleRegSubmit(e)}
+              onFocus={() => setPlaceholder("")}
+              onBlur={() => {
+                numberplate? setPlaceholder(numberplate): setPlaceholder("ENTER REG");
+
+              }}
+              
+              placeholder={placeholder}
+            />
         </div>
 
-      
-      <div className="grid sm:grid-cols-2 lg:grid-cols-1 sm:grid-rows-[min-content-fit_1fr] gap-x-3 gap-y-1 sm:gap-x-6 ">
-        <div className="relative sm:row-start-1 sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
+        <div className="relative sm:row-start-2 sm:col-span-1 sm:col-start-1 md:col-span-6 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="model" className="block relative py-1.5">Model</label>
           <div className="">
             <input id="model" type="text" {...register("model", {required: true})}
@@ -130,7 +129,7 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
           </div>
           {errors.model && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.model?.message}</p>}
         </div>
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
+        <div className="relative sm:row-start-3 sm:col-span-1 md:col-span-6 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
           <label htmlFor="mileage" className="block relative py-1.5">Mileage</label>
           <div className="">
             <input id="mileage" type="text" {...register("mileage", {required: true})}
@@ -143,9 +142,9 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
           {errors.mileage && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.mileage?.message}</p>}
         </div>
 
-        <div className="dvla-summary mt-6 sm:row-start-1 sm:row-span-2">
+        <div className="dvla-summary  mt-6 sm:mt-0 md:col-start-9 md:col-span-12 sm:row-start-1 sm:row-span-5">
           <label className="block relative font-medium text-gray-500 py-1.5">Car Details</label>
-          <div className="">   
+          <div className="px-3.5 py-2 bg-slate-100 rounded-md ring-slate-200 ring-inset ring-1">   
             {
             Object.entries(form.steps.partExchange.value).map(([key, value]) => {
               let label;
@@ -154,18 +153,22 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
                 case 'make': label = 'Make'; break;
                 case 'yearOfManufacture': label = 'Year'; break;
                 case 'engineCapacity': label = 'Engine'; break;
-                case 'motExpiryDate': label = 'MOT Expiry'; break;
-                case 'taxDueDate': label = 'Tax Expiry'; break;
+                case 'motExpiryDate': label = 'MOT'; break;
+                case 'taxDueDate': label = 'Tax'; break;
                 default : label = capitalizeFirstLetter(key);
               }
               return (
-                <div key={key} className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
+                <div key={key} className=" relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
                   <div className="">
                     <div 
-                      className="flex justify-between w-full rounded text-sm "
+                      className="flex flex-col xs:flex-row justify-between w-full rounded text-sm "
                     >
-                      <div>{label}:</div>
-                      <div>{value}</div>
+                      <div className="text-gray-600">{label}:</div>
+    
+                      {
+                        key === "engineCapacity"?
+                        <div>{value}cc</div>:<div>{value}</div>
+                      }
                     </div>
                   </div>
               </div>

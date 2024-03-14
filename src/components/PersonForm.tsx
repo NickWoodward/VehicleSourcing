@@ -22,7 +22,7 @@ export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProp
     handleSubmit, 
     formState: { errors, isValid },
     control, 
-    watch
+    // watch
   } = useForm({
     // shouldUseNativeValidation: true,
     resolver: zodResolver(PersonSchema),

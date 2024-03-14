@@ -1,7 +1,6 @@
 import { Review } from "./Review";
-import type { ComponentProps } from "react";
 import { Button } from "./Button";
-import { CarIcon2, Plane } from "../utils/svgComponents";
+import { Plane } from "../utils/svgComponents";
 import { cn } from "../utils/utils";
 
 type ReviewProps = {
@@ -12,10 +11,12 @@ type ReviewProps = {
   rating: 1|2|3|4|5,
 }
 
+interface Props {
+  className: string
+}
 
-
-export const Reviews = () => {
-  const classes = cn("flex flex-col sm:flex-row sm:flex-wrap sm:justify-between space-y-8 sm:space-y-0  sm:gap-y-8 xl:gap-y-20");
+export const Reviews = ({className}: Props) => {
+  const classes = cn("flex flex-col sm:flex-row sm:flex-wrap sm:justify-between space-y-8 sm:space-y-0  sm:gap-y-8 xl:gap-y-20", className);
 
   const reviews: ReviewProps[] = [
     {
@@ -47,6 +48,7 @@ export const Reviews = () => {
   const renderedReviews = reviews.map(({reviewId, title, body, author, rating}: ReviewProps) => {
     return (
       <Review
+        key={reviewId}
         reviewId={reviewId}
         title={title}
         body={body}

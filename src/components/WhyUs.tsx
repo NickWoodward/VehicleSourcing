@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "../utils/utils";
 import { Button } from "./Button";
-import { PinPointIcon, ContactIcon, ChevronRight, KeyIcon, Plane } from "../utils/svgComponents"
+import { PinPointIcon, ContactIcon, KeyIcon, Plane, ArrowIcon } from "../utils/svgComponents"
 
 interface Props extends ComponentProps<"div">{
   contactImage?: ReactNode,
@@ -59,7 +59,7 @@ export const WhyUs = ({className, contactImage, m3Image, mechanicImage}: Props) 
     className
   );
 
-  const createCard = ({title, content, image, id, to}: CardProps) => {
+  const createCard = ({title, content, image, id}: CardProps) => {
     
     return <article key={id} className="card flex flex-col sm:flex-row sm:space-x-2 md:h-[210px]">
          <div className="sm:w-3/5 md:w-2/5">
@@ -72,10 +72,14 @@ export const WhyUs = ({className, contactImage, m3Image, mechanicImage}: Props) 
         </div> */}
 
 
-        <div className="sm:w-2/5 md:w-3/5 flex flex-col bg-offWhite shadow-2xl rounded-b sm:rounded-r sm:rounded-l-none    pt-5 pb-3.5 sm:pt-8 sm:pb-6 md:pb-8 md:pt-9 xl:pt-10 xl:pb-5 px-6 sm:px-8 md:pl-10 ">
-          <div className="title font-semibold text-sm xs:text-base md:text-lg xl:text-xl text-primary">{title}</div>
-          <div className="content mt-1 xl:mt-2.5 ml-0.5 text-sm xs:text-base md:text-lg xl:text-xl text-textDark leading-5 md:leading-7">{content}</div>
-          <ChevronRight className="grow flex items-end ml-auto w-4 h-4 xl:w-5 xl:h-5 mt-2 text-primary" />
+        <div className="sm:w-2/5 md:w-3/5 flex flex-col bg-offWhite shadow-2xl rounded-b-lg sm:rounded-r sm:rounded-l-none  pt-5 pb-8 sm:pt-8 sm:pb-6 md:pb-8 md:pt-9 xl:pt-10 xl:pb-5 px-6 sm:px-8 md:pl-10 ">
+          <div className="relative  flex  items-center justify-between">
+            <div className="title text-lg font-semibold xs:text-base md:text-lg xl:text-xl text-primary">{title}</div>
+            <ArrowIcon className="text-gray-600 rotate-45 w-4 h-4 mx-2" />
+          </div>
+
+          <div className="content mt-1 xl:mt-2.5 ml-0.5 text-base  xs:text-base md:text-lg xl:text-xl text-textGray leading-6 md:leading-7">{content}</div>
+          {/* <ChevronRight className="grow flex items-end ml-auto w-4 h-4 xl:w-5 xl:h-5 mt-2 text-primary" /> */}
         </div>
     </article>
   };

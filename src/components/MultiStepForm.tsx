@@ -1,5 +1,5 @@
-import { useCallback, useContext, type ComponentProps, useRef, useLayoutEffect, useState, type FormEvent, useEffect } from 'react';
-import { FORM_STATE, FormStateContext } from './FormContainer';
+import { useCallback, useContext, type ComponentProps, useRef, useState } from 'react';
+import { FormStateContext } from './FormContainer';
 import { produce } from 'immer';
 import { useStore } from '@nanostores/react';
 import {$registration} from '../store/store';
@@ -11,11 +11,10 @@ import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import { PersonForm } from './PersonForm';
 import { CarForm } from './CarForm';
-import { Plane, Tick } from '../utils/svgComponents';
+import { Tick } from '../utils/svgComponents';
 import React from 'react';
 import { SummaryForm } from './SummaryForm';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
-import { FormSchema } from '../models/Models';
 import { PartExchangeForm } from './PartExchangeForm';
 import { sleep } from '../utils/utils';
 
@@ -24,7 +23,6 @@ interface Props extends ComponentProps<"div"> {
 };
 
 export const MultiStepForm = ({steps}: Props) => {
-  console.log(steps)
   const { form, setForm } = useContext(FormStateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
@@ -58,7 +56,6 @@ export const MultiStepForm = ({steps}: Props) => {
         
         setForm(nextState);
         setPxPlaceholder(() => $reg)
-        console.log("nextState",nextState);
       } catch (error) {
         console.log(error);
         setIsError(true);
@@ -210,7 +207,6 @@ export const MultiStepForm = ({steps}: Props) => {
   }
 
   const checkboxHandler = () => {
-    console.log("PX form",form.px);
     setForm(
       produce((form) => {
         form.px = !form.px;
@@ -219,9 +215,10 @@ export const MultiStepForm = ({steps}: Props) => {
   }
 
   return (
-    <div ref={formWrapperRef} className="multistep-form flex flex-col md:flex-row justify-between lg:py-0 space-y-4 ">
+    <div ref={formWrapperRef} className=" multistep-form flex flex-col md:flex-row justify-between lg:py-0 space-y-4 md:space-y-0 ">
       <Tabs selectedIndex={selectedIndex}>
         {steps.map((step, index) => {
+          console.log({step}, !form.px)
           if(step.label === "Part Exchange" && !form.px) {
             return null;
           }
@@ -237,7 +234,7 @@ export const MultiStepForm = ({steps}: Props) => {
                 data-active={selectedIndex === index}
                 data-selectable={canSelectStep}
                 data-last={index===NUM_STEPS-1}
-                className="hidden tab-line data-[active=false]:data-[selectable=false]:bg-slate-300 grow  h-1 bg-primary" 
+                className="hidden tab-line data-[active=false]:data-[selectable=false]:bg-slate-300 grow  " 
               ></div>}
               <Tab
                 key={step.label}
@@ -245,7 +242,7 @@ export const MultiStepForm = ({steps}: Props) => {
                 data-last={index===NUM_STEPS-1}
                 data-selectable={canSelectStep}
                 closeable={step.label === "Part Exchange"}
-                className=''
+                className='flex-col w-[28%] '
                 onSelect={() => {
                   if (canSelectStep) {
                     setSelectedIndex(index);
@@ -255,10 +252,10 @@ export const MultiStepForm = ({steps}: Props) => {
                 <div 
                   data-active={selectedIndex === index}
                   data-selectable={canSelectStep}
-                  className="data-[active=true]:outline data-[active=false]:data-[selectable=false]:bg-slate-300 flex justify-center items-center bg-primary outline-offset-2  outline-primary text-white rounded-full w-7 h-7">
-                    {index+1}
+                  className="data-[active=true]:outline  flex justify-center items-center bg-primary outline-offset-2  data-[active=true]:outline-primary data-[active=false]:data-[selectable=false]:bg-slate-400 data-[active=false]:data-[selectable=false]:outline text-white rounded-sm w-7 h-7">
+                    {index+1}   
                 </div>
-                <div className="flex justify-center text-sm sm:text-base lg:text-xl items-center pl-3.5">
+                <div className="flex justify-center text-sm sm:text-base lg:text-xl items-center ">
                   {step.label}
                 </div>
               </Tab>
@@ -269,12 +266,12 @@ export const MultiStepForm = ({steps}: Props) => {
         
         {
           !form.px &&
-          <div className='flex items-center px-3 py-2.5'>
-            <label  className="flex items-center text-sm cursor-pointer">
+          <div className='flex items-center px-3 py-2'>
+            <label  className="flex items-center text-base cursor-pointer">
 
               <div className="flex items-center justify-center w-7 h-7">
                 <input 
-                  checked={form.px}
+                  defaultChecked={form.px}
                   onClick={checkboxHandler}
                   type="checkbox" 
                   className='peer overflow-visible w-6 h-6 appearance-none bg-slate-200 border-2 border-slate-300 rounded accent-primary text-white shrink-0 focus:outline-none focus:ring-offset-0 focus:ring-1 focus:ring-blue-100 checked:bg-primary checked:border-0 disabled:border-steel-400 disabled:bg-steel-400 cursor-pointer' 
@@ -300,8 +297,8 @@ export const MultiStepForm = ({steps}: Props) => {
           </div>
         }
       </Tabs>
-      <div>
-        <div className="bg-slate-50  px-6 xs:px-8 sm:px-10 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded md:w-3/5">
+      <div className="flex flex-col space-y-6 md:w-4/6">
+        <div className="bg-slate-50  px-6 xs:px-8 sm:px-10 md:px-8 pb-8 xs:pb-10 pt-4 xs:pt-6 shadow-md rounded">
           { !isComplete && form.selectedIndex === 0 && <CarForm onNext={nextFormStep} onPrevious={previousFormStep} step={form.selectedIndex} /> }
           { !isComplete && form.selectedIndex === 1 && <PersonForm onNext={nextFormStep} onPrevious={previousFormStep} step={form.selectedIndex} /> }
           { !isComplete && form.selectedIndex === 2 && form.px && <PartExchangeForm onNext={nextFormStep} onPrevious={previousFormStep} placeholder={pxPlaceholder} setPlaceholder={setPxPlaceholder} step={form.selectedIndex} /> }
@@ -315,7 +312,7 @@ export const MultiStepForm = ({steps}: Props) => {
             <a href="#" className="font-medium pl-1.5 lg:text-gray-900 underline">Privacy Policy</a>.
         </div>
     
-        <Turnstile ref={turnstileRef} siteKey='1x00000000000000000000AA' />
+        <Turnstile className='ml-auto ' ref={turnstileRef} siteKey='1x00000000000000000000AA' />
 
       </div>
         

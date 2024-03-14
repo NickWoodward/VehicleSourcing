@@ -9,6 +9,8 @@ interface IconProps extends ComponentProps<"svg">{
   solid?: boolean,
   flip?: boolean
 }
+interface SVGProps extends ComponentProps<"svg"> {}
+
 interface BurgerProps extends ComponentProps<"div">{
   // animate: boolean;
   // onToggle: () => void;
@@ -205,12 +207,20 @@ export const ChevronLeft = (props: Props) => {
 export const ArrowTopRight = (props: Props) => {
   return (
     <div {...props}>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3.5} stroke="currentColor" >
         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
       </svg>
     </div>
 
   )
+}
+export const ArrowIcon = ({className}: SVGProps) => {
+  const classes = cn("size-4", className);
+  return (
+    <svg xmlns="http:www.w3.org/2000/svg" fill="currentColor" className={classes} viewBox="0 0 24 24"  stroke="currentColor" >
+      <path strokeLinecap="round" strokeWidth={4} strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+  );
 }
 
 
@@ -648,7 +658,7 @@ export const FordLogo = (props: Props) => {
   );
 };
 
-export const InstagramLogo = (props) => (
+export const InstagramLogo = (props: SVGProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={200}
@@ -666,7 +676,7 @@ export const InstagramLogo = (props) => (
   </svg>
 )
 
-export const ThreadsLogo = (props) => (
+export const ThreadsLogo = (props: SVGProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={200}
@@ -686,51 +696,7 @@ export const ThreadsLogo = (props) => (
 );
 
 
-
-export const Logo = (props) => {
-  return (
-    <div {...props}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        id="Layer_2"
-        data-name="Layer 2"
-        viewBox="0 0 141.81684 149.21684"
-        {...props}
-      >
-        <defs id="defs1">
-          <style id="style1">
-            {".cls-1{fill:#26b2fc;stroke-width:0;fill-rule:evenodd}"}
-          </style>
-        </defs>
-        <g id="Layer_1-2" data-name="Layer 1" transform="translate(-12.157 -.013)">
-          <g id="g3">
-            <path
-              id="path2"
-              d="M100.518 10.16c-25.78-1.87-48.2 17.51-50.07 43.3-1.87 25.78 17.52 48.2 43.3 50.07 25.78 1.87 48.2-17.52 50.07-43.3 1.87-25.78-17.52-48.2-43.3-50.07zm-45.57 8.59c-19.84 21.97-19.34 55.19.33 76.54l-3.93 4.36c-1.79-1.62-5.01-5.26-8.06-1.88l-30.1 33.33a4.025 4.025 0 0 0 .29 5.67l12.65 11.43a4.025 4.025 0 0 0 5.67-.29l30.1-33.33a4.025 4.025 0 0 0-.29-5.67l-2.4-2.17 3.93-4.35c23.24 17.39 56.34 14.52 76.18-7.45 21.04-23.3 19.21-59.24-4.09-80.27-23.3-21.04-59.24-19.21-80.28 4.09z"
-              style={{
-                fill: "currentcolor",
-                fillRule: "evenodd",
-                strokeWidth: 0,
-              }}
-            />
-            <path
-              id="path3"
-              d="M58.018 54.28c0 4.87 7.4 5.22 7.66.09.83-16.44 16.07-30.27 33.74-29h.27c4.9 0 5.21-7.45.05-7.66-22.17-.88-39.36 13.99-41.69 36.04l-.03.51z"
-              style={{
-                strokeWidth: 0,
-                fill: "#26b2fc",
-              }}
-            />
-          </g>
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-
-
-export const FacebookLogo = (props) => (
+export const FacebookLogo = (props: SVGProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={200}

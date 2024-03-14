@@ -12,7 +12,7 @@ module.exports = {
       lg: ['1.125rem', { lineHeight: '2rem' }],
       xl: ['1.25rem', { lineHeight: '1.75rem' }],
       '2xl': ['1.5rem', { lineHeight: '2rem' }],
-      '3xl': ['2rem', { lineHeight: '2.75rem' }],
+      '3xl': ['1.75rem', { lineHeight: '2.5rem' }],
       '4xl': ['2.5rem', { lineHeight: '3rem' }],
       '5xl': ['3rem', { lineHeight: '1' }],
       '6xl': ['3.75rem', { lineHeight: '1' }],
@@ -63,6 +63,12 @@ module.exports = {
       gridTemplateColumns: {
         // Simple 16 column grid
         '16': 'repeat(16, minmax(0, 1fr))',
+        "content-xxs": '1.5rem 1fr 1.5rem',
+        "content-xs": '2rem 1fr 2rem',
+        "content-sm": '4rem 1fr 4rem',
+        "content-md": '6rem 1fr 6rem',
+        "content-lg": '6rem 1fr 1fr',
+        "content-xl": '2fr 7fr 7fr',
       },
        gridRowStart: {
         '7': '7',
@@ -144,6 +150,7 @@ module.exports = {
       },
 			height: {
 				dvh: "var(--dvh)",
+        svh: "var(--svh)",
         peek: "var(--peekHeight)",
         dvhMinusPeek: "var(--dvhMinusPeek)",
         dvhPlusPeek: "var(--dvhPlusPeek)",
@@ -164,6 +171,7 @@ module.exports = {
       },
 			colors: {
 				primary: "var(--primary)",
+        primaryDark: "var(--primaryDark)",
 				dark: "var(--dark)",
         darker: "hsl(215 28% 24%)",
         offWhite: "hsl(215, 33%, 93%)",
@@ -173,7 +181,8 @@ module.exports = {
         circle: "var(--c-cirle)",
         gradientDark: "var(--gradient-dark)",
         gradientLight: "var(--gradient-light)",
-        yellow: "hsl(52 97% 50%)",
+        yellow: "var(--yellow)",
+        background: "blue-200"
 
         // "#888e98" also maybe secondary?
 			},

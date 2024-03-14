@@ -42,14 +42,14 @@ export const Review = ({className, reviewId, title, body, author,rating, ...prop
       <figure
         {...props}
       >
-        <blockquote className="text-gray-600">
+        <blockquote className="text-primaryDark">
           <StarRating rating={rating} />
           <p className="mt-3 xl:mt-2 text-lg xl:text-xl font-semibold leading-5 before:content-['“'] after:content-['”']">
             {title}
           </p>
-          <p className="mt-2 xl:mt-3 text-base sm:text-lg xl:text-xl text-textGray font-light leading-7 line-clamp-4">{body}</p>
+          <p className="mt-2 xl:mt-3 text-base sm:text-lg xl:text-xl text-textGray font-light leading-6 line-clamp-4">{body}</p>
         </blockquote>
-        <figcaption className="mt-2 xl:mt-3 text-base xl:text-lg font-medium text-gray-600 before:content-['–_']">
+        <figcaption className="mt-2 xl:mt-3 text-base xl:text-lg font-medium text-primaryDark before:content-['–_']">
           {author}
         </figcaption>
       </figure>

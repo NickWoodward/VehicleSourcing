@@ -71,12 +71,6 @@ export const FormContainer = () => {
   }, []);
 
 
-  useEffect(() => {
-    const lastStepIndex = FORM_STEPS.length;
-console.log('selectedIndex',form.selectedIndex, {lastStepIndex})
-    console.log(form);
-  }, [form.selectedIndex]);
-
   return (
     <FormStateContext.Provider value={{ form, setForm }} >
       <MultiStepForm steps={FORM_STEPS} />

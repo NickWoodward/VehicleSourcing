@@ -7,7 +7,7 @@ import { cn } from "../utils/utils";
 interface Props extends ComponentProps<"div"> {
   modalClasses?: string;
   contentClasses?: string;
-  close: () => void;
+  // close: () => void;
   // show: boolean,
   children: React.ReactNode;
   // position?: {right: string, top: string}
@@ -17,8 +17,8 @@ interface Props extends ComponentProps<"div"> {
 //   { modalClasses, contentClasses, close, children, }: Props,
 //   ref
 // ) {
-  export const Modal = ({modalClasses, contentClasses, close, children}:Props) => {
-    const modalClassName = cn("flex absolute top-0 left-0 w-full g-full cursor-pointer z-50", 
+  export const Modal = ({modalClasses, contentClasses, onClick, children}:Props) => {
+    const modalClassName = cn("flex fixed top-0 left-0 w-full h-svh cursor-pointer z-50", 
       modalClasses
     );
   
@@ -66,10 +66,11 @@ interface Props extends ComponentProps<"div"> {
       >
         <div
           id="overlay"
-          className="h-full w-full  inset-0 bg-dark opacity-0 cursor-pointer"
-          onClick={() => { close() }}
-        />
-        {children}
+          className="fixed top-headerHeight w-full h-dvh  bg-dark opacity-90 cursor-pointer"
+          onClick={onClick }
+        >
+        </div>
+          {children}
       </div>,
     // </Transition>,
 
