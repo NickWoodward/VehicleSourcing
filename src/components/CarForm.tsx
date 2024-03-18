@@ -53,13 +53,13 @@ export const CarForm = ({ onNext, onPrevious, step, className }: Props ) => {
     onNext();
   }
 
-  const classes = cn('space-y-10', className);
+  const classes = cn('flex  flex-col w-full space-y-8', className);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes} >
-      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-x-3 gap-y-1 sm:gap-x-6 ">
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor="manufacturer" className="block relative py-1.5">Manufacturer</label>
+      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-x-4 gap-y-2 sm:gap-x-6 ">
+        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-slate-500">
+          <label htmlFor="manufacturer" className="block font-medium relative py-1">Make</label>
           <div>
             <input
               id="manufacturer"
@@ -70,11 +70,11 @@ export const CarForm = ({ onNext, onPrevious, step, className }: Props ) => {
               {...register("manufacturer", { required: true })}
             />
           </div>
-          {errors.manufacturer && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.manufacturer?.message}</p>}
+          {errors.manufacturer && <p className="absolute  top-0 right-0 py-1 pr-1 text-sm text-red-500">{errors.manufacturer?.message}</p>}
         </div>
 
-        <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
-          <label htmlFor="model" className="block relative py-1.5">
+        <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-slate-500">
+          <label htmlFor="model" className="block font-medium relative py-1">
             Model
           </label>
 
@@ -88,11 +88,11 @@ export const CarForm = ({ onNext, onPrevious, step, className }: Props ) => {
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
-          {errors.model && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.model?.message}</p>}
+          {errors.model && <p className="absolute  top-0 right-0 py-1 pr-1 text-sm text-red-500">{errors.model?.message}</p>}
         </div>
 
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-gray-500">
-          <label htmlFor="year" className="block relative py-1.5">Year</label>
+        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-slate-500">
+          <label htmlFor="year" className="block font-medium relative py-1">Year</label>
 
           <div>
             <input
@@ -104,11 +104,11 @@ export const CarForm = ({ onNext, onPrevious, step, className }: Props ) => {
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
-          {errors.year && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.year?.message}</p>}
+          {errors.year && <p className="absolute  top-0 right-0 py-1 pr-1 text-sm text-red-500">{errors.year?.message}</p>}
         </div>
 
-        <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-gray-500">
-          <label htmlFor="mileage" className="block relative py-1.5">Mileage</label>
+        <div className="relative sm:col-span-1 sm:col-start-2 text-base font-medium w-full text-slate-500">
+          <label htmlFor="mileage" className="block font-medium relative py-1">Mileage</label>
 
           <div>
             <input
@@ -118,7 +118,7 @@ export const CarForm = ({ onNext, onPrevious, step, className }: Props ) => {
               className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
-          {errors.mileage && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.mileage?.message}</p>}
+          {errors.mileage && <p className="absolute  top-0 right-0 py-1 pr-1 text-sm text-red-500">{errors.mileage?.message}</p>}
         </div>
       </div>
 

@@ -60,27 +60,27 @@ export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProp
     onNext();
   }
 
-  const classes = cn('space-y-10', className);
+  const classes = cn('flex  flex-col w-full space-y-8', className);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-1 sm:grid-rows-[min-content-fit_1fr] gap-x-3 gap-y-1 sm:gap-x-6 ">
+      <div className="grid sm:grid-cols-2 sm:grid-rows-[min-content-fit_1fr]  gap-x-4 gap-y-2 sm:gap-x-6 ">
 
-        <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-          <label htmlFor="fName" className="block relative py-1.5">Name</label>
+        <div className="relative sm:col-span-1 sm:col-start-1 text-base font-medium w-full text-slate-500">
+          <label htmlFor="fName" className="block font-medium relative py-1">Name</label>
           <div className="">
             <input id="fName" type="text" {...register("fName", {required: true})}
               required
               autoComplete="given-name"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
             
           </div>
           {errors.fName && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.fName?.message}</p>}
         </div>
         <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-          <label htmlFor="sName" className="block relative py-1.5" >
+          <label htmlFor="sName" className="block font-medium relative py-1" >
             Surname
           </label>
           {errors.sName && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.sName?.message}</p>}
@@ -89,12 +89,12 @@ export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProp
             <input id="sName" type="text" {...register("sName", {required: true})}
               required
               autoComplete="family-name"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
           </div>
         </div>
         <div className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-          <label htmlFor="email" className="block relative py-1.5">
+          <label htmlFor="email" className="block font-medium relative py-1">
             Email
 
           </label>
@@ -103,13 +103,13 @@ export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProp
             <input id="email" type="text" {...register("email", {required: true})}
               required
               autoComplete="email"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
           </div>
           {errors.email && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.email?.message}</p>}
         </div>
         <div className="relative sm:col-span-1 sm:col-start-2 lg:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-          <label htmlFor="phone" className="block relative py-1.5">
+          <label htmlFor="phone" className="block font-medium relative py-1">
             Phone
 
           </label>
@@ -118,7 +118,7 @@ export const PersonForm = ({onNext, onPrevious, step, className}: PersonFormProp
             <input id="phone" type="text" {...register("phone", { required: true })}
               required
               autoComplete="tel"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
               />
           </div>
           {errors.phone && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.phone?.message}</p>}

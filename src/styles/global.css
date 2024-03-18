@@ -4,7 +4,7 @@
 
 @layer utilities {
   .poly-clip {
-    clip-path: polygon(0 0, 100% 20%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 100%);
   }
 }
 
@@ -59,6 +59,8 @@ html { scroll-behavior: smooth; }
   --peekHeight: 2rem;
   --dvhMinusPeek: calc(var(--dvh) - var(--peekHeight));
   --dvhPlusPeek: calc(var(--dvh) + var(--peekHeight));
+
+  --about-offset: calc(var(--header-height) + 2rem);
 
   --slate-200: #e2e8f0;
 

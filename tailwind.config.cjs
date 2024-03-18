@@ -11,10 +11,12 @@ module.exports = {
       base: ['1rem', { lineHeight: '1.5rem' }],
       lg: ['1.125rem', { lineHeight: '2rem' }],
       xl: ['1.25rem', { lineHeight: '1.75rem' }],
-      '2xl': ['1.5rem', { lineHeight: '2rem' }],
+      '2xl': ['1.4rem', { lineHeight: '1.9rem' }],
+      '2.5xl': ['1.6rem', { lineHeight: '1.9rem' }],
+
       '3xl': ['1.75rem', { lineHeight: '2.5rem' }],
-      '4xl': ['2.5rem', { lineHeight: '3rem' }],
-      '5xl': ['3rem', { lineHeight: '1' }],
+      '4xl': ['2.3rem', { lineHeight: '3rem' }],
+      '5xl': ['2.8rem', { lineHeight: '1' }],
       '6xl': ['3.75rem', { lineHeight: '1' }],
       '7xl': ['4.5rem', { lineHeight: '1' }],
       '8xl': ['6rem', { lineHeight: '1' }],
@@ -63,12 +65,16 @@ module.exports = {
       gridTemplateColumns: {
         // Simple 16 column grid
         '16': 'repeat(16, minmax(0, 1fr))',
-        "content-xxs": '1.5rem 1fr 1.5rem',
-        "content-xs": '2rem 1fr 2rem',
-        "content-sm": '4rem 1fr 4rem',
-        "content-md": '6rem 1fr 6rem',
-        "content-lg": '6rem 1fr 1fr',
-        "content-xl": '2fr 7fr 7fr',
+        "content-xxs": '8% 1fr 8%',
+        "content-xs": '8% 1fr 8%',
+        "content-sm": '5% 1fr 5%',
+        "content-md": '8% 1fr 8%',
+        "content-lg": '8% 1fr 8%',
+        "content-xl": '10% 1fr 10%',
+        "content-2xl": '1fr 1250px 1fr',
+        "content-hero": '1fr 1250px 1fr',
+        "content-about": '1fr 1fr 1fr 1250px 1fr 1fr 1fr',
+        "content-contact": '10% repeat(8, 156.25px) 10%'
       },
        gridRowStart: {
         '7': '7',

@@ -8,7 +8,7 @@ const DVLA_TEST_URL = import.meta.env.DVLA_TEST_URL;
 const DVLA_URL = import.meta.env.DVLA_URL;
 
 export const POST: APIRoute = async ({ request }) => {
-
+  console.log('called dvla api')
   const body = await request.json();
   const numberplate = body.numberplate
   if(!body.numberplate) {

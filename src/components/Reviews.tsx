@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const Reviews = ({className}: Props) => {
-  const classes = cn("flex flex-col sm:flex-row sm:flex-wrap sm:justify-between space-y-8 sm:space-y-0  sm:gap-y-8 xl:gap-y-20", className);
+  const classes = cn("flex flex-col sm:flex-row sm:flex-wrap sm:justify-between mx-auto max-w-[450px] sm:max-w-none space-y-8 sm:space-y-0  sm:gap-y-8 xl:gap-y-20", className);
 
   const reviews: ReviewProps[] = [
     {
@@ -46,6 +46,15 @@ export const Reviews = ({className}: Props) => {
   // const carouselOptions = { loop: true, duration: 4000, watchDrag: false }
 
   const renderedReviews = reviews.map(({reviewId, title, body, author, rating}: ReviewProps) => {
+    let reviewClasses; 
+    
+    switch (reviewId) {
+      case 1: reviewClasses = 'rounded-bl-2xl'; break;
+      case 2: reviewClasses = 'rounded-tr-2xl'; break;
+      case 3: reviewClasses = 'rounded-br-2xl'; break;
+      case 4: reviewClasses = 'rounded-tl-2xl';  break;
+      default: reviewClasses = 'rounded-2xl'
+    }
     return (
       <Review
         key={reviewId}
@@ -54,6 +63,7 @@ export const Reviews = ({className}: Props) => {
         body={body}
         author={author}
         rating={rating}
+        reviewClasses={reviewClasses}
       />
     );
   })
@@ -61,18 +71,7 @@ export const Reviews = ({className}: Props) => {
     <div className={classes}>
       {/* <Carousel slides={renderedReviews} axis="y" autoplayOptions={autoplayOptions} options={carouselOptions} /> */}
       {renderedReviews}
-      <div className="flex flex-col ml-auto sm:w-[48%] xl:w-[32%] justify-center items-center xl:items-start px-2 xl:pl-6 space-y-8 ">
-        {/* <p className="flex w-full text-xl xl:text-xl xl:font-medium text-textGray text-center xl:text-start max-w-xs px-1.5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p> */}
-        <Button     
-          className="w-full mx-auto xl:ml-auto xl:mr-2 sm:w-auto max-w-[300px] px-4 py-2.5 md:py-3 xl:py-4"
-          rounded
-          intent="primary"   
-          size="md"
-        >
-          <span className="text-base xl:text-xl">Get Started</span>
-          <Plane className="ml-3 h-5 w-5 flex-none" />
-        </Button>
-      </div>
+      
     </div>
   );
 };

@@ -23,8 +23,9 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm  ou
       monochrome: "bg-white text-text border border-gray-400",
     },
     size: {
+      // max-w-[300px] px-4 py-2.5 md:py-3 xl:py-4
       sm:"pl-1.5 py-2 pr-1.5",
-      md:"pl-3 py-3 pr-3 md:pl-4",
+      md:"pl-3 py-3 pr-4 md:pl-4",
       none: "p-0"
     },
     aspect: {
@@ -32,7 +33,7 @@ export const buttonVariants = cva("flex items-center justify-center  text-sm  ou
       circle: "p-4 rounded-full",
     },
     rounded: {
-      true: "rounded-lg",
+      true: "rounded-md",
       sm: "rounded-sm",
       md: "rounded-md",
       lg: "rounded-lg",

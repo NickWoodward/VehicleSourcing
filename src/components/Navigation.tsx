@@ -17,9 +17,8 @@ export const Navigation = ({className}: Props) => {
 
   const navItems = [
     {name: "About", to: "/#about"},
-    {name: "Why Us", to: "#why-us"},
-    {name: "Contact", to: "#contact"},
-    {name: "Data Centres", to: "/datacenters"},
+    {name: "Why Us", to: "/#testimonials"},
+    {name: "Contact", to: "/#contact"},
 
   ];
 

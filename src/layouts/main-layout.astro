@@ -21,13 +21,15 @@ const { classes } = Astro.props;
 </head>
 <body>
   <main class={classes}>
-    <HeaderTest className="fixed">
+    <HeaderTest className="fixed" client:load>
       <!-- <div class="header-bg opacity-0 bg-sky-50 shadow-sm  fixed h-headerHeight 3xl:h-headerHeight top-0 left-0 w-full z-50"></div> -->
       <!-- <Logo /> -->
       <Navigation className="" client:load />
  
-      <Logo className=" logo-light opacity-0  top-0 left-0 h-headerHeight 3xl:h-headerHeight-lg  flex items-center pl-6 3xl:pl-header-lg  text-slate-50 text-[23px] 3xl:text-[30px] z-50" />
-      <Logo className=" logo-dark fixed top-0 left-0 h-headerHeight 3xl:h-headerHeight-lg flex items-center pl-6 3xl:pl-header-lg text-slate-700 text-[23px] 3xl:text-[30px] z-50" />
+      <a href="#hero">
+        <Logo  className=" logo-light opacity-0  top-0 left-0 h-headerHeight   flex items-center pl-6 3xl:pl-header-lg  text-slate-50 text-[23px] 3xl:text-[30px] z-50" />
+        <Logo className=" logo-dark fixed top-0 left-0 h-headerHeight  flex items-center pl-6 3xl:pl-header-lg text-slate-700 text-[23px] 3xl:text-[30px] z-50" />
+      </a>
 
 <!-- 
       <MobileNav className="fixed top-0 right-0 h-headerHeight pr-6 text-dark z-50" client:only="react"/>

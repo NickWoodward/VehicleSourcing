@@ -13,6 +13,7 @@ import {HeroText} from '../components/HeroText';
 import { WhyUs } from "../components/WhyUs";
 import "../styles/global.css";
 import { SectionIntro } from "../components/SectionIntro";
+import { TagLine } from "../components/SectionIntro";
 
 
 import heroImage from '../assests/golf-xl.png';
@@ -24,6 +25,7 @@ import { Footer } from "../components/Footer";
 // import { BrandCloud } from "../components/BrandCloud";
 import { FormContainer } from "../components/FormContainer";
 import { Reviews } from "../components/Reviews";
+import { Button } from '../components/Button';
 // import { ChatIcon, StarIcon } from '../utils/svgComponents';
 // import { cn } from '../utils/utils';
 ---
@@ -213,14 +215,14 @@ const heroScrollTl = gsap.timeline({
         duration: .7
       }, "<.3");
 
-    aboutScrollAnimation
-    .to([
-        aboutScope('.subtitle'), 
-        aboutScope('.title'),
-        aboutScope('.tagline'),
-      ], { 
-        autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
-      })
+    // aboutScrollAnimation
+    // .to([
+    //     aboutScope('.subtitle'), 
+    //     aboutScope('.title'),
+    //     aboutScope('.tagline'),
+    //   ], { 
+    //     autoAlpha:1, y:0, ease: "back.in(2)", stagger: .12, duration: .8 
+    //   })
    
     const cards = cardsScope('.card');
     // const btns = aboutScope('.contact-btn');
@@ -490,7 +492,7 @@ const heroScrollTl = gsap.timeline({
           src: url('/fonts/UKNumberPlate.ttf');
         } */
       </style>
-      <!-- <Section breakout className="hero section relative justify-center flex  bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
+      <!-- <Section breakout className="hero sectionrelative justify-center flex  bg-gradient-to-bl from-slate-200 to-slate-50 z-10" height="full" contentClassName="xl:max-w-8xl">
 
 
         <div class="grid  h-full">
@@ -527,7 +529,7 @@ const heroScrollTl = gsap.timeline({
 
 
 <!-- 
-      <Section breakout id='hero' className="hero section section-1 relative px-page-xxs pt-headerHeight flex bg-gradient-to-bl from-blue-100 to-blue-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[850px] lg:max-w-[1100px] 3xl:max-w-[1300px]  md:px-0 lg:px-0">
+      <Section breakout id='hero' className="hero sectionsection-1 relative px-page-xxs pt-headerHeight flex bg-gradient-to-bl from-blue-100 to-blue-50 z-10" height="full" contentClassName="content max-w-[400px] sm:max-w-[700px] md:max-w-[850px] lg:max-w-[1100px] 3xl:max-w-[1300px]  md:px-0 lg:px-0">
         
        <div class="chat-icon fixed bottom-2 right-4 xs:bottom-8 xs:right-8 xl:right-14 z-50">
           <ChatIcon className="w-12 h-12 xs:w-14 xs:h-14 xl:w-20 xl:h-20 z-50" />
@@ -586,22 +588,22 @@ const heroScrollTl = gsap.timeline({
       </Section> -->
 
 <!-- ************** TEST ************ -->
-<SectionTest headerOffset height="full" className="section-1 bg-sky-50 grid grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-md lg:grid-cols-content-lg xl:grid-cols-content-xl items-center">	
-	<HeroText className="hero flex-col col-start-2 col-span-1 row-start-1 place-self-end" client:load />
+<SectionTest id="hero" headerOffset height="full" className="section-1 bg-sky-50 grid grid-cols-content-xxs  xs:grid-cols-content-md sm:grid-cols-content-sm md:grid-cols-content-md lg:grid-cols-content-md xl:grid-cols-content-xl 2xl:grid-cols-content-2xl ">	
+
+	<HeroText className="hero self-end flex-col col-start-2 col-span-1 row-start-1 sm:row-start-1 lg:row-start-1 row-span-2   " client:load />
   <!-- <div class="IMAGE__BORDER hidden lg:flex -translate-x-3 bg-slate-200 row-start-1 col-start-1 lg:col-start-3 col-span-full h-full lg:poly-clip"></div>
   <div class="IMAGE__BG bg-gray-600 row-start-1 col-start-1 lg:col-start-3 col-span-full h-full lg:poly-clip"></div> -->
   <Image 
-    data-flip="false" 
-    class="IMAGE col-start-2 lg:col-start-3 col-span-1 row-start-2 row-span-3 place-self-center z-40 lg:poly-clip" 
+    class="IMAGE col-start-2  col-span-1 row-start-3 sm:row-start-2 lg:row-start-2 xl:row-start-2 row-span-3 sm:row-span-4   place-self-start  self-center xs:place-self-end xs:self-center  w-full max-w-[380px] md:max-w-[430px] lg:max-w-[600px] xl:max-w-[650px] 2xl:max-w-[750px] z-40  xs:-scale-x-100" 
     src={heroImage} 
     widths={[ ]} 
     alt="A closeup of our servers" slot="bgImage"
   />	
-  <div class="hero-background  h-full sm:-scale-x-100  self-end col-start-1 col-span-full row-start-3 row-span-3  bg-gradient-to-bl sm:bg-gradient-to-br from-gradientDark to-gradientLight poly-clip"></div>
+  <div class="hero-background  h-full sm:-scale-x-100  self-end col-start-1 col-span-full row-start-4 sm:row-start-3 row-span-3  bg-gradient-to-bl  from-gradientDark to-gradientLight poly-clip"></div>
 </SectionTest>
 
 
-      <SectionTest id="about" className=" about section  relative grid pb-10 space-y-14 grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-md lg:grid-cols-content-lg xl:grid-cols-content-xl items-center bg-gradient-to-br from-gradientLight to-gradientDark">
+      <SectionTest id="about" className=" about section scroll-mt-[var(--about-offset)] -translate-y-1 relative grid pb-28 sm:pb-28 xl:pb-32 space-y-14 sm:space-y-16 xl:space-y-28 grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-sm  lg:grid-cols-content-sm xl:grid-cols-[5%_5%_1fr_1fr_1fr_5%_5%] 2xl:grid-cols-content-about  items-center bg-gradient-to-br sm:bg-gradient-to-bl from-gradientLight to-gradientDark">
 
         <SectionIntro 
           title="How It Works"
@@ -609,15 +611,33 @@ const heroScrollTl = gsap.timeline({
           subtitle="3 Easy Steps"
           subtitleClasses="subtitle invisible opacity-0",
           tagline="Take the hassle out of buying your car. Give us a call and sit back and relax"
-          className="pl-1 flex flex-col justify-start col-start-2 col-span-1"
+          className=" flex flex-col justify-start col-start-2 col-span-1 xl:col-start-3 xl:col-span-2"
           taglineClasses="invisible opacity-0"
           variant="dark"
         />
-          <WhyUs className="col-start-2 col-span-1 z-20 ">
-            <Image data-flip="false" class="h-full rounded-t-lg sm:rounded-l md:rounded-r-none object-cover" src={contactImage} widths={[ 275, 550 ]} alt="A woman talking on her mobile phone, facing away from the camera" slot="contactImage"/>
-            <Image data-flip="true" class="h-full rounded-t-lg sm:rounded-l md:rounded-r-none object-cover" src={mechanicImage} widths={[275, 550]} alt="A mechanic with a clipboard looking at a BMW" slot="mechanicImage" />
-            <Image data-flip="true" class="h-full rounded-t sm:rounded-l md:rounded-r-none object-cover" src={m3Image} widths={[275, 550]} alt="A light blue BMW M3" slot="m3Image"/>
-          </WhyUs>
+        <WhyUs className="col-start-2 col-span-1 sm:col-start-2 sm:col-span-1 lg:col-start-1 lg:col-span-3 xl:col-span-5 xl:col-start-2 z-20 ">
+          <Image data-flip={false} class="h-full xl:h-full rounded-tr-2xl sm:rounded-none sm:rounded-tr-2xl  object-cover" src={contactImage} widths={[ 275, 550 ]} alt="A woman talking on her mobile phone, facing away from the camera" slot="contactImage"/>
+          <Image data-flip={true} class="h-full xl:h-full rounded-tl-2xl sm:rounded-none sm:rounded-tl-2xl object-cover" src={mechanicImage} widths={[275, 550]} alt="A mechanic with a clipboard looking at a BMW" slot="mechanicImage" />
+          <Image data-flip={true} class="h-full xl:h-full rounded-tr-2xl sm:rounded-none sm:rounded-tr-2xl object-cover" src={m3Image} widths={[275, 550]} alt="A light blue BMW M3" slot="m3Image"/>
+        </WhyUs>
+        <div class="SECTION_OUTRO max-w-[350px] mx-auto gap-y-3 w-full col-start-2 col-span-1  xl:col-start-4   flex flex-col justify-self-start">
+          <Button   
+            className="col-start-2 col-span-1  xl:col-start-4 w-auto  flex justify-self-start gap-3 "
+            rounded
+            variant="ghost"
+            size="md"
+          >
+            <TagLine className="font-light text-base md:text-xl xl:text-2xl text-gray-300  leading-6 xs:leading-7" content="Read Our Reviews"/>
+          </Button>
+          <Button   
+            className="col-start-2 col-span-1  xl:col-start-4 w-auto  flex justify-self-start gap-3 "
+            rounded
+            intent="primary"   
+            size="md"
+          >
+            <span class="text-base xl:text-xl">Get Started</span>
+          </Button>
+        </div>
 
           <!-- <div class="contact-btn w-full xl:max-w-8xl xl:mx-auto flex flex-col justify-start items-start col-start-1 col-span-16 lg:row-start-15 lg:row-span-2">
             <Button   
@@ -634,9 +654,9 @@ const heroScrollTl = gsap.timeline({
       </SectionTest>
     
 
-      <!-- <SectionTest id="about" className=" about section  relative grid pb-10 space-y-14 grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-md lg:grid-cols-content-lg xl:grid-cols-content-xl items-center bg-gradient-to-br from-gradientLight to-gradientDark"> -->
+      <!-- <SectionTest id="about" className=" about section relative grid pb-10 space-y-14 grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-md lg:grid-cols-content-lg xl:grid-cols-content-xl items-center bg-gradient-to-br from-gradientLight to-gradientDark"> -->
         
-      <SectionTest id="testimonials" className="testimonials section  relative space-y-14 grid grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-md lg:grid-cols-content-lg xl:grid-cols-content-xl items-center pt-16 xs:pt-18 sm:pt-24 lg:pt-28 pb-14 xs:pb-16 sm:pb-24 lg:pb-32 bg-gradient-to-bl from-blue-100 to-blue-50 " >
+      <SectionTest id="testimonials" className="testimonials sectionscroll-mt-[var(--header-height)]  relative space-y-14 grid grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-sm lg:grid-cols-content-lg xl:grid-cols-[5%_5%_1fr_1fr_1fr_5%_5%] items-center pt-16 xs:pt-18 sm:pt-24 lg:pt-28 pb-14 xs:pb-16 sm:pb-24 lg:pb-32  bg-gradient-to-bl from-blue-100 to-blue-50 " >
 
           <SectionIntro 
             title="What Others Have Said"
@@ -644,41 +664,51 @@ const heroScrollTl = gsap.timeline({
             subtitle="Still Not Sure?"
             subtitleClasses="invisible opacity-0"
             tagline="Read more reviews about us and our services"
-            className="pl-1 flex flex-col justify-start col-start-2 col-span-1"
+            className="pl-1 flex flex-col justify-start col-start-2 col-span-1 xl:col-start-3 xl:col-span-2"
             taglineClasses="invisible opacity-0"
             
           />
-          <Reviews className="col-start-2 col-span-1" />
-        </div>
+          <Reviews className="col-start-2 col-span-1 xl:col-span-5 xl:col-start-2 " />
+          <div class="SECTION_OUTRO max-w-[350px] mx-auto gap-y-3 w-full  col-start-2 col-span-1  xl:col-start-4   flex flex-col justify-self-start">
+            <Button   
+              className="col-start-2 col-span-1  xl:col-start-4 w-auto  flex justify-self-start gap-3 "
+              rounded
+              variant="ghost"
+              size="md"
+            >
+              <TagLine className="font-light text-base md:text-xl xl:text-2xl text-gray-300  leading-6 xs:leading-7" content="Read Our Reviews"/>
+            </Button>
+            <Button   
+              className="col-start-2 col-span-1  xl:col-start-4 w-auto  flex justify-self-start gap-3 "
+              rounded
+              intent="primary"   
+              size="md"
+            >
+              <span class="text-base xl:text-xl">Get Started</span>
+            </Button>
+          </div>
       </SectionTest>
     
-      <Section breakout id="contact" className="contact section relative flex pt-16 pb-14 xs:pt-18 xs:pb-16 sm:pb-24 sm:pt-24 lg:pb-32  bg-gradient-to-bl from-blue-100 to-blue-50  px-page-xxs "  contentClassName=" max-w-[400px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1400px] px-4 xl:px-8" client:visible>
+      <SectionTest id="contact" className="overflow-hidden contact section scroll-mt-[var(--header-height)] relative space-y-14 xl:space-y-0 xl:space-x-12  grid grid-cols-content-xxs xxs:grid-cols-content-xs xs:grid-cols-content-sm sm:grid-cols-content-sm md:grid-cols-[5%_5%_1fr_1fr_1fr_5%_5%] lg:grid-cols-[5%_5%_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_5%_5%]   items-center pt-16 xs:pt-18 sm:pt-24 lg:pt-28 pb-14 xs:pb-16 sm:pb-24 lg:pb-52 bg-gradient-to-bl from-blue-100 to-blue-50 " >
+
         <!-- <BrandCloud className="absolute top-0 left-0 -translate-y-1/2 " /> -->
-        <div class=" w-full grid grid-cols-1  gap-y-10 xs:gap-y-16 sm:gap-y-16 lg:grid-cols-2  lg:gap-x-20">
 
           <SectionIntro 
             title="Find the Perfect Car"
             titleClasses="invisible opacity-0"
             subtitle="Contact Us Today"
             subtitleClasses="subtitle invisible opacity-0"
-            className="lg:max-w-2xl md:px-page-md lg:px-0 xl:max-w-2xl flex flex-col  justify-start  w-full  col-start-1 col-span-full md:col-span-16 lg:col-span-1  lg:row-start-2"
+            className="pl-1 flex flex-col justify-start col-start-2 col-span-3 lg:col-start-2 lg:col-span-3 xl:col-start-3"
             tagline="Let our team know what you're looking for and we'll get right on it!"
             taglineClasses="invisible opacity-0"
           />   
 
 
-          <div class="contact-form col-start-1 lg:col-start-2 lg:col-span-1  lg:row-start-1 lg:row-span-6">
-            <!-- client:only react elements responsible for their own animation -->
-            <!-- <Form className=" " client:only/> -->
-            <FormContainer client:only/>
-            <!-- <div class="cf-turnstile" data-sitekey="3x00000000000000000000FF" 
-            data-size="normal" 
-            data-theme="light"
-            ></div> -->
+          <div class="contact-form w-full col-start-2 col-span-1 md:col-start-3 md:col-span-4 lg:col-start-6 xl:col-start-6 lg:col-span-6 xl:col-span-5 ">
+            <FormContainer client:load/>
           </div>
-        </div>
 
-      </Section>
+      </SectionTest>
 
       <Section height="sm" last className=" px-header" variant="darker">
         <Footer />

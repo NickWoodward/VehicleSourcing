@@ -8,6 +8,7 @@ import { RegistrationSummary } from "./RegistrationSummary";
 
 import {$registration} from '../store/store';
 import { cn } from "../utils/utils";
+import { toast } from "sonner";
 
 interface Props {
   className?: string
@@ -17,7 +18,7 @@ export const HeroCTA = ({className}: Props) => {
   const [plateOpen, setPlateOpen] = useState<boolean>(false);
   const [numberplate, setNumberplate] = useState<string>('');
   const [platePlaceholder, setPlatePlaceholder] = useState("ENTER REG");
-
+console.log("RENDERING HERO CTA")
   const scrollToContact = () => {
     // querySelector used because no shared react component
     const contact = document.querySelector('.contact');
@@ -32,6 +33,7 @@ export const HeroCTA = ({className}: Props) => {
     e.preventDefault();
     $registration.set(numberplate);
     scrollToContact();
+    toast.info("Vehicle Added to Contact Form");
   }
 
   const changeHandler = (e:FormEvent) => {
@@ -68,7 +70,20 @@ export const HeroCTA = ({className}: Props) => {
             name="reg"
             value={numberplate}
             onChange={changeHandler}
-            onFocus={() => setPlatePlaceholder("")}
+            onFocus={() => {
+              setPlatePlaceholder("")
+              toast("Press Enter to Search", {
+                  unstyled: true,
+                  classNames: {
+                    toast: 'bg-primary flex w-auto text-white ring-2 ring-slate-100 font-normal text-lg py-1.5 px-2 rounded',
+                    title: 'text-red-400',
+                    description: 'text-red-400',
+                    actionButton: 'bg-zinc-400',
+                    cancelButton: 'bg-orange-400',
+                    closeButton: 'bg-lime-400',
+                  },
+              })
+            }}
             onBlur={() => setPlatePlaceholder("ENTER REG")}
             placeholder={platePlaceholder}
             autoComplete="off"

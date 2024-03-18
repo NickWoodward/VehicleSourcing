@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react"
 import { cn } from "../utils/utils";
+import { useGSAP } from "@gsap/react";
 
 interface IntroProps extends ComponentProps<"div">, VariantProps<typeof sectionVariants> {
   title: string,
@@ -39,11 +40,11 @@ const subtitleVariants = cva("subtitle mb-0.5 sm:mb3 font-semibold text-primary"
     variant: "default"
   }
 });
-const titleVariants = cva("title text-2xl xs:text-xl sm:text-2xl xl:text-3xl  tracking-tight", {
+const titleVariants = cva("title   tracking-tight", {
   variants: {
     variant: {
-      default:"font-bold text-primaryDark",
-      dark: "font-medium"
+      default:"text-2xl md:text-2.5xl   xl:text-3xl font-semibold text-primaryDark",
+      dark: "text-2xl md:text-2.5xl   xl:text-3xl font-medium"
     }
   },
   defaultVariants: {
@@ -53,8 +54,8 @@ const titleVariants = cva("title text-2xl xs:text-xl sm:text-2xl xl:text-3xl  tr
 const taglineVariants = cva("mt-1.5 xl:mt-2", {
   variants: {
     variant: {
-      default: "text-lg xs:text-lg sm:text-xl lg:text-xl xl:text-2xl text-textGray font-normal leading-6 xs:leading-7",
-      dark: "text-base xl:text-2xl text-gray-300 font-normal leading-6 xs:leading-7",
+      default: "text-lg md:text-xl xl:text-2xl text-textGray font-normal leading-6 xs:leading-7",
+      dark: "text-lg md:text-xl xl:text-2xl text-gray-300 font-normal leading-6 xs:leading-7",
     }
   },
   defaultVariants: {
@@ -62,7 +63,7 @@ const taglineVariants = cva("mt-1.5 xl:mt-2", {
   }
 });
 
-const TagLine = ({content, className}: TagLineProps) => {
+export const TagLine = ({content, className}: TagLineProps) => {
   return (
     <p className={className}>
       {content}
@@ -71,6 +72,10 @@ const TagLine = ({content, className}: TagLineProps) => {
 }
 
 export const SectionIntro = ({title, subtitle, tagline, variant, className, titleClasses, subtitleClasses, taglineClasses}: IntroProps) => {
+  useGSAP(() => {
+    gsap.to('.title', { autoAlpha:1, y:0, ease: "ease: back.in(2)", stagger: .12, duration: .8 });
+  });
+
   return (
     <div className={cn(sectionVariants({variant}), className)}>
       <h3 className={cn(subtitleVariants({variant}), subtitleClasses)}>{subtitle}</h3>

@@ -73,7 +73,7 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
     setNumberplate(target.value?.toUpperCase())
   }
 
-  const classes = cn('space-y-10', className);
+  const classes = cn('flex  flex-col w-full space-y-8', className);
   return (
     <>
       {/* <form onSubmit={() => {console.log("SUBMITTED"); $registration.set(numberplate)}}
@@ -108,8 +108,9 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
               onChange={changeHandler}
               onKeyDown={(e) => e.key === "Enter" && handleRegSubmit(e)}
               onFocus={() => setPlaceholder("")}
-              onBlur={() => {
+              onBlur={(e) => {
                 numberplate? setPlaceholder(numberplate): setPlaceholder("ENTER REG");
+                handleRegSubmit(e);
 
               }}
               
@@ -123,7 +124,7 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
             <input id="model" type="text" {...register("model", {required: true})}
               required
               autoComplete="given-name"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
             
           </div>
@@ -135,35 +136,33 @@ export const PartExchangeForm = ({onNext, onPrevious, placeholder, setPlaceholde
             <input id="mileage" type="text" {...register("mileage", {required: true})}
               required
               autoComplete="given-name"
-              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-100 text-sm px-3.5 py-2"
+              className="w-full rounded ring-slate-200 ring-inset ring-1 bg-slate-50 text-sm px-3.5 py-2"
             />
             
           </div>
           {errors.mileage && <p className="absolute  top-0 right-0 py-1.5 pr-1 text-sm text-red-500">{errors.mileage?.message}</p>}
         </div>
 
-        <div className="dvla-summary  mt-6 sm:mt-0 md:col-start-9 md:col-span-12 sm:row-start-1 sm:row-span-5">
+        <div className="dvla-summary  mt-6 sm:mt-0 md:col-start-8 md:col-span-12 sm:row-start-1 sm:row-span-5">
           <label className="block relative font-medium text-gray-500 py-1.5">Car Details</label>
-          <div className="px-3.5 py-2 bg-slate-100 rounded-md ring-slate-200 ring-inset ring-1">   
+          <div className="px-5 py-5 space-y-2 bg-slate-100 rounded-md ring-slate-200 ring-inset ring-1">   
             {
-            Object.entries(form.steps.partExchange.value).map(([key, value]) => {
+            Object.entries(form.steps.partExchange.value).filter(([key]) => ["registrationNumber", "yearOfManufacture",  "make", "colour", "engineCapacity"].includes(key)).map(([key, value]) => {
               let label;
               switch(key) {
                 case 'registrationNumber': label = 'Reg'; break;
                 case 'make': label = 'Make'; break;
                 case 'yearOfManufacture': label = 'Year'; break;
                 case 'engineCapacity': label = 'Engine'; break;
-                case 'motExpiryDate': label = 'MOT'; break;
-                case 'taxDueDate': label = 'Tax'; break;
                 default : label = capitalizeFirstLetter(key);
               }
               return (
-                <div key={key} className=" relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg font-medium w-full text-gray-500">
-                  <div className="">
+                <div key={key} className="relative sm:col-span-1 sm:col-start-1 text-base lg:text-lg  w-full text-gray-400">
+                  <div className="flex flex-col">
                     <div 
-                      className="flex flex-col xs:flex-row justify-between w-full rounded text-sm "
+                      className="flex flex-col leading-4 xs:flex-row justify-between w-full rounded text-base "
                     >
-                      <div className="text-gray-600">{label}:</div>
+                      <div className=" font-normal py-1">{label}:</div>
     
                       {
                         key === "engineCapacity"?
