@@ -31,9 +31,9 @@ console.log("RENDERING HERO CTA")
 
   const handleRegSubmit = async (e:FormEvent) => {
     e.preventDefault();
-    $registration.set(numberplate);
-    scrollToContact();
-    toast.info("Vehicle Added to Contact Form");
+    // $registration.set(numberplate);
+    // scrollToContact();
+    // toast.info("Vehicle Added to Contact Form");
   }
 
   const changeHandler = (e:FormEvent) => {

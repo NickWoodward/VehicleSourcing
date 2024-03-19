@@ -314,7 +314,7 @@ export const MultiStepForm = ({steps}: Props) => {
             <a href="#" className="font-medium pl-1.5 lg:text-gray-900 underline">Privacy Policy</a>.
         </div>
 
-        {/* <Turnstile className='ml-auto ' ref={turnstileRef} siteKey='1x00000000000000000000AA' /> */}
+        <Turnstile className='ml-auto ' ref={turnstileRef} siteKey='1x00000000000000000000AA' />
       </div>
         
       
